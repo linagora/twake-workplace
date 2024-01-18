@@ -1,1 +1,3 @@
 # twake-workplace
+
+- [registration](/registration)

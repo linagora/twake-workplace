@@ -1,0 +1,18 @@
+name: Docker build
+on:
+  push:
+    branches:
+      - main
+env:
+  CI: true
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Kaniko build
+        uses: aevea/action-kaniko@master
+        with:
+          image: kferjani/twake-matrix-register
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}

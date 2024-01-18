@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  registration:
+    image: kferjani/twake-matrix-register:main
+    ports:
+      - 8080:3000
+    env_file:
+      - .env
+    depends_on:
+      - openldap
+      - llng
+
+  openldap:
+    image: bitnami/openldap
+    ports:
+      - '1389:1389'
+      - '1636:1636'
+    env_file:
+      - .env
+    volumes:
+      - openldap_data:/bitnami/openldap
+
+  llng:
+    image: yadd/lemonldap-ng-full
+    environment:
+      - LOGGER=stderr
+      - USERLOGGER=stderr
+    ports:
+      - 19876:19876
+      - 80:80
+    volumes:
+      - ./config/lmConf-1.json:/var/lib/lemonldap-ng/conf/lmConf-1.json
+    networks:
+      default:
+        aliases:
+          - auth.example.com
+
+networks:
+  registration-network:
+    driver: bridge
+
+volumes:
+  openldap_data:
+    driver: local
