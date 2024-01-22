@@ -4,7 +4,7 @@ import type {
 	ISmsSentResponse,
 	IValidateOTPPayload,
 	VerificationResult
-} from '../../types';
+} from '../../../types';
 
 /**
  * Sends an OTP to the given phone number.

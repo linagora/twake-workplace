@@ -1,6 +1,6 @@
 import { generateNickNames } from '$lib/utils/username';
-import type { User } from '../../types';
-import ldapClient from './ldap/client';
+import type { User } from '../../../types';
+import ldapClient from '../ldap/client';
 
 /**
  * Checks if a nickname is available.
