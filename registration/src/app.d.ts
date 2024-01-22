@@ -31,4 +31,5 @@ interface SessionData {
 	postLoginUrl?: string;
 	challenge?: string;
 	clientId?: string;
+	country?: string;
 }
