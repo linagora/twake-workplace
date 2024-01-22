@@ -1,7 +1,7 @@
 export interface ISmsSendPayload {
 	phone_number: string;
 	text: string;
-	channel: "sms" | "voice_sms",
+	channel: 'sms' | 'voice_sms';
 	sender: string;
 	code_length: number;
 }
@@ -62,17 +62,24 @@ export interface TokenResponse extends AuthAPIResponse {
 	token: string;
 }
 
-export type Tab = "register" | "login"
+export type Tab = 'register' | 'login';
 
-export type PasswordType = "text" | "password"
+export type PasswordType = 'text' | 'password';
 
-export type VerificationResult = "correct" | "wrong" | "timeout"
+export type VerificationResult = 'correct' | 'wrong' | 'timeout';
 
-export type PlatformType = "web" | "android" | "ios" | "server"
+export type PlatformType = 'web' | 'android' | 'ios' | 'server';
 
-export type ApplicationType = "tdrive" | "tmail" | "twake"
+export type ApplicationType = 'tdrive' | 'tmail' | 'twake';
 
 export interface IApplicationStorePayload {
 	type: 'play_store_url' | 'app_store_url';
 	url: string;
+}
+
+export interface CountryInformation {
+	ip: string;
+	country?: string;
+	country_3?: string;
+	name?: string;
 }
