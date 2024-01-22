@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { activeTab, form as formStore } from './../store';
+	import { activeTab, form as formStore, userCountry } from './../store';
 	import AccessSelect from '$lib/components/landing/AccessSelect.svelte';
 	import Hero from '$lib/components/landing/Hero.svelte';
 	import type { ActionData, PageData } from './$types';
@@ -8,6 +8,7 @@
 	export let data: PageData;
 	$: formStore.set(form);
 	$: activeTab.set(data.isLogin ? 'login' : 'register');
+	$: userCountry.set(data.country);
 </script>
 
 <div class="flex w-full h-full lg:px-10 xl:px-[124px]">
