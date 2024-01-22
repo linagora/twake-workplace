@@ -127,3 +127,11 @@ export const getOath2RedirectUri = (challenge: string, redirectUri: string, clie
 export const gotoOath2RedirectUrl = (url: string, challenge: string, clientId: string): void => {
 	goto(getOath2RedirectUri(challenge, url, clientId));
 };
+
+/**
+ * removes trailing slash from a url
+ *
+ * @returns {string} the url without a trailing slash
+ */
+export const removeTrailingSlash = (url: string): string =>
+	url.endsWith('/') ? url.slice(0, -1) : url;
