@@ -31,7 +31,8 @@ export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddr
 		...data,
 		redirectUrl,
 		postLoginUrl,
-		clientId
+		clientId,
+		country
 	}));
 
 	if (session.data.authenticated === true && cookie) {
