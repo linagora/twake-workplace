@@ -24,6 +24,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddr
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
 	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
 	const clientId = url.searchParams.get('client_id') ?? undefined;
+	const challenge = url.searchParams.get('challenge_code') ?? undefined;
 
 	const cookie = cookies.get(authService.cookieName);
 
@@ -32,7 +33,8 @@ export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddr
 		redirectUrl,
 		postLoginUrl,
 		clientId,
-		country
+		country,
+		challenge
 	}));
 
 	if (session.data.authenticated === true && cookie) {
