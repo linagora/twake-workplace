@@ -14,10 +14,12 @@ import {
 import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
+import { getUserCountry } from '$lib/services/ip';
 
-export const load: PageServerLoad = async ({ locals, url, cookies }) => {
+export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddress }) => {
 	await Client.getClient();
 
+	const country = await getUserCountry(getClientAddress());
 	const { session } = locals;
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
 	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
@@ -29,7 +31,8 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 		...data,
 		redirectUrl,
 		postLoginUrl,
-		clientId
+		clientId,
+		country
 	}));
 
 	if (session.data.authenticated === true && cookie) {
@@ -37,6 +40,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	}
 
 	return {
+		country,
 		isLogin: !!postLoginUrl
 	};
 };
@@ -121,7 +125,12 @@ export const actions: Actions = {
 			const data = await request.formData();
 			const { session } = locals;
 			const phone = data.get('phone') as string;
-			const { phone: verifiedPhone, redirectUrl = null, challenge = null, clientId = null } = session.data;
+			const {
+				phone: verifiedPhone,
+				redirectUrl = null,
+				challenge = null,
+				clientId = null
+			} = session.data;
 
 			if (!phone || isPhoneValid(phone) === false || !(await checkPhoneAvailability(phone))) {
 				return fail(400, { invalid_phone: true });

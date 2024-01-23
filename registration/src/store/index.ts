@@ -9,6 +9,8 @@ export const verifiedPhones = writable<string[]>([]);
 export const redirectUrl = writable<string | null>(null);
 export const challenge = writable<string | null>(null);
 export const clientId = writable<string | null>(null);
+export const activeTab = writable<Tab>('register');
+export const userCountry = writable<string>('');
 
 verified.subscribe((v) => {
 	if (v === true) {
@@ -23,5 +25,3 @@ phone.subscribe((v) => {
 		verified.set(false);
 	}
 });
-
-export const activeTab = writable<Tab>('register');
