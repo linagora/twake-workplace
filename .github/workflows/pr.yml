@@ -11,5 +11,5 @@ on:
 jobs:
   test:
     name: Build And Test
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/registration-publish.yml
     secrets: inherit
