@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     name: Build And Test
-    uses: ./.github/workflows/main.yml
+    uses: ./.github/workflows/build.yml
     secrets: inherit
 
   publish:
