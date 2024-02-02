@@ -1,4 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type { ApplicationType } from './types';
+
 // for information about these interfaces
 declare global {
 	namespace App {
@@ -32,4 +35,5 @@ interface SessionData {
 	challenge?: string;
 	clientId?: string;
 	country?: string;
+	app?: ApplicationType;
 }
