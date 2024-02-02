@@ -15,9 +15,6 @@ export default {
 				'blueGray': '#8C9CAF',
 				'inputOutline': '#AEAEC0'
 			},
-			backgroundImage: {
-				'layout': 'url("/bubble-dynamic-clay.svg"), url("/lock-dynamic-clay.png")'
-			},
 			backgroundPosition: {
 				'layout': 'top left 600px, left 100px bottom -140px'
 			},
