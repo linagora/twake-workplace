@@ -70,7 +70,9 @@ export type VerificationResult = 'correct' | 'wrong' | 'timeout';
 
 export type PlatformType = 'web' | 'android' | 'ios' | 'server';
 
-export type ApplicationType = 'tdrive' | 'tmail' | 'twake';
+export type ApplicationType = 'tdrive' | 'tmail' | 'chat' | 'default';
+
+export type LogoType = 'landing' | 'header';
 
 export interface IApplicationStorePayload {
 	type: 'play_store_url' | 'app_store_url';
