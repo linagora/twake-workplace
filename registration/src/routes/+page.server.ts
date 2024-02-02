@@ -15,16 +15,19 @@ import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
 import { getUserCountry } from '$lib/services/ip';
+import type { ApplicationType } from '../types';
 
 export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddress }) => {
 	await Client.getClient();
 
 	const country = await getUserCountry(getClientAddress());
 	const { session } = locals;
+
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
 	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
 	const clientId = url.searchParams.get('client_id') ?? undefined;
 	const challenge = url.searchParams.get('challenge_code') ?? undefined;
+	const app = (url.searchParams.get('app') as ApplicationType) ?? 'default';
 
 	const cookie = cookies.get(authService.cookieName);
 
@@ -34,7 +37,8 @@ export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddr
 		postLoginUrl,
 		clientId,
 		country,
-		challenge
+		challenge,
+		app
 	}));
 
 	if (session.data.authenticated === true && cookie) {
@@ -42,6 +46,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddr
 	}
 
 	return {
+		app,
 		country,
 		isLogin: !!postLoginUrl
 	};
