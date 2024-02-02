@@ -1,0 +1,28 @@
+name: Docker Build
+
+on:
+  workflow_call:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get all src files that have changed
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files: |
+            packages/registration/**/*
+            .github/workflows/**
+      - name: Publish to dockerhub
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: linagora/twake-matrix-registration
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          workdir: "${{ github.workspace }}/registration"
+          context: .
+          buildoptions: "-t linagora/twake-matrix-registration -f Dockerfile"
+          tags: "latest"
+

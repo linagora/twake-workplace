@@ -1,0 +1,15 @@
+name: pr
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  merge_group:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Build And Test
+    uses: ./.github/workflows/registration-publish.yml
+    secrets: inherit

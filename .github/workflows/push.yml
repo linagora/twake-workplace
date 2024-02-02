@@ -1,0 +1,16 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Build And Test
+    uses: ./.github/workflows/registration-build.yml
+    secrets: inherit
+
+  publish:
+    needs: [test]
+    name: Publish Registration Page
+    uses: ./.github/workflows/registration-publish.yml
+    secrets: inherit
