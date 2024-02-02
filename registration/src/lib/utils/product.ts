@@ -20,7 +20,7 @@ export const getApplicationStoreUrl = (
 			};
 		}
 
-		if (platform === 'android' && app === 'twake') {
+		if (platform === 'android' && app === 'chat') {
 			return {
 				type: 'play_store_url',
 				url: env.PUBLIC_TWAKE_PLAYSTORE_URL
@@ -34,7 +34,7 @@ export const getApplicationStoreUrl = (
 			};
 		}
 
-		if (platform === 'ios' && app === 'twake') {
+		if (platform === 'ios' && app === 'chat') {
 			return {
 				type: 'app_store_url',
 				url: env.PUBLIC_TWAKE_APPSTORE_URL
@@ -58,7 +58,7 @@ export const getApplicationDeepLink = (app: ApplicationType): string | undefined
 		return env.PUBLIC_TMAIL_MAGIC_LINK;
 	}
 
-	if (app === 'twake') {
+	if (app === 'chat') {
 		return env.PUBLIC_TWAKE_MAGIC_LINK;
 	}
 };
