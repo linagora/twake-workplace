@@ -12,6 +12,8 @@
 	} from 'svelte-tel-input/types';
 	import 'svelte-tel-input/styles/flags.css';
 	import { t } from 'svelte-i18n';
+	import NavigateBack from '../button/NavigateBack.svelte';
+	import SearchIcon from '../icons/SearchIcon.svelte';
 
 	export let clickOutside = true;
 	export let closeOnClick = true;
@@ -21,7 +23,7 @@
 	export let searchPlaceholder: string | null = 'Choose a country';
 	export let selectedCountry: CountryCode | null;
 	export let valid: boolean;
-	export let options: TelInputOptions;
+	export let options: TelInputOptions = {};
 	let searchText = '';
 	let isOpen = false;
 
@@ -158,7 +160,7 @@
 		{#if isOpen}
 			<div
 				id="dropdown-countries"
-				class="absolute z-10 max-w-fit bg-white divide-y divide-gray-100 shadow overflow-hidden translate-y-11 rounded-[8px] bg-[var(--m-3-sys-light-bg-surface-surface,_#F4F4F4)] [box-shadow:0px]"
+				class="fixed top-0 left-0 lg:absolute z-10 max-w-fit bg-white divide-y divide-gray-100 shadow overflow-hidden lg:translate-y-11 rounded-[8px] bg-[var(--m-3-sys-light-bg-surface-surface,_#F4F4F4)] [box-shadow:0px]"
 				data-popper-reference-hidden=""
 				data-popper-escaped=""
 				data-popper-placement="bottom"
@@ -167,17 +169,23 @@
 				tabindex="-1"
 			>
 				<div
-					class="text-sm text-gray-700 max-h-48 bg-white overflow-y-auto"
+					class="text-sm text-gray-700 max-h-screen lg:max-h-60 bg-white overflow-y-auto pt-12 lg:pt-0"
 					aria-labelledby="countries-button"
 					role="listbox"
 				>
-					<input
-						aria-autocomplete="list"
-						type="text"
-						class="px-4 py-2 text-gray-900 focus:outline-none w-full sticky top-0"
-						bind:value={searchText}
-						placeholder={searchPlaceholder}
-					/>
+					<div class="flex flex-row fixed lg:sticky top-0 bg-white shadow-sm">
+						<NavigateBack handler={() => (isOpen = false)} />
+						<input
+							aria-autocomplete="list"
+							type="text"
+							class="px-4 py-2 placeholder:text-gray-900 focus:outline-none w-full sticky top-0 text-center text-[22px] lg:text-sm lg:text-left lg:px-5 font-semibold"
+							bind:value={searchText}
+							placeholder={searchPlaceholder}
+						/>
+
+						<SearchIcon />
+					</div>
+
 					{#each sortCountries(normalizedCountries, searchText) as country (country.id)}
 						{@const isActive = isSelected(country.iso2, selectedCountry)}
 						<div id="country-{country.iso2}" role="option" aria-selected={isActive}>
