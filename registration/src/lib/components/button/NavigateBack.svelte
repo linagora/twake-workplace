@@ -3,6 +3,7 @@
 </script>
 
 <button
+  type="button"
 	on:click={handler}
 	class="flex w-[48px] h-[48px] flex-col justify-center items-center relative gap-[10px] lg:-ml-14"
 >
