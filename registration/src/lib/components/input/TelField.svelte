@@ -59,22 +59,8 @@
 		if (!normalizedText) {
 			return countries.sort((a, b) => a.label.localeCompare(b.label));
 		}
-		return countries.sort((a, b) => {
-			const aNameLower = a.name.toLowerCase();
-			const bNameLower = b.name.toLowerCase();
-			const aStartsWith = aNameLower.startsWith(normalizedText);
-			const bStartsWith = bNameLower.startsWith(normalizedText);
-			if (aStartsWith && !bStartsWith) return -1;
-			if (!aStartsWith && bStartsWith) return 1;
-			const aIndex = aNameLower.indexOf(normalizedText);
-			const bIndex = bNameLower.indexOf(normalizedText);
-			if (aIndex === -1 && bIndex === -1) return a.id.localeCompare(b.id);
-			if (aIndex === -1) return 1;
-			if (bIndex === -1) return -1;
-			const aWeight = aIndex + (aStartsWith ? 0 : 1);
-			const bWeight = bIndex + (bStartsWith ? 0 : 1);
-			return aWeight - bWeight;
-		});
+
+		return countries.filter(({ name }) => name.toLocaleLowerCase().includes(normalizedText));
 	};
 
 	const handleSelect = (val: CountryCode, e?: Event) => {
@@ -160,7 +146,7 @@
 		{#if isOpen}
 			<div
 				id="dropdown-countries"
-				class="fixed top-0 left-0 lg:absolute z-10 max-w-fit bg-white divide-y divide-gray-100 shadow overflow-hidden lg:translate-y-11 rounded-[8px] bg-[var(--m-3-sys-light-bg-surface-surface,_#F4F4F4)] [box-shadow:0px]"
+				class="fixed top-0 left-0 lg:absolute z-10 w-full h-full lg:h-fit bg-white divide-y divide-gray-100 shadow overflow-hidden lg:translate-y-11 rounded-[8px] bg-[var(--m-3-sys-light-bg-surface-surface,_#F4F4F4)] [box-shadow:0px]"
 				data-popper-reference-hidden=""
 				data-popper-escaped=""
 				data-popper-placement="bottom"
@@ -173,7 +159,7 @@
 					aria-labelledby="countries-button"
 					role="listbox"
 				>
-					<div class="flex flex-row fixed lg:sticky top-0 bg-white shadow-sm">
+					<div class="flex flex-row fixed lg:sticky w-full top-0 bg-white shadow-sm">
 						<NavigateBack handler={() => (isOpen = false)} />
 						<input
 							aria-autocomplete="list"
