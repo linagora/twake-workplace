@@ -42,6 +42,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@k4ung/svelte-otp": "^0.0.9",
 		"@tailwindcss/forms": "^0.5.7",
 		"ldapjs": "^3.0.3",
 		"svelte-i18n": "^4.0.0",
