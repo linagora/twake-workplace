@@ -67,5 +67,9 @@
   "failed-to-send-otp-try-again-later": "Không gửi được OTP, hãy thử lại sau",
   "failed-to-check-otp-try-again-later": "Không kiểm tra được OTP, hãy thử lại sau",
   "Choose-a-country": "Chọn một quốc gia",
-  "Search": "Tìm kiếm"
+  "Search": "Tìm kiếm",
+  "Your-phone-number": "Số điện thoại của bạn",
+  "Please confirm your country code and enter your phone number": "Vui lòng xác nhận mã quốc gia và nhập số điện thoại của bạn.",
+  "please-confirm": "Vui lòng xác nhận mã quốc gia và nhập số điện thoại của bạn.",
+  "Next": "Kế tiếp"
 }

@@ -67,5 +67,9 @@
   "failed-to-send-otp-try-again-later": "Échec de l'envoi d'OTP, réessayez plus tard",
   "failed-to-check-otp-try-again-later": "Échec de la vérification d'OTP, réessayez plus tard",
   "Choose-a-country": "Choisissez un pays",
-  "Search": "Recherche"
+  "Search": "Recherche",
+  "Your-phone-number": "Votre numéro de téléphone",
+  "Please confirm your country code and enter your phone number": "Veuillez confirmer votre code pays et saisir votre numéro de téléphone.",
+  "please-confirm": "Veuillez confirmer votre code pays et saisir votre numéro de téléphone.",
+  "Next": "Suivant"
 }
