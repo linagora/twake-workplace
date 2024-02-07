@@ -20,12 +20,14 @@
 	export let disabled = false;
 	export let detailedValue: DetailedValue | null = null;
 	export let value: E164Number | null;
-	export let searchPlaceholder: string | null = 'Choose a country';
+	export let searchPlaceholder: string | null = $t('Search');
 	export let selectedCountry: CountryCode | null;
 	export let valid: boolean;
 	export let options: TelInputOptions = { format: 'national' };
 	let searchText = '';
 	let isOpen = false;
+
+	let isSearching = false;
 
 	$: selectedCountryDialCode =
 		normalizedCountries.find((el) => el.iso2 === selectedCountry)?.dialCode || null;
@@ -161,15 +163,26 @@
 				>
 					<div class="flex flex-row fixed lg:sticky w-full top-0 bg-white shadow-sm">
 						<NavigateBack handler={() => (isOpen = false)} />
-						<input
-							aria-autocomplete="list"
-							type="text"
-							class="px-4 py-2 placeholder:text-gray-900 focus:outline-none w-full sticky top-0 text-center text-[22px] lg:text-sm lg:text-left lg:px-5 font-semibold"
-							bind:value={searchText}
-							placeholder={searchPlaceholder}
-						/>
-
-						<SearchIcon />
+						{#if isSearching}
+							<input
+								aria-autocomplete="list"
+								type="text"
+								class="text-left focus:outline-none text-[17px] w-full font-medium tracking-[0px] font-[Inter] not-italic leading-[24px] lg:px-10"
+								bind:value={searchText}
+								placeholder={searchPlaceholder}
+							/>
+						{:else}
+							<button
+								on:click={() => (isSearching = true)}
+								type="button"
+								class="px-5 py-2 text-gray-900 focus:outline-none w-full sticky top-0 text-center text-[22px] lg:text-sm lg:text-left lg:px-5 font-semibold"
+							>
+								{$t('Choose-a-country')}
+							</button>
+						{/if}
+						<button type="button" on:click={() => (isSearching = !isSearching)}>
+							<SearchIcon />
+						</button>
 					</div>
 
 					{#each sortCountries(normalizedCountries, searchText) as country (country.id)}
