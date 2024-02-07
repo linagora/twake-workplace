@@ -26,6 +26,9 @@
 	export let valid: boolean;
 	export let options: TelInputOptions = { format: 'national' };
 	export let loading: boolean = false;
+	export let onBlur: () => void = () => {};
+	export let onInput: () => void = () => {};
+
 	let searchText = '';
 	let isOpen = false;
 
@@ -159,7 +162,7 @@
 				tabindex="-1"
 			>
 				<div
-					class="text-sm text-gray-700 max-h-screen lg:max-h-60 bg-white overflow-y-auto pt-12 lg:pt-0"
+					class="text-sm text-gray-700 max-h-screen lg:max-h-64 bg-white overflow-y-auto pt-12 lg:pt-0"
 					aria-labelledby="countries-button"
 					role="listbox"
 				>
@@ -223,6 +226,8 @@
 		bind:value
 		bind:valid
 		{options}
+		on:input={onInput}
+		on:blur={onBlur}
 		required
 		class="h-[54px] rounded-[4px] focus:outline-none text-[17px] font-medium leading-6 tracking-tight text-left peer w-full placeholder:text-inputOutline"
 	/>
