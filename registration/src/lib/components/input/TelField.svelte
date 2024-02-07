@@ -14,6 +14,7 @@
 	import { t } from 'svelte-i18n';
 	import NavigateBack from '../button/NavigateBack.svelte';
 	import SearchIcon from '../icons/SearchIcon.svelte';
+	import Spin from '../icons/Spin.svelte';
 
 	export let clickOutside = true;
 	export let closeOnClick = true;
@@ -24,6 +25,7 @@
 	export let selectedCountry: CountryCode | null;
 	export let valid: boolean;
 	export let options: TelInputOptions = { format: 'national' };
+	export let loading: boolean = false;
 	let searchText = '';
 	let isOpen = false;
 
@@ -224,7 +226,11 @@
 		required
 		class="h-[54px] rounded-[4px] focus:outline-none text-[17px] font-medium leading-6 tracking-tight text-left peer w-full placeholder:text-inputOutline"
 	/>
-
+	{#if loading}
+		<span class="absolute inset-y-0 right-0 flex items-center px-1">
+			<Spin />
+		</span>
+	{/if}
 	<label
 		for="phone"
 		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 overflow-hidden text-ellipsis text-[11px] not-italic font-medium leading-4 tracking-[0.5px] {!valid
