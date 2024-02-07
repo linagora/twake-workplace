@@ -65,5 +65,7 @@
   "entered-code-is-incorrect-try-again": "الرمز الذي تم إدخاله غير صحيح. حاول ثانية.",
   "twake-mail": "بريد تويك",
   "failed-to-send-otp-try-again-later": "فشل إرسال كلمة المرور ، حاول مرة أخرى لاحقًا",
-  "failed-to-check-otp-try-again-later": "فشل التحقق من كلمة المرور، حاول مرة أخرى لاحقًا"
+  "failed-to-check-otp-try-again-later": "فشل التحقق من كلمة المرور، حاول مرة أخرى لاحقًا",
+  "Choose-a-country": "اختر بلدا",
+  "Search": "بحث"
 }
