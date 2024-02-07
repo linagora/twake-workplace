@@ -23,7 +23,7 @@
 	export let searchPlaceholder: string | null = 'Choose a country';
 	export let selectedCountry: CountryCode | null;
 	export let valid: boolean;
-	export let options: TelInputOptions = {};
+	export let options: TelInputOptions = { format: 'national' };
 	let searchText = '';
 	let isOpen = false;
 
