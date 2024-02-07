@@ -51,7 +51,7 @@
 	</div>
 	<div class="w-[386px] h-[236px]" />
 	<div class="mt-auto py-4">
-		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Next')}</PrimaryButton>
+		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Confirm')}</PrimaryButton>
 		<div class="w-full h-12 px-6 py-3.5 justify-center items-center inline-flex">
 			<div class="text-center flex space-x-1">
 				<span class="text-gray-400 text-sm font-medium leading-tight tracking-tight"
