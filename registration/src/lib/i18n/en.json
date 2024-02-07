@@ -31,7 +31,7 @@
   "Number is already registered": "Number is already registered.",
   "instead": "instead",
   "Phone number confirmation": "Phone number confirmation",
-  "Enter 6 digit code we sent to": "Enter 6 digit code we sent to",
+  "6-digit": "Enter 6 digit code we've sent to",
   "Code": "Code",
   "Send code": "Send code again",
   "Confirm": "Confirm",
@@ -70,5 +70,8 @@
   "Search": "Search",
   "Your-phone-number": "Your phone number",
   "please-confirm": "Please confirm your country code and enter your phone number.",
-  "Next": "Next"
+  "Next": "Next",
+  "Confirm-your-code": "Confirm your code",
+  "Resend": "Resend",
+  "Resend-in": "Resend in"
 }

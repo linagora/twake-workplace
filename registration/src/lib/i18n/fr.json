@@ -71,5 +71,8 @@
   "Your-phone-number": "Votre numéro de téléphone",
   "Please confirm your country code and enter your phone number": "Veuillez confirmer votre code pays et saisir votre numéro de téléphone.",
   "please-confirm": "Veuillez confirmer votre code pays et saisir votre numéro de téléphone.",
-  "Next": "Suivant"
+  "Next": "Suivant",
+  "Confirm-your-code": "Confirmez votre code",
+  "Resend": "Renvoyer",
+  "Resend-in": "Renvoyer dans"
 }

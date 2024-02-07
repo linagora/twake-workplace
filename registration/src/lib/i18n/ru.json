@@ -71,5 +71,8 @@
   "Your-phone-number": "Ваш номер телефона",
   "Please confirm your country code and enter your phone number": "Пожалуйста, подтвердите код страны и введите свой номер телефона.",
   "please-confirm": "Пожалуйста, подтвердите код страны и введите свой номер телефона.",
-  "Next": "Следующий"
+  "Next": "Следующий",
+  "Confirm-your-code": "Подтвердите свой код",
+  "Resend": "Отправить",
+  "Resend-in": "Отправить повторно"
 }
