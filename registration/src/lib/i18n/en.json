@@ -67,5 +67,8 @@
   "failed-to-send-otp-try-again-later": "Failed to send OTP, try again later",
   "failed-to-check-otp-try-again-later": "Failed to check OTP, try again later",
   "Choose-a-country": "Choose a country",
-  "Search": "Search"
+  "Search": "Search",
+  "Your-phone-number": "Your phone number",
+  "please-confirm": "Please confirm your country code and enter your phone number.",
+  "Next": "Next"
 }
