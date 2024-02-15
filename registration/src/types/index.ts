@@ -85,3 +85,5 @@ export interface CountryInformation {
 	country_3?: string;
 	name?: string;
 }
+
+export type RegistrationStepType = 'home' | 'phone' | 'otp' | 'nickname' | 'password' | 'success';

@@ -6,7 +6,6 @@
 	import { maskPhone } from '$lib/utils/phone';
 	import { t } from 'svelte-i18n';
 
-	export let handler: () => void = () => {};
 	export let phone: string = '+21652128155';
 
 	let value = '';
@@ -17,8 +16,8 @@
 		if (resendCounter > 0) resendCounter--;
 	}, 1000);
 
-	const handleSendOtp = () => {
-		if (!phone || !value) return;
+	const handler = () => {
+		if (!phone || !value || disabled) return;
 
 		if (resendCounter > 0) return;
 
@@ -68,7 +67,7 @@
 					<span class="text-gray-400 text-sm font-medium leading-tight tracking-tight"
 						>Didn't get the code?</span
 					>
-					<button type="button" disabled={resendCounter > 0} on:click={handleSendOtp}>
+					<button type="button" disabled={resendCounter > 0} on:click={handler}>
 						{#if resendCounter === 0}
 							<div class="text-primary text-sm font-medium leading-tight tracking-tight">
 								{$t('Resend')}

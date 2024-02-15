@@ -53,6 +53,45 @@ export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddr
 };
 
 export const actions: Actions = {
+	checkNickName: async ({ request, locals }) => {
+		const data = Object.fromEntries(await request.formData()) as {
+			nickname: string;
+			firstName: string;
+			lastName: string;
+		};
+
+		try {
+			const { firstName, lastName, nickname } = data;
+
+			if ((await checkNickNameAvailability(nickname)) === false) {
+				const alternatives = await suggestAlternativeAvaialableNickNames(
+					firstName,
+					lastName,
+					nickname
+				);
+
+				return fail(400, { nickname_taken: true, alternative_nicknames: alternatives });
+			}
+
+			if (validateName(firstName) === false) {
+				return fail(400, { invalid_firstname: true });
+			}
+
+			if (validateName(lastName) === false) {
+				return fail(400, { invalid_lastname: true });
+			}
+
+			await locals.session.update((data) => ({
+				...data,
+				step: 'nickname'
+			}));
+
+			return { verified_nickname: true };
+		} catch (error) {
+			return fail(400, { error });
+		}
+	},
+
 	sendOtp: async ({ request, locals }) => {
 		const data = await request.formData();
 		const phone = data.get('phone') as string;
@@ -82,7 +121,8 @@ export const actions: Actions = {
 			last_sent: Date.now(),
 			phone,
 			verified: false,
-			authenticated: false
+			authenticated: false,
+			step: 'phone'
 		});
 
 		return { sent: true };
@@ -106,7 +146,8 @@ export const actions: Actions = {
 		if (verification === 'correct') {
 			await locals.session.update((data) => ({
 				...data,
-				verified: true
+				verified: true,
+				step: 'otp'
 			}));
 
 			return { verified: true };
@@ -120,7 +161,7 @@ export const actions: Actions = {
 		} else {
 			await locals.session.update((data) => ({
 				...data,
-				verified: false
+				verified: false,
 			}));
 
 			return fail(400, { incorrect: true });
@@ -188,7 +229,8 @@ export const actions: Actions = {
 				verified: false,
 				user: nickname,
 				firstName,
-				lastName
+				lastName,
+				step: 'success'
 			});
 
 			const authSessionCookie = await authService.login(nickname, password);

@@ -1,6 +1,6 @@
 import { writable, get } from 'svelte/store';
 import type { ActionData } from '../routes/$types';
-import type { ApplicationType, Tab } from '../types';
+import type { RegistrationStepType, ApplicationType, Tab } from '../types';
 import type { CountryCode } from 'svelte-tel-input/types';
 
 export const form = writable<ActionData>();
@@ -13,6 +13,7 @@ export const clientId = writable<string | null>(null);
 export const activeTab = writable<Tab>('register');
 export const userCountry = writable<CountryCode | null>(null);
 export const app = writable<ApplicationType>('default');
+export const registrationStep = writable<RegistrationStepType>('home');
 
 verified.subscribe((v) => {
 	if (v === true) {

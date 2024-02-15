@@ -6,18 +6,17 @@
 	import { createUserFormSchema } from '$lib/schemas/zodSchema';
 	import { isPhoneTaken } from '$lib/utils/api';
 	import type { E164Number } from 'svelte-tel-input/types';
+	import { enhance } from '$app/forms';
 
 	export let value: null | E164Number = null;
 	export let valid = true;
-	export let handler: () => void = () => {};
 
+	let sendOtpForm: HTMLFormElement;
 	let loading = false;
 	let phoneChecked = false;
 	let phoneTaken = false;
 
 	$: disabled = !valid || phoneTaken || loading;
-
-  $: console.log(value)
 
 	const checkPhone = async () => {
 		if (!value || !createUserFormSchema.safeParse({ value }).success || phoneChecked) return;
@@ -33,7 +32,17 @@
 		phoneChecked = false;
 		phoneTaken = false;
 	};
+
+	const handler = () => {
+		if (!value || disabled) return;
+
+		sendOtpForm.requestSubmit();
+	};
 </script>
+
+<form use:enhance action="?/sendOtp" method="POST" class="hidden" bind:this={sendOtpForm}>
+	<input type="text" name="phone" bind:value required />
+</form>
 
 <div class="flex flex-col px-4 lg:px-0 lg:h-fit h-screen">
 	<div class="w-[386px] h-20" />

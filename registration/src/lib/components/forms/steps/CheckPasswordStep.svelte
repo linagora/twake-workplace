@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import PrimaryButton from '$lib/components/button/PrimaryButton.svelte';
 	import PasswordField from '$lib/components/input/PasswordField.svelte';
 	import { createUserFormSchema, fullCreateUserFormSchema } from '$lib/schemas/zodSchema';
 	import { t } from 'svelte-i18n';
+
+	let sendPasswordForm: HTMLFormElement;
 
 	let password = '';
 	let confirmPassword = '';
@@ -11,7 +14,17 @@
 		password,
 		confirmPassword
 	}).success;
+
+	const handler = () => {
+		if (disabled) return;
+
+		sendPasswordForm.requestSubmit();
+	};
 </script>
+
+<form use:enhance action="?/register" method="POST" class="hidden" bind:this={sendPasswordForm}>
+	<input type="text" name="password" bind:value={password} required />
+</form>
 
 <div class="flex flex-col px-4 lg:px-0 lg:h-fit h-screen">
 	<div class="w-[386px] h-20" />
@@ -42,6 +55,6 @@
 	</div>
 	<div class="w-[386px] h-56" />
 	<div class="flex flex-col lg:mt-auto gap-4 space-y-4 py-4">
-		<PrimaryButton ariaLabel="next" {disabled}>{$t('Sign up')}</PrimaryButton>
+		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Sign up')}</PrimaryButton>
 	</div>
 </div>
