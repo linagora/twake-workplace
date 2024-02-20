@@ -15,7 +15,7 @@ import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
 import { getUserCountry } from '$lib/services/ip';
-import type { ApplicationType, VerificationResult } from '../types';
+import type { ApplicationType } from '$types';
 
 export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddress }) => {
 	await Client.getClient();
@@ -46,10 +46,10 @@ export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddr
 	}
 
 	return {
-		app: 'chat',
+		app,
 		country,
 		isLogin: !!postLoginUrl,
-		step: session.data.step,
+		step: session.data.step || 'home',
 		verified: session.data.verified,
 		phone: session.data.phone
 	};
@@ -124,7 +124,7 @@ export const actions: Actions = {
 				return fail(400, { phone, phone_taken: true });
 			}
 
-			const token = '123456';
+			const token = await send(phone);
 
 			await session.set({
 				otp_request_token: token,
@@ -157,13 +157,11 @@ export const actions: Actions = {
 				return fail(400, { invalid: true });
 			}
 
-			// const verification = await verify(
-			// 	session.data.phone,
-			// 	password,
-			// 	session.data.otp_request_token
-			// );
-
-			const verification: VerificationResult = 'correct';
+			const verification = await verify(
+				session.data.phone,
+				password,
+				session.data.otp_request_token
+			);
 
 			if (verification === 'correct') {
 				await session.update((data) => ({
