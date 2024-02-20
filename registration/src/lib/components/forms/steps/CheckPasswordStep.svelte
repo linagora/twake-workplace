@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import PrimaryButton from '$lib/components/button/PrimaryButton.svelte';
-	import PasswordField from '$lib/components/input/PasswordField.svelte';
+	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import PasswordField from '$components/input/PasswordField.svelte';
 	import { createUserFormSchema, fullCreateUserFormSchema } from '$lib/schemas/zodSchema';
 	import { t } from 'svelte-i18n';
 
@@ -26,7 +26,7 @@
 	<input type="text" name="password" bind:value={password} required />
 </form>
 
-<div class="flex flex-col px-4 lg:px-0 lg:h-fit h-screen">
+<div class="flex flex-col px-4 lg:px-0 h-full">
 	<div class="w-[386px] h-20" />
 	<div class="self-stretch text-center text-zinc-900 text-[22px] font-semibold leading-7">
 		{$t('Set-your-password')}
@@ -53,8 +53,7 @@
 			error={$t('password_mismatch')}
 		/>
 	</div>
-	<div class="w-[386px] h-56" />
-	<div class="flex flex-col lg:mt-auto gap-4 space-y-4 py-4">
+	<div class="flex flex-col mt-auto gap-4 space-y-4 py-4">
 		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Sign up')}</PrimaryButton>
 	</div>
 </div>

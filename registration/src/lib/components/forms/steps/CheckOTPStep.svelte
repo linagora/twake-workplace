@@ -1,47 +1,56 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import PrimaryButton from '$lib/components/button/PrimaryButton.svelte';
-	import OtpField from '$lib/components/input/OtpField.svelte';
-	import PhoneConfirmed from '$lib/components/otp/PhoneConfirmed.svelte';
-	import { maskPhone } from '$lib/utils/phone';
+	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import OtpField from '$components/input/OtpField.svelte';
+	import PhoneConfirmed from '$components/otp/PhoneConfirmed.svelte';
+	import { maskPhone } from '$utils/phone';
 	import { t } from 'svelte-i18n';
-
-	export let phone: string = '+21652128155';
+	import { form, nextRegistrationStep, phone, registrationStep, verified } from '$store';
 
 	let value = '';
 	let resendCounter = 60;
 	let sendOtpForm: HTMLFormElement;
+	let checkOtpForm: HTMLFormElement;
 
 	setInterval(() => {
 		if (resendCounter > 0) resendCounter--;
 	}, 1000);
 
-	const handler = () => {
-		if (!phone || !value || disabled) return;
-
-		if (resendCounter > 0) return;
+	const handleSendOtp = () => {
+		if (!$phone || resendCounter > 0) return;
 
 		sendOtpForm.requestSubmit();
 
 		resendCounter = 60;
 	};
 
-	$: disabled = value.length < 6;
+	const handleCheckOtp = () => {
+		if (!$phone || disabled) return;
 
-	let confirmed = true;
+		checkOtpForm.requestSubmit();
+	};
+
+	$: disabled = value.length < 6;
+	$: timeout = $form?.timeout;
+	$: incorrect = $form?.incorrect;
 </script>
 
-<form use:enhance action="?/sendOtp" method="POST" class="hidden" bind:this={sendOtpForm}>
-	<input type="text" name="phone" bind:value={phone} required />
+<form use:enhance action="?/checkOtp" method="POST" class="hidden" bind:this={checkOtpForm}>
+	<input type="text" name="password" bind:value required />
 </form>
 
-<div class="flex flex-col px-4 lg:px-0 lg:h-fit h-screen">
-	{#if confirmed}
+<form use:enhance action="?/sendOtp" method="POST" class="hidden" bind:this={sendOtpForm}>
+	<input type="text" name="phone" bind:value={$phone} required />
+</form>
+
+<div class="flex flex-col px-4 lg:px-0 h-full">
+	{#if $verified && $registrationStep === 'confirmed'}
 		<div class="w-[386px] h-[238px]" />
 		<PhoneConfirmed />
-		<div class="w-[386px] h-[238px]" />
 		<div class="mt-auto py-4">
-			<PrimaryButton ariaLabel="next">{$t('continue-sign-up')}</PrimaryButton>
+			<PrimaryButton ariaLabel="next" handler={nextRegistrationStep}
+				>{$t('continue-sign-up')}</PrimaryButton
+			>
 		</div>
 	{:else}
 		<div class="w-[386px] h-20" />
@@ -52,22 +61,35 @@
 			<div class="text-center flex flex-col">
 				<span class="text-gray-400 text-base font-normal leading-normal">{$t('6-digit')}</span><span
 					class="text-zinc-900 text-base font-semibold leading-normal tracking-tight"
-					>{maskPhone(phone)}</span
+					>{maskPhone($phone)}</span
 				>
 			</div>
 		</div>
-		<div class="py-4 flex p-[16px] flex-col items-center gap-[12px] self-stretch">
+		<div class="py-4 flex p-4 flex-col items-center justify-center gap-3 self-stretch">
 			<OtpField bind:value />
+			<div class="flex items-center justify-center w-full">
+				{#if incorrect}
+					<div class="text-xs font-medium leading-4 tracking-tight text-center text-error px-5 pt-1 w-full">
+						{$t('entered-code-is-incorrect-try-again')}
+					</div>
+				{/if}
+				{#if timeout}
+					<div class="text-xs font-medium leading-4 tracking-tight text-center text-error px-5 pt-1">
+						{$t('too-many-wrong-attempts-has-been-made-try-again-later')}
+					</div>
+				{/if}
+			</div>
 		</div>
-		<div class="w-[386px] h-[236px]" />
 		<div class="mt-auto py-4">
-			<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Confirm')}</PrimaryButton>
+			<PrimaryButton ariaLabel="next" {disabled} handler={handleCheckOtp}
+				>{$t('Confirm')}</PrimaryButton
+			>
 			<div class="w-full h-12 px-6 py-3.5 justify-center items-center inline-flex">
 				<div class="text-center flex space-x-1">
 					<span class="text-gray-400 text-sm font-medium leading-tight tracking-tight"
 						>Didn't get the code?</span
 					>
-					<button type="button" disabled={resendCounter > 0} on:click={handler}>
+					<button type="button" disabled={resendCounter > 0} on:click={handleSendOtp}>
 						{#if resendCounter === 0}
 							<div class="text-primary text-sm font-medium leading-tight tracking-tight">
 								{$t('Resend')}
