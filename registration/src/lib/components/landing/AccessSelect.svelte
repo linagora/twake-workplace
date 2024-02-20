@@ -14,7 +14,7 @@
 	<div
 		class="{$registrationStep !== 'home' || $activeTab === 'login'
 			? 'bg-white'
-			: 'lg:bg-white'} md:shadow-xl md:rounded-3xl flex flex-col w-full xl:w-[504px] md:px-[60px] py-6 h-full"
+			: 'lg:bg-white'} md:shadow-xl md:rounded-3xl flex flex-col w-full xl:w-[504px] md:px-[60px] h-full"
 		id="start"
 	>
 		<FormHeader show={$registrationStep !== 'home'} />
