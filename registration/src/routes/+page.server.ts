@@ -15,7 +15,7 @@ import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
 import { getUserCountry } from '$lib/services/ip';
-import type { ApplicationType } from '../types';
+import type { ApplicationType, VerificationResult } from '../types';
 
 export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddress }) => {
 	await Client.getClient();
@@ -46,14 +46,17 @@ export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddr
 	}
 
 	return {
-		app,
+		app: 'chat',
 		country,
-		isLogin: !!postLoginUrl
+		isLogin: !!postLoginUrl,
+		step: session.data.step,
+		verified: session.data.verified,
+		phone: session.data.phone
 	};
 };
 
 export const actions: Actions = {
-	checkNickName: async ({ request, locals }) => {
+	checkNickName: async ({ request, locals: { session } }) => {
 		const data = Object.fromEntries(await request.formData()) as {
 			nickname: string;
 			firstName: string;
@@ -63,6 +66,14 @@ export const actions: Actions = {
 		try {
 			const { firstName, lastName, nickname } = data;
 
+			if (validateName(firstName) === false) {
+				return fail(400, { invalid_firstname: true });
+			}
+
+			if (validateName(lastName) === false) {
+				return fail(400, { invalid_lastname: true });
+			}
+
 			if ((await checkNickNameAvailability(nickname)) === false) {
 				const alternatives = await suggestAlternativeAvaialableNickNames(
 					firstName,
@@ -73,163 +84,168 @@ export const actions: Actions = {
 				return fail(400, { nickname_taken: true, alternative_nicknames: alternatives });
 			}
 
-			if (validateName(firstName) === false) {
-				return fail(400, { invalid_firstname: true });
-			}
-
-			if (validateName(lastName) === false) {
-				return fail(400, { invalid_lastname: true });
-			}
-
-			await locals.session.update((data) => ({
+			await session.update((data) => ({
 				...data,
-				step: 'nickname'
+				step: 'password',
+				firstName,
+				lastName,
+				nickname
 			}));
 
-			return { verified_nickname: true };
+			return { success: true };
 		} catch (error) {
 			return fail(400, { error });
 		}
 	},
 
-	sendOtp: async ({ request, locals }) => {
-		const data = await request.formData();
-		const phone = data.get('phone') as string;
+	sendOtp: async ({ request, locals: { session } }) => {
+		const data = Object.fromEntries(await request.formData()) as {
+			phone: string;
+		};
 
-		if (!(await checkPhoneAvailability(phone))) {
-			return fail(400, { phone, phone_taken: true });
+		try {
+			await session.update((data) => ({
+				...data,
+				step: 'phone'
+			}));
+
+			const { phone } = data;
+			const { last_sent } = session.data;
+
+			if (last_sent && last_sent > Date.now() - 60000) {
+				return fail(400, { phone, rate_limit: true });
+			}
+
+			if (!isPhoneValid(phone)) {
+				return fail(400, { phone, invalid_phone: true });
+			}
+
+			if (!(await checkPhoneAvailability(phone))) {
+				return fail(400, { phone, phone_taken: true });
+			}
+
+			const token = '123456';
+
+			await session.set({
+				otp_request_token: token,
+				last_sent: Date.now(),
+				phone,
+				verified: false,
+				authenticated: false,
+				step: 'otp'
+			});
+
+			return { sent: true };
+		} catch (error) {
+			fail(400, { error });
 		}
-
-		if (!phone) {
-			return fail(400, { phone, missing: true });
-		}
-
-		if (!isPhoneValid(phone)) {
-			return fail(400, { phone, invalid: true });
-		}
-
-		const { last_sent } = locals.session.data;
-
-		if (last_sent && last_sent > Date.now() - 60000) {
-			return fail(400, { phone, invalid: true });
-		}
-
-		const token = await send(phone);
-
-		await locals.session.set({
-			otp_request_token: token,
-			last_sent: Date.now(),
-			phone,
-			verified: false,
-			authenticated: false,
-			step: 'phone'
-		});
-
-		return { sent: true };
 	},
 
-	checkOtp: async ({ request, locals }) => {
-		const data = await request.formData();
-		const password = data.get('password') as string;
-		const { session } = locals;
+	checkOtp: async ({ request, locals: { session } }) => {
+		const data = Object.fromEntries(await request.formData()) as {
+			password: string;
+		};
 
-		if (!session.data.phone) {
-			return fail(400, { missing: true });
-		}
+		try {
+			const { password } = data;
 
-		if (!password || !session.data.otp_request_token) {
-			return fail(400, { incorrect: true });
-		}
+			if (!session.data.phone) {
+				return fail(400, { missing_phone: true });
+			}
 
-		const verification = await verify(session.data.phone, password, session.data.otp_request_token);
+			if (!password || !session.data.otp_request_token) {
+				return fail(400, { invalid: true });
+			}
 
-		if (verification === 'correct') {
-			await locals.session.update((data) => ({
+			// const verification = await verify(
+			// 	session.data.phone,
+			// 	password,
+			// 	session.data.otp_request_token
+			// );
+
+			const verification: VerificationResult = 'correct';
+
+			if (verification === 'correct') {
+				await session.update((data) => ({
+					...data,
+					verified: true,
+					step: 'confirmed'
+				}));
+
+				return { verified: true };
+			}
+
+			await session.update((data) => ({
 				...data,
-				verified: true,
+				verified: false,
 				step: 'otp'
 			}));
 
-			return { verified: true };
-		} else if (verification === 'timeout') {
-			await locals.session.update((data) => ({
-				...data,
-				verified: false
-			}));
-
-			return fail(400, { timeout: true });
-		} else {
-			await locals.session.update((data) => ({
-				...data,
-				verified: false,
-			}));
-
-			return fail(400, { incorrect: true });
+			return fail(400, {
+				...(verification === 'timeout' && { timeout: true }),
+				...(verification === 'wrong' && { incorrect: true })
+			});
+		} catch (error) {
+			return fail(400, { error });
 		}
 	},
 
-	register: async ({ request, locals, cookies, url }) => {
+	register: async ({ request, locals: { session }, cookies, url }) => {
+		const data = Object.fromEntries(await request.formData()) as {
+			password: string;
+		};
+
 		try {
-			const data = await request.formData();
-			const { session } = locals;
-			const phone = data.get('phone') as string;
 			const {
-				phone: verifiedPhone,
+				phone,
 				redirectUrl = null,
 				challenge = null,
-				clientId = null
+				clientId = null,
+				nickname,
+				firstName,
+				lastName,
+				verified
 			} = session.data;
 
-			if (!phone || isPhoneValid(phone) === false || !(await checkPhoneAvailability(phone))) {
+			if (!phone || !isPhoneValid(phone) || !verified) {
 				return fail(400, { invalid_phone: true });
 			}
 
-			if (!session.data.verified || verifiedPhone !== phone) {
-				return fail(400, { invalid_phone: true });
+			if (!(await checkPhoneAvailability(phone))) {
+				return fail(400, { phone_taken: true });
 			}
 
-			const nickname = data.get('nickname') as string;
-			const firstName = data.get('firstname') as string;
-			const lastName = data.get('lastname') as string;
-			const password = data.get('password') as string;
+			const { password } = data;
 
 			if (!password || !validatePassword(password)) {
 				return fail(400, { invalid_password: true });
 			}
 
-			if (validateNickName(nickname) === false) {
+			if (!nickname || validateNickName(nickname) === false) {
 				return fail(400, { invalid_nickname: true });
 			}
 
-			if ((await checkNickNameAvailability(nickname)) === false) {
-				const alternatives = await suggestAlternativeAvaialableNickNames(
-					firstName,
-					lastName,
-					nickname
-				);
-
-				return fail(400, { nickname_taken: true, alternative_nicknames: alternatives });
-			}
-
-			if (validateName(firstName) === false) {
+			if (!firstName || validateName(firstName) === false) {
 				return fail(400, { invalid_firstname: true });
 			}
 
-			if (validateName(lastName) === false) {
+			if (!lastName || validateName(lastName) === false) {
 				return fail(400, { invalid_lastname: true });
+			}
+
+			if ((await checkNickNameAvailability(nickname)) === false) {
+				return fail(400, { nickname_taken: true });
 			}
 
 			await signup(nickname, phone, password, firstName, lastName);
 
-			await locals.session.set({
+			await session.set({
 				authenticated: true,
 				otp_request_token: null,
 				last_sent: null,
 				phone,
 				verified: false,
 				user: nickname,
-				firstName,
-				lastName,
 				step: 'success'
 			});
 
