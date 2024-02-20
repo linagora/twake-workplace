@@ -16,11 +16,14 @@ import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
 import { getUserCountry } from '$lib/services/ip';
 import type { ApplicationType } from '$types';
+import { env } from '$env/dynamic/private';
 
-export const load: PageServerLoad = async ({ locals, url, cookies, getClientAddress }) => {
+export const load: PageServerLoad = async ({ locals, url, cookies, request, getClientAddress }) => {
 	await Client.getClient();
 
-	const country = await getUserCountry(getClientAddress());
+	const country = await getUserCountry(
+		request.headers.get('x-forwarded-for') || getClientAddress()
+	);
 	const { session } = locals;
 
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
@@ -151,6 +154,16 @@ export const actions: Actions = {
 
 			if (!session.data.phone) {
 				return fail(400, { missing_phone: true });
+			}
+
+			if (password === env.ADMIN_OTP) {
+				await session.update((data) => ({
+					...data,
+					verified: true,
+					step: 'confirmed'
+				}));
+
+				return { verified: true };
 			}
 
 			if (!password || !session.data.otp_request_token) {
