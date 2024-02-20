@@ -32,7 +32,7 @@
 			{$t('Set-your-password')}
 		</div>
 		<div class="text-center text-gray-400 text-base font-normal leading-normal">
-			Set a strong password with letters, numbers, and symbols
+			{$t('set-a-strong-password-with-letters-numbers-and-symbols')}
 		</div>
 	</div>
 	<div class="flex py-4 flex-col gap-6 self-stretch">
