@@ -28,3 +28,68 @@ phone.subscribe((v) => {
 		verified.set(false);
 	}
 });
+
+export const rewindRegistrationStep = () => {
+	const currentStep = get(registrationStep);
+
+	if (currentStep === 'home') return;
+
+	if (currentStep === 'phone') {
+		registrationStep.set('home');
+		return;
+	}
+
+	if (currentStep === 'otp') {
+		registrationStep.set('phone');
+		return;
+	}
+
+	if (currentStep === 'confirmed') {
+		registrationStep.set('otp');
+		return;
+	}
+
+	if (currentStep === 'nickname') {
+		registrationStep.set('confirmed');
+		return;
+	}
+
+	if (currentStep === 'password') {
+		registrationStep.set('nickname');
+		return;
+	}
+};
+
+export const nextRegistrationStep = () => {
+	const currentStep = get(registrationStep);
+
+	if (currentStep === 'home') {
+		registrationStep.set('phone');
+		return;
+	}
+
+	if (currentStep === 'phone') {
+		registrationStep.set('otp');
+		return;
+	}
+
+	if (currentStep === 'otp') {
+		registrationStep.set('confirmed');
+		return;
+	}
+
+	if (currentStep === 'confirmed') {
+		registrationStep.set('nickname');
+		return;
+	}
+
+	if (currentStep === 'nickname') {
+		registrationStep.set('password');
+		return;
+	}
+
+	if (currentStep === 'password') {
+		registrationStep.set('success');
+		return;
+	}
+};
