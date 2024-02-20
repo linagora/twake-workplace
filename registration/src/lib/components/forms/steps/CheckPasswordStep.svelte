@@ -26,13 +26,14 @@
 	<input type="text" name="password" bind:value={password} required />
 </form>
 
-<div class="flex flex-col px-4 lg:px-0 h-full">
-	<div class="w-[386px] h-20" />
-	<div class="self-stretch text-center text-zinc-900 text-[22px] font-semibold leading-7">
-		{$t('Set-your-password')}
-	</div>
-	<div class="text-center text-gray-400 text-base font-normal leading-normal">
-		Set a strong password with letters, numbers, and symbols
+<div class="flex flex-col px-4 lg:px-0 h-full pb-6 pt-20">
+	<div class="flex p-4 flex-col items-center gap-[4px] self-stretch">
+		<div class="self-stretch text-center text-zinc-900 text-[22px] font-semibold leading-7">
+			{$t('Set-your-password')}
+		</div>
+		<div class="text-center text-gray-400 text-base font-normal leading-normal">
+			Set a strong password with letters, numbers, and symbols
+		</div>
 	</div>
 	<div class="flex py-4 flex-col gap-6 self-stretch">
 		<PasswordField

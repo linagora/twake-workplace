@@ -7,7 +7,9 @@
 </script>
 
 {#if type === 'header'}
-	<Header />
+	<div class="h-8 w-48">
+		<Header />
+	</div>
 {:else}
 	<Landing />
 {/if}

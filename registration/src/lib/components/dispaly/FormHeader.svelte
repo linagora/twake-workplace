@@ -7,7 +7,10 @@
 </script>
 
 <div class="flex flex-row">
-	<NavigateBack handler={rewindRegistrationStep} show={$registrationStep !== 'home'} />
+	<NavigateBack
+		handler={rewindRegistrationStep}
+		show={$registrationStep !== 'home' && $registrationStep !== 'confirmed'}
+	/>
 	{#if show}
 		<div class="flex p-0 flex-col justify-center items-center self-stretch w-full">
 			<div class="flex w-full p-[12px] flex-col items-center gap-[10px]">

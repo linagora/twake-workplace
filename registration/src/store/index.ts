@@ -44,13 +44,8 @@ export const rewindRegistrationStep = () => {
 		return;
 	}
 
-	if (currentStep === 'confirmed') {
-		registrationStep.set('otp');
-		return;
-	}
-
 	if (currentStep === 'nickname') {
-		registrationStep.set('confirmed');
+		registrationStep.set('phone');
 		return;
 	}
 
