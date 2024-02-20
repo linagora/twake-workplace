@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Valid from '../icons/valid.svelte';
-	import { verified } from '../../../store';
-	import Spin from '../icons/Spin.svelte';
-	import FieldError from '../dispaly/FieldError.svelte';
-	import { isMobile } from '$lib/utils/device';
+	import Valid from '$components/icons/valid.svelte';
+	import { verified } from '$store';
+	import Spin from '$components/icons/Spin.svelte';
+	import FieldError from '$components/dispaly/FieldError.svelte';
+	import { isMobile } from '$utils/device';
 	import { t } from 'svelte-i18n';
 
 	export let value: string;

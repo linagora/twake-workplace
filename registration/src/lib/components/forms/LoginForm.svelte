@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { t } from 'svelte-i18n';
-	import { form } from '../../../store';
-	import SubmitButton from '../button/SubmitButton.svelte';
-	import PasswordField from '../input/PasswordField.svelte';
-	import TextField from '../input/TextField.svelte';
-	import OutlineLink from '../link/OutlineLink.svelte';
+	import { form } from '$store';
+	import SubmitButton from '$components/button/SubmitButton.svelte';
+	import PasswordField from '$components/input/PasswordField.svelte';
+	import TextField from '$components/input/TextField.svelte';
+	import OutlineLink from '$components/link/OutlineLink.svelte';
 
 	let login = '';
 	let password = '';

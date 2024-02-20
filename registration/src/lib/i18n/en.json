@@ -2,8 +2,8 @@
   "welcome": "Twake ID is your one entry access to all our services Chat, Mail and Drive",
   "Sign up": "Sign up",
   "Sign in": "Sign in",
-  "First Name": "First Name",
-  "Last Name": "Last Name",
+  "First Name": "First name",
+  "Last Name": "Last name",
   "Username": "Username",
   "Password": "Password",
   "Confirm password": "Confirm password",
@@ -22,7 +22,7 @@
   "tdrive_description": "Share and collaborate on files securely, anywhere",
   "tmail_description": "Experience email communication like never before",
   "Logout": "Logout",
-  "Matrix ID/Email": "Matrix ID/Email",
+  "Matrix ID/Email": "Matrix ID / Email",
   "username_info_tooltip": "Username you enter will be used to form you Matrix ID as well as your Twake mail address.",
   "Ok-got-it": "Ok, got it",
   "username_taken": "Sorry, this username is already taken",
@@ -75,5 +75,8 @@
   "Resend": "Resend",
   "Resend-in": "Resend in",
   "continue-sign-up": "Continue sign up",
-  "Set-your-password": "Set your password"
+  "Set-your-password": "Set your password",
+  "Create-Twake-ID": "Create Twake ID",
+  "Use-company-server": "Use company server",
+  "end-to-end-encryption-collaborative-features-for-secure-and-efficient-teamwork": "End-to-end encryption, collaborative features for secure and efficient teamwork"
 }

@@ -14,6 +14,14 @@ const config = {
 		adapter: adapter(),
 		csrf: {
 			checkOrigin: false
+		},
+		alias: {
+			'$store': './src/store',
+			'$types': './src/types',
+			'$utils': './src/lib/utils',
+			'$services': './src/lib/services',
+			'$lib': './src/lib',
+			'$components': './src/lib/components',
 		}
 	}
 };

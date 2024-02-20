@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { ApplicationType } from './types';
+import type { ApplicationType, RegistrationStepType } from './types';
 
 // for information about these interfaces
 declare global {
@@ -30,10 +30,12 @@ interface SessionData {
 	user?: string;
 	firstName?: string;
 	lastName?: string;
+	nickname?: string;
 	redirectUrl?: string;
 	postLoginUrl?: string;
 	challenge?: string;
 	clientId?: string;
 	country?: string;
 	app?: ApplicationType;
+	step: RegistrationStepType = 'home';
 }

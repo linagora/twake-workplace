@@ -1,9 +1,10 @@
 <script lang="ts">
-	import PrimaryButton from '$lib/components/button/PrimaryButton.svelte';
-	import TextField from '$lib/components/input/TextField.svelte';
-	import AvailableNicknames from '$lib/components/user/AvailableNicknames.svelte';
+	import { enhance } from '$app/forms';
+	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import TextField from '$components/input/TextField.svelte';
+	import AvailableNicknames from '$components/user/AvailableNicknames.svelte';
 	import { createUserFormSchema } from '$lib/schemas/zodSchema';
-	import { isNickNameTaken, suggestNickNames } from '$lib/utils/api';
+	import { isNickNameTaken, suggestNickNames } from '$utils/api';
 	import { t } from 'svelte-i18n';
 
 	let firstName: string = '';
@@ -14,6 +15,7 @@
 	let loading = false;
 	let accepted = false;
 	let alternativeNicknames: string[] = [];
+	let checkNicknameForm: HTMLFormElement;
 
 	$: validNickName = nickName.length > 0 && nickNamechecked && !nickNameTaken;
 
@@ -49,10 +51,22 @@
 			nickName,
 			accepted
 		}).success || nickNameTaken;
+
+	const handler = async () => {
+		if (disabled) return;
+
+		checkNicknameForm.requestSubmit();
+	};
 </script>
 
-<div class="flex flex-col px-4 lg:px-0 lg:h-fit min-h-[768px]">
-	<div class="flex py-[16px] flex-col items-start gap-[24px] self-stretch">
+<form use:enhance action="?/checkNickName" method="POST" class="hidden" bind:this={checkNicknameForm}>
+	<input type="text" name="nickname" bind:value={nickName} required />
+	<input type="text" name="firstName" bind:value={firstName} required />
+	<input type="text" name="lastName" bind:value={lastName} required />
+</form>
+
+<div class="flex flex-col px-4 lg:px-0 h-full">
+	<div class="flex flex-col items-start gap-6 self-stretch">
 		<TextField
 			name="firstname"
 			placeholder={$t('First Name')}
@@ -99,10 +113,9 @@
 			</span>
 		{/if}
 
-		<div class="hidden lg:block w-[386px] h-[146px]" />
 	</div>
 	<div class="flex flex-col lg:mt-auto gap-4 space-y-4 py-4">
-		<PrimaryButton ariaLabel="next" {disabled}>{$t('Next')}</PrimaryButton>
+		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Next')}</PrimaryButton>
 		<div class="flex items-start gap-[8px] self-stretch">
 			<input
 				type="checkbox"

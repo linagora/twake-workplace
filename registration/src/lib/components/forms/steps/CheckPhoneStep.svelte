@@ -1,23 +1,23 @@
 <script lang="ts">
-	import TelField from '$lib/components/input/TelField.svelte';
+	import TelField from '$components/input/TelField.svelte';
 	import { t } from 'svelte-i18n';
-	import { userCountry } from '$lib/../store';
-	import PrimaryButton from '$lib/components/button/PrimaryButton.svelte';
+	import { userCountry, form } from '$store';
+	import PrimaryButton from '$components/button/PrimaryButton.svelte';
 	import { createUserFormSchema } from '$lib/schemas/zodSchema';
-	import { isPhoneTaken } from '$lib/utils/api';
+	import { isPhoneTaken } from '$utils/api';
 	import type { E164Number } from 'svelte-tel-input/types';
+	import { enhance } from '$app/forms';
+	import UsedPhone from '$components/otp/UsedPhone.svelte';
 
 	export let value: null | E164Number = null;
 	export let valid = true;
-	export let handler: () => void = () => {};
 
+	let sendOtpForm: HTMLFormElement;
 	let loading = false;
 	let phoneChecked = false;
 	let phoneTaken = false;
 
-	$: disabled = !valid || phoneTaken || loading;
-
-  $: console.log(value)
+	$: disabled = !valid || phoneTaken || loading || !value || !phoneChecked;
 
 	const checkPhone = async () => {
 		if (!value || !createUserFormSchema.safeParse({ value }).success || phoneChecked) return;
@@ -33,9 +33,19 @@
 		phoneChecked = false;
 		phoneTaken = false;
 	};
+
+	const handler = () => {
+		if (!value || disabled) return;
+
+		sendOtpForm.requestSubmit();
+	};
 </script>
 
-<div class="flex flex-col px-4 lg:px-0 lg:h-fit h-screen">
+<form use:enhance action="?/sendOtp" method="POST" class="hidden" bind:this={sendOtpForm}>
+	<input type="text" name="phone" bind:value required />
+</form>
+
+<div class="flex flex-col px-4 lg:px-0 h-full">
 	<div class="w-[386px] h-20" />
 	<div class="h-28 py-4 flex-col justify-start items-center gap-1 flex">
 		<div class="self-stretch text-center text-zinc-900 text-[22px] font-semibold leading-7">
@@ -57,7 +67,15 @@
 			onBlur={checkPhone}
 		/>
 	</div>
-	<div class="w-[386px] h-[236px]" />
+	{#if $form?.invalid_phone || $form?.phone_taken}
+		<div class="text-xs font-medium leading-4 pt-1 tracking-wide text-left text-error px-5">
+			{$t('invalid phone number')}
+		</div>
+	{:else if phoneTaken}
+		<div class="relative w-full">
+			<UsedPhone checked={phoneChecked} />
+		</div>
+	{/if}
 	<div class="mt-auto py-4">
 		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Next')}</PrimaryButton>
 	</div>
