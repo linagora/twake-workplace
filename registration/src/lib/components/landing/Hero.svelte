@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
-	import Logo from '../logo/Logo.svelte';
+	import Logo from '$components/logo/Logo.svelte';
 </script>
 
 <div
-	class="flex flex-col w-full lg:max-w-[508px] px-10 lg:px-0 space-y-6 font-[Inter] pt-52 items-center lg:items-start"
+	class="hidden lg:flex flex-col w-full lg:max-w-[508px] px-10 lg:px-0 space-y-6 font-[Inter] pt-52 items-center lg:items-start"
 >
 	<Logo />
 	<div class="flex flex-col space-y-5 w-full h-screen lg:h-fit">
@@ -19,10 +19,5 @@
 		>
 			{$t('Start your journey')}
 		</a>
-		<div class="hidden lg:flex flex-row gap-[50.2px]">
-			<img src="/images/twakechat.svg" alt="twake" class="w-[88px] h-[88px]" />
-			<img src="/images/tdrive.svg" alt="tdrive" class="w-[88px] h-[88px]" />
-			<img src="/images/tmail.svg" alt="tmail" class="w-[88px] h-[88px]" />
-		</div>
 	</div>
 </div>
