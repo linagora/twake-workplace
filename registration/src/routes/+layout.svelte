@@ -15,7 +15,7 @@
 </svelte:head>
 
 <div
-	class="w-full lg:h-[100vh] overflow-x-hidden overflow-y-scroll gradiant flex flex-col font-[Inter]"
+	class="w-full h-[100vh] overflow-x-hidden overflow-y-scroll gradiant flex flex-col font-[Inter]"
 >
 	<slot />
 	<span
