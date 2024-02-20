@@ -30,6 +30,7 @@ interface SessionData {
 	user?: string;
 	firstName?: string;
 	lastName?: string;
+	nickname?: string;
 	redirectUrl?: string;
 	postLoginUrl?: string;
 	challenge?: string;
