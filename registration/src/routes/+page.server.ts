@@ -250,7 +250,8 @@ export const actions: Actions = {
 
 			await signup(nickname, phone, password, firstName, lastName);
 
-			await session.set({
+			await session.update((data) => ({
+				...data,
 				authenticated: true,
 				otp_request_token: null,
 				last_sent: null,
@@ -258,7 +259,7 @@ export const actions: Actions = {
 				verified: false,
 				user: nickname,
 				step: 'success'
-			});
+			}));
 
 			const authSessionCookie = await authService.login(nickname, password);
 

@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ parent, cookies }) => {
 	}
 
 	return {
-		username: session.user,
+		username: session.nickname,
 		firstName: session.firstName,
 		lastName: session.lastName,
 		phone: session.phone,
