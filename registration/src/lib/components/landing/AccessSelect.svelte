@@ -8,16 +8,17 @@
 	import CheckNickNameStep from '$components/forms/steps/CheckNickNameStep.svelte';
 	import CheckPasswordStep from '$components/forms/steps/CheckPasswordStep.svelte';
 	import MainScreen from '$components/landing/MainScreen.svelte';
+
+	$: showHeader = $registrationStep !== 'home' || $activeTab === 'login';
 </script>
 
 <div class="w-full flex flex-col md:flex-row justify-end h-full lg:max-h-[768px] lg:min-h-[768px]">
 	<div
-		class="{$registrationStep !== 'home' || $activeTab === 'login'
+		class="{showHeader
 			? 'bg-white'
 			: 'lg:bg-white'} md:shadow-xl md:rounded-3xl flex flex-col w-full xl:w-[504px] md:px-[60px] h-full"
-		id="start"
 	>
-		<FormHeader show={$registrationStep !== 'home'} />
+		<FormHeader show={showHeader} />
 		{#if $registrationStep === 'nickname' || $activeTab === 'login'}
 			<div
 				class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 text-center"
