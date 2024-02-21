@@ -65,7 +65,7 @@
 	<input type="text" name="lastName" bind:value={lastName} required />
 </form>
 
-<div class="flex flex-col px-4 lg:px-0 h-full">
+<div class="flex flex-col px-4 lg:px-0 h-full pb-[28px] lg:pb-6">
 	<div class="flex flex-col items-start gap-6 self-stretch">
 		<TextField
 			name="firstname"

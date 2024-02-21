@@ -26,7 +26,7 @@
 	<input type="text" name="password" bind:value={password} required />
 </form>
 
-<div class="flex flex-col px-4 lg:px-0 h-full pb-6 pt-20">
+<div class="flex flex-col px-4 lg:px-0 h-full pt-20 pb-[28px] lg:pb-6">
 	<div class="flex p-4 flex-col items-center gap-[4px] self-stretch">
 		<div class="self-stretch text-center text-zinc-900 text-[22px] font-semibold leading-7">
 			{$t('Set-your-password')}

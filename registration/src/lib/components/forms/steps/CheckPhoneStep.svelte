@@ -45,7 +45,7 @@
 	<input type="text" name="phone" bind:value required />
 </form>
 
-<div class="flex flex-col px-4 lg:px-0 h-full">
+<div class="flex flex-col px-4 lg:px-0 h-full pb-[28px] lg:pb-6">
 	<div class="w-[386px] h-20" />
 	<div class="h-28 py-4 flex-col justify-start items-center gap-1 flex">
 		<div class="self-stretch text-center text-zinc-900 text-[22px] font-semibold leading-7">
