@@ -43,7 +43,7 @@
 	<input type="text" name="phone" bind:value={$phone} required />
 </form>
 
-<div class="flex flex-col px-4 lg:px-0 h-full">
+<div class="flex flex-col px-4 lg:px-0 h-full pb-[28px] lg:pb-6">
 	{#if $verified && $registrationStep === 'confirmed'}
 		<div class="w-[386px] h-[238px]" />
 		<PhoneConfirmed />
