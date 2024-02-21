@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { env } from '$env/dynamic/public';
 	import OutlineButton from '../button/OutlineButton.svelte';
 	import { t } from 'svelte-i18n';
 
 	export let user: string;
 	export let id: string;
 	export let phone: string;
+
+	$: suffix = `@${env.PUBLIC_SIGNUP_EMAIL_DOMAIN}`;
 </script>
 
 <div
@@ -22,28 +25,42 @@
 			<img src="/images/arrow-forward.svg" alt="next" />
 		</div>
 		<div class="flex flex-col gap-0.5 px-4">
-			<span class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left">@{id}</span>
-			<span class="text-sm font-normal leading-5 text-left text-gray-500">{ $t('twake-matrix-id') }</span>
+			<span
+				class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left"
+				>@{id}</span
+			>
+			<span class="text-sm font-normal leading-5 text-left text-gray-500"
+				>{$t('twake-matrix-id')}</span
+			>
 		</div>
 		<div class="flex flex-col gap-0.5 px-4">
-			<span class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left">{id}@twake.app</span>
-			<span class="text-sm font-normal leading-5 text-left text-gray-500">{ $t('twake-mail') }</span>
+			<span
+				class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left"
+				>{`${id}${suffix}`}</span
+			>
+			<span class="text-sm font-normal leading-5 text-left text-gray-500">{$t('twake-mail')}</span>
 		</div>
 		{#if phone}
 			<div class="flex flex-col gap-0.5 px-4">
-				<span class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left">{phone}</span>
-				<span class="text-sm font-normal leading-5 text-left text-gray-500">{ $t('twake-phone-number') }</span
+				<span
+					class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left"
+					>{phone}</span
+				>
+				<span class="text-sm font-normal leading-5 text-left text-gray-500"
+					>{$t('twake-phone-number')}</span
 				>
 			</div>
 		{/if}
 
 		<div class="flex items-center justify-center pt-5">
 			<div class="w-4/5 md:hidden">
-				<OutlineButton disabled={true} handler={() => {}}>{ $t('add-recovery-email') }</OutlineButton>
+				<OutlineButton disabled={true} handler={() => {}}>{$t('add-recovery-email')}</OutlineButton>
 			</div>
 		</div>
 	</div>
-	<span class="text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px] text-disabled-text">
-		{ $t('logged_twakeid_choose_mobile') }
+	<span
+		class="text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px] text-disabled-text"
+	>
+		{$t('logged_twakeid_choose_mobile')}
 	</span>
 </div>
