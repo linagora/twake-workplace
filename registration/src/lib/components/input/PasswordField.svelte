@@ -29,8 +29,8 @@
 	$: notValid = value.length > 0 && isInvalid;
 </script>
 
-<div class="flex flex-col space-y-1">
-	<div class="relative">
+<div class="flex flex-col space-y-1 w-full">
+	<div class="relative w-full">
 		<input
 			id={name}
 			{placeholder}
