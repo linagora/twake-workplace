@@ -20,17 +20,17 @@
 </script>
 
 <div class="w-full h-full lg:h-fit">
-	<div class="flex flex-col lg:space-y-5">
+	<div class="flex flex-col h-full lg:space-y-5">
 		<div class="h-20 flex-row w-full lg:p-10 hidden lg:flex">
 			<div class="w-full" />
-			<div class="right-0 w-52">
+			<div class="right-0 w-56">
 				<LoggedUser {username} {user} />
 			</div>
 		</div>
-		<div class="flex space-x-4 w-full lg:px-48 lg:py-4">
-			<div class="w-full overflow-hidden">
+		<div class="flex space-x-4 w-full h-full lg:px-48 lg:py-4">
+			<div class="w-full h-full overflow-hidden">
 				<div
-					class="flex flex-col-reverse lg:flex-row-reverse w-full lg:space-x-20 lg:py-10 lg:px-10 h-full"
+					class="flex flex-col-reverse lg:flex-row-reverse w-full lg:pt-9 xl:space-x-24 h-full"
 				>
 					<SuccessCard {user} bind:id={username} {phone} />
 					<div class="hidden lg:block w-full">
