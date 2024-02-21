@@ -3,6 +3,7 @@
 	import PrimaryButton from '$components/button/PrimaryButton.svelte';
 	import TextField from '$components/input/TextField.svelte';
 	import AvailableNicknames from '$components/user/AvailableNicknames.svelte';
+	import { env } from '$env/dynamic/public';
 	import { createUserFormSchema } from '$lib/schemas/zodSchema';
 	import { isNickNameTaken, suggestNickNames } from '$utils/api';
 	import { t } from 'svelte-i18n';
@@ -18,6 +19,7 @@
 	let checkNicknameForm: HTMLFormElement;
 
 	$: validNickName = nickName.length > 0 && nickNamechecked && !nickNameTaken;
+	$: suffix = `@${env.PUBLIC_SIGNUP_EMAIL_DOMAIN}`;
 
 	const invalidateNickNameCheck = () => {
 		nickNamechecked = false;
@@ -59,7 +61,13 @@
 	};
 </script>
 
-<form use:enhance action="?/checkNickName" method="POST" class="hidden" bind:this={checkNicknameForm}>
+<form
+	use:enhance
+	action="?/checkNickName"
+	method="POST"
+	class="hidden"
+	bind:this={checkNicknameForm}
+>
 	<input type="text" name="nickname" bind:value={nickName} required />
 	<input type="text" name="firstName" bind:value={firstName} required />
 	<input type="text" name="lastName" bind:value={lastName} required />
@@ -95,7 +103,7 @@
 			feedback={validNickName}
 			onInput={invalidateNickNameCheck}
 			{loading}
-			suffix="@twake.app"
+			{suffix}
 			info={true}
 			infoTitle={$t('Matrix ID/Email')}
 			infoDescription={$t('username_info_tooltip')}
@@ -112,7 +120,6 @@
 				>{$t('invalid Username')}
 			</span>
 		{/if}
-
 	</div>
 	<div class="flex flex-col lg:mt-auto gap-4 space-y-4 py-4">
 		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Next')}</PrimaryButton>

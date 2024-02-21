@@ -285,18 +285,17 @@ export const actions: Actions = {
 		}
 	},
 
-	login: async ({ request, locals, cookies, url }) => {
+	login: async ({ request, locals: { session }, cookies, url }) => {
 		try {
-			const data = await request.formData();
+			const data = Object.fromEntries(await request.formData()) as {
+				login: string;
+				password: string;
+			};
 
-			const login = data.get('login') as string;
-			const password = data.get('password') as string;
+			const { login, password } = data;
+			const { postLoginUrl = null, challenge = null, clientId = null } = session.data;
 
-			const { postLoginUrl = null, challenge = null, clientId = null } = locals.session.data;
-
-			const cookie = await authService.login(login, password);
-
-			if (!cookie) {
+			if (!login || !password) {
 				return fail(400, { failed_login: true });
 			}
 
@@ -306,12 +305,19 @@ export const actions: Actions = {
 				throw Error('User not found');
 			}
 
-			await locals.session.update((data) => ({
+			const cookie = await authService.login(user.cn, password);
+
+			if (!cookie) {
+				return fail(400, { failed_login: true });
+			}
+
+			await session.update((data) => ({
 				...data,
 				authenticated: true,
-				lastName: user?.sn,
-				firstName: user?.givenName,
-				user: user?.cn
+				lastName: user.sn,
+				firstName: user.givenName,
+				nickname: user.cn,
+				phone: user.mobile
 			}));
 
 			cookies.set(authService.cookieName, cookie, { domain: extractMainDomain(url.host) });

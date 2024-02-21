@@ -13,7 +13,7 @@
 	};
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-2 w-full">
 	<button
 		aria-label="user menu"
 		type="button"
