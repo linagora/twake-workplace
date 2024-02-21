@@ -1,6 +1,8 @@
+import { env } from '$env/dynamic/public';
 import { generateNickNames } from '$lib/utils/username';
 import type { User } from '../../../types';
 import ldapClient from '../ldap/client';
+import validator from 'validator';
 
 /**
  * Checks if a nickname is available.
@@ -83,10 +85,11 @@ export const signup = async (
 	mobile: string,
 	password: string,
 	firstName: string,
-	lastName: string,
-	mail?: string
+	lastName: string
 ): Promise<void> => {
 	try {
+		const mail = `${cn}@${env.PUBLIC_SIGNUP_EMAIL_DOMAIN}`;
+
 		const entry: User = {
 			uid: cn,
 			cn,
@@ -94,12 +97,9 @@ export const signup = async (
 			sn: lastName,
 			mobile,
 			userPassword: password,
+			mail,
 			objectclass: 'inetOrgPerson'
 		};
-
-		if (mail) {
-			entry.mail = mail;
-		}
 
 		await ldapClient.insert<User>(`cn=${cn},ou=users`, entry);
 	} catch (error) {
@@ -117,7 +117,17 @@ export const signup = async (
  */
 export const fetchUser = async (login: string): Promise<User | null> => {
 	try {
-		const user = (await ldapClient.find('cn', login, [
+		let filter = 'cn';
+
+		if (validator.isEmail(login)) {
+			filter = 'mail';
+		}
+
+		if (validator.isMobilePhone(login)) {
+			filter = 'mobile';
+		}
+
+		const user = (await ldapClient.find(filter, login, [
 			'cn',
 			'sn',
 			'givenName'
