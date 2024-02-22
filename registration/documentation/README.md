@@ -1,6 +1,7 @@
 # API Documentation:
 
 - [Validate nickname](#validate-nickname)
+- [validate phone](#validate-phone)
 - [Suggest nicknames](#suggest-nicknames)
 
 ## Validate nickname
