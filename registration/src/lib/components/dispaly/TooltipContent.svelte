@@ -28,7 +28,7 @@
 		<span
 			class="text-primary text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 		>
-			{ $t('Ok-got-it') }
+			{$t('Ok-got-it')}
 		</span>
 	</button>
 </div>

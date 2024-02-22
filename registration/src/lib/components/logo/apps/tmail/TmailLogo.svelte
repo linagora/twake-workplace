@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LogoType } from '../../../../../types';
+	import type { LogoType } from '$types';
 	import Header from './TmailHeader.svelte';
 	import Landing from './TmailLanding.svelte';
 

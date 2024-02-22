@@ -1,6 +1,6 @@
 import { env } from '$env/dynamic/public';
-import type { ApplicationType, IApplicationStorePayload } from '../../types';
-import { isMobile, getPlatform } from './device';
+import type { ApplicationType, IApplicationStorePayload } from '$types';
+import { isMobile, getPlatform } from '$utils/device';
 
 /**
  * Get the store url for an application.

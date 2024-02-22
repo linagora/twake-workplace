@@ -87,6 +87,6 @@ export const GET: RequestHandler = async () => {
 			'PS256',
 			'PS384',
 			'PS512'
-		],
+		]
 	});
 };

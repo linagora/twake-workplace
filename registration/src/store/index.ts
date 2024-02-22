@@ -1,6 +1,6 @@
 import { writable, get } from 'svelte/store';
 import type { ActionData } from '../routes/$types';
-import type { RegistrationStepType, ApplicationType, Tab } from '../types';
+import type { RegistrationStepType, ApplicationType, Tab } from '$types';
 import type { CountryCode } from 'svelte-tel-input/types';
 
 export const form = writable<ActionData>();

@@ -1,9 +1,13 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 import { env } from '$env/dynamic/public';
-import type { ApplicationType } from '../../types';
-import { isMobile } from './device';
-import { getApplicationDeepLink, getApplicationGotoLink, getApplicationStoreUrl } from './product';
+import type { ApplicationType } from '$types';
+import { isMobile } from '$utils/device';
+import {
+	getApplicationDeepLink,
+	getApplicationGotoLink,
+	getApplicationStoreUrl
+} from '$utils/product';
 import { encode as base64url } from 'universal-base64url';
 
 /**

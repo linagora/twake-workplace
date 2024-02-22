@@ -5,7 +5,6 @@
 	import SubmitButton from '$components/button/SubmitButton.svelte';
 	import PasswordField from '$components/input/PasswordField.svelte';
 	import TextField from '$components/input/TextField.svelte';
-	import OutlineLink from '$components/link/OutlineLink.svelte';
 
 	let login = '';
 	let password = '';

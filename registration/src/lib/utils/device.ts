@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import type { PlatformType } from '../../types';
+import type { PlatformType } from '$types';
 
 /**
  * Detects whether the user is on a mobile device or not.

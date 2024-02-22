@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { env } from '$env/dynamic/private';
 import { getUrl } from '$lib/utils/url';
-import type { AuthResponse, TokenResponse } from '../../../types';
+import type { AuthResponse, TokenResponse } from '$types';
 
 class LemonLdapAuthService {
 	portal = '';

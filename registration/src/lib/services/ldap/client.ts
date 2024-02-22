@@ -1,6 +1,6 @@
 import ldapjs from 'ldapjs';
 import { env } from '$env/dynamic/private';
-import type { SearchResult } from '../../../types';
+import type { SearchResult } from '$types';
 
 class LdapClient {
 	private client: ldapjs.Client | undefined;

@@ -13,7 +13,7 @@ export const maskPhone = (phone: string): string => {
 	const inBetween = number
 		.slice(3, number.length - 1)
 		.replace(/(\d{3})(?=\d)/g, '$1 ')
-		.replace(/[0-9]/g, '*')
+		.replace(/[0-9]/g, '*');
 
 	return `${code} ${number.slice(0, 3)} ${inBetween} ${number.slice(-1)}`;
 };

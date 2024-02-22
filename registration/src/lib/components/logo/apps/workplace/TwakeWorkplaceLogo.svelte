@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LogoType } from '../../../../../types';
+	import type { LogoType } from '$types';
 	import Header from './WorkplaceHeader.svelte';
 	import Landing from './WorkspalaceLanding.svelte';
 

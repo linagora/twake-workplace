@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { activeTab } from '../../../store';
+	import { activeTab } from '$store';
 	import { t } from 'svelte-i18n';
 
 	export let checked: boolean = false;
@@ -27,15 +27,15 @@
 		role="alert"
 	>
 		<div class="ms-3 text-sm font-medium text-gray-800 dark:text-gray-300 w-9/12 text-left">
-			{ $t('this-number-is-already-registered-sign-in-instead') }
+			{$t('this-number-is-already-registered-sign-in-instead')}
 		</div>
 		<button
-			aria-label={ $t('sign-in-instead') }
+			aria-label={$t('sign-in-instead')}
 			on:click={() => ($activeTab = 'login')}
 			type="button"
 			class="flex items-center w-4/12 justify-center px-3 py-[10px] text-[#9BC8FF] text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 		>
-			{ $t('Sign in') }
+			{$t('Sign in')}
 		</button>
 		<button
 			type="button"

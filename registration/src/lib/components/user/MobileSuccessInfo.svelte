@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
-	import OutlineButton from '../button/OutlineButton.svelte';
+	import OutlineButton from '$components/button/OutlineButton.svelte';
 	import { t } from 'svelte-i18n';
 
 	export let user: string;

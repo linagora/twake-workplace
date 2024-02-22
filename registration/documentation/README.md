@@ -178,13 +178,13 @@ POST
 
 The request body should be in JSON format and include the following properties:
 
-| Parameter      | Type   | Description                                                |
-| -------------- | ------ | ---------------------------------------------------------- |
-| nickname       | string | The user's nickname for registration.                      |
-| firstname    | string | The user's display name.                        |
-| lastname    | string | The user's display name.                        |
-| phone | string | The user's phone number |
-| password       | string | The user's password for account authentication.            |
+| Parameter | Type   | Description                                     |
+| --------- | ------ | ----------------------------------------------- |
+| nickname  | string | The user's nickname for registration.           |
+| firstname | string | The user's display name.                        |
+| lastname  | string | The user's display name.                        |
+| phone     | string | The user's phone number                         |
+| password  | string | The user's password for account authentication. |
 
 Note:
 
@@ -194,11 +194,11 @@ Example:
 
 ```json
 {
-  "nickname": "exampleUser123",
-  "firstname":  "John",
-  "lastname": "Doe",
-  "password": "SecurePass123+",
-  "phone":  "+21622222222",
+	"nickname": "exampleUser123",
+	"firstname": "John",
+	"lastname": "Doe",
+	"password": "SecurePass123+",
+	"phone": "+21622222222"
 }
 ```
 
@@ -269,9 +269,9 @@ POST
 
 The request body should be in JSON format and include the following property:
 
-| Parameter | Type   | Description                          |
-| --------- | ------ | ------------------------------------ |
-| nickname     | string | the nickname to check. |
+| Parameter | Type   | Description            |
+| --------- | ------ | ---------------------- |
+| nickname  | string | the nickname to check. |
 
 Example:
 
@@ -285,11 +285,11 @@ Example:
 
 The API endpoint returns the following response:
 
-| Status Code | Description                                                        |
-| ----------- | ------------------------------------------------------------------ |
-| 200         | OK - The nickname is valid and is available.                       |
-| 400         | Bad Request - Invalid nickname or nickname is already in use.      |
-| 500         | Internal error. something unexpected occured                       |
+| Status Code | Description                                                   |
+| ----------- | ------------------------------------------------------------- |
+| 200         | OK - The nickname is valid and is available.                  |
+| 400         | Bad Request - Invalid nickname or nickname is already in use. |
+| 500         | Internal error. something unexpected occured                  |
 
 Example Response (Status Code: 200 - OK):
 
@@ -304,7 +304,6 @@ Body: ok
   - If the provided nickname is invalid (e.g., not in a valid format).
   - If the provided nickname is already in use by another user.
 - Status code 500: Internal error
-
 
 ## Suggest nicknames
 
@@ -330,10 +329,10 @@ POST
 
 The request body should be in JSON format and include the following property:
 
-| Parameter | Type   | Description                          |
-| --------- | ------ | ------------------------------------ |
-| firstname | string | the user firstname.                  |
-| lastname  | string | the user lastname.                   |
+| Parameter | Type   | Description         |
+| --------- | ------ | ------------------- |
+| firstname | string | the user firstname. |
+| lastname  | string | the user lastname.  |
 
 Example:
 
@@ -348,11 +347,11 @@ Example:
 
 The API endpoint returns the following response:
 
-| Status Code | Description                                                        |
-| ----------- | ------------------------------------------------------------------ |
-| 200         | OK - returns a list of suggested available nicknames               |
-| 400         | Bad Request - missing or invalid firstname or lastname             |
-| 500         | Internal error. something unexpected occured                       |
+| Status Code | Description                                            |
+| ----------- | ------------------------------------------------------ |
+| 200         | OK - returns a list of suggested available nicknames   |
+| 400         | Bad Request - missing or invalid firstname or lastname |
+| 500         | Internal error. something unexpected occured           |
 
 Example Response (Status Code: 200 - OK):
 

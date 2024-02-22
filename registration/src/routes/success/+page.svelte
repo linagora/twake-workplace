@@ -3,7 +3,7 @@
 		challenge as challengeStore,
 		redirectUrl as redirectUrlStore,
 		clientId as clientIdStore
-	} from './../../store';
+	} from '$store';
 	import type { PageData } from './$types';
 	import SuccessCard from '$lib/components/landing/SuccessCard.svelte';
 	import LoggedUser from '$lib/components/nav/LoggedUser.svelte';
@@ -29,9 +29,7 @@
 		</div>
 		<div class="flex space-x-4 w-full h-full lg:px-48 lg:py-4">
 			<div class="w-full h-full overflow-hidden">
-				<div
-					class="flex flex-col-reverse lg:flex-row-reverse w-full lg:pt-9 xl:space-x-24 h-full"
-				>
+				<div class="flex flex-col-reverse lg:flex-row-reverse w-full lg:pt-9 xl:space-x-24 h-full">
 					<SuccessCard {user} bind:id={username} {phone} />
 					<div class="hidden lg:block w-full">
 						<LoggedHero />

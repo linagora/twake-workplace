@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
 	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
-	import { redirectUrl as redirectUrlStore } from '../../../store';
+	import { redirectUrl as redirectUrlStore } from '$store';
 
 	const open = () => {
 		$redirectUrlStore ? openRedirectLink($redirectUrlStore, 'tdrive') : attemptToOpenApp('tdrive');
@@ -36,6 +36,6 @@
 		on:click={open}
 		class="flex shrink items-center justify-center"
 	>
-		<img src="/images/arrow-forward.svg" alt="next" class="w-6 " />
+		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
 	</button>
 </div>
