@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Logo from '../logo/Logo.svelte';
+	import Logo from '$components/logo/Logo.svelte';
 	import { t } from 'svelte-i18n';
 </script>
 

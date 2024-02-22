@@ -10,7 +10,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		throw error(400, 'missing firstname or lastname');
 	}
 
-	if(!validateName(firstname) || !validateName(lastname)) {
+	if (!validateName(firstname) || !validateName(lastname)) {
 		throw error(400, 'Invalid name');
 	}
 

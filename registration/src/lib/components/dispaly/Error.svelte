@@ -28,7 +28,7 @@
 			{$t('Error')}
 		</h5>
 		<p class="mt-2 block font-sans text-base font-normal leading-relaxed text-white antialiased">
-			{ $t('sorry-something-went-wrong-please-try-again') }
+			{$t('sorry-something-went-wrong-please-try-again')}
 		</p>
 	</div>
 	<div

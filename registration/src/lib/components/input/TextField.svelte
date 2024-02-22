@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { clickOutside } from './../../utils/html';
-	import ErrorIcon from '../icons/ErrorIcon.svelte';
-	import InfoIcon from '../icons/InfoIcon.svelte';
-	import Spin from '../icons/Spin.svelte';
-	import Valid from '../icons/valid.svelte';
-	import InfoTooltip from '../dispaly/InfoTooltip.svelte';
+	import { clickOutside } from '$utils/html';
+	import ErrorIcon from '$components/icons/ErrorIcon.svelte';
+	import InfoIcon from '$components/icons/InfoIcon.svelte';
+	import Spin from '$components/icons/Spin.svelte';
+	import Valid from '$components/icons/valid.svelte';
+	import InfoTooltip from '$components/dispaly/InfoTooltip.svelte';
 
 	export let label: string;
 	export let placeholder: string;

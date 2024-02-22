@@ -69,12 +69,16 @@
 			<OtpField bind:value />
 			<div class="flex items-center justify-center w-full">
 				{#if incorrect}
-					<div class="text-xs font-medium leading-4 tracking-tight text-center text-error px-5 pt-1 w-full">
+					<div
+						class="text-xs font-medium leading-4 tracking-tight text-center text-error px-5 pt-1 w-full"
+					>
 						{$t('entered-code-is-incorrect-try-again')}
 					</div>
 				{/if}
 				{#if timeout}
-					<div class="text-xs font-medium leading-4 tracking-tight text-center text-error px-5 pt-1">
+					<div
+						class="text-xs font-medium leading-4 tracking-tight text-center text-error px-5 pt-1"
+					>
 						{$t('too-many-wrong-attempts-has-been-made-try-again-later')}
 					</div>
 				{/if}

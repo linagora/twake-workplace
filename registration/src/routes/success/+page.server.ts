@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from '../$types';
+import type { PageServerLoad } from './$types';
 import authService from '$lib/services/auth';
 
 export const load: PageServerLoad = async ({ parent, cookies }) => {
@@ -18,6 +18,6 @@ export const load: PageServerLoad = async ({ parent, cookies }) => {
 		phone: session.phone,
 		redirectUrl: session.redirectUrl ?? null,
 		challenge: session.challenge ?? null,
-		clientId: session.clientId ?? null,
+		clientId: session.clientId ?? null
 	};
 };

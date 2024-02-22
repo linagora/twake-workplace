@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Logout from './../icons/Logout.svelte';
-	import Avatar from './../icons/Avatar.svelte';
+	import Logout from '$components/icons/Logout.svelte';
+	import Avatar from '$components/icons/Avatar.svelte';
 	import { t } from 'svelte-i18n';
 
 	export let user: string;

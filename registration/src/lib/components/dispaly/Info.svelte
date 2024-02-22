@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="mb-3 inline-flex w-full items-center rounded-lg  px-6 py-5 text-sm text-gray-500"
+	class="mb-3 inline-flex w-full items-center rounded-lg px-6 py-5 text-sm text-gray-500"
 	role="alert"
 >
 	<span class="mr-2">

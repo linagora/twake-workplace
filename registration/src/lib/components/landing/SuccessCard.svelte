@@ -1,10 +1,9 @@
 <script lang="ts">
-	import OutlineButton from './../button/OutlineButton.svelte';
-	import TdriveProduct from '../products/TdriveProduct.svelte';
-	import TmailProduct from '../products/TmailProduct.svelte';
-	import TwakeProduct from '../products/TwakeProduct.svelte';
-	import MobileSuccessInfo from '../user/MobileSuccessInfo.svelte';
-	import SuccessInfo from '../user/SuccessInfo.svelte';
+	import TdriveProduct from '$components/products/TdriveProduct.svelte';
+	import TmailProduct from '$components/products/TmailProduct.svelte';
+	import TwakeProduct from '$components/products/TwakeProduct.svelte';
+	import MobileSuccessInfo from '$components/user/MobileSuccessInfo.svelte';
+	import SuccessInfo from '$components/user/SuccessInfo.svelte';
 
 	export let user: string;
 	export let id: string;

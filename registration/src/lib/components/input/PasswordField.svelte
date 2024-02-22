@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { PasswordType } from '../../../types';
-	import FieldError from '../dispaly/FieldError.svelte';
-	import ErrorIcon from '../icons/ErrorIcon.svelte';
-	import Hide from '../icons/hide.svelte';
-	import Show from '../icons/show.svelte';
-	import Valid from '../icons/valid.svelte';
-	import { t } from 'svelte-i18n'
+	import type { PasswordType } from '$types';
+	import FieldError from '$components/dispaly/FieldError.svelte';
+	import ErrorIcon from '$components/icons/ErrorIcon.svelte';
+	import Hide from '$components/icons/hide.svelte';
+	import Show from '$components/icons/show.svelte';
+	import Valid from '$components/icons/valid.svelte';
+	import { t } from 'svelte-i18n';
 
 	export let value: string;
 	export let isInvalid: boolean;
@@ -52,7 +52,7 @@
 		<span class="absolute inset-y-0 right-0 flex items-center px-2">
 			{#if value}
 				<button
-					aria-label={$t("hide or show")}
+					aria-label={$t('hide or show')}
 					type="button"
 					class="focus:outline-none focus:shadow-outline"
 					on:click={toggleVisibility}

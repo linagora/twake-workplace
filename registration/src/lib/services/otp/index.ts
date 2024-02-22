@@ -4,7 +4,7 @@ import type {
 	ISmsSentResponse,
 	IValidateOTPPayload,
 	VerificationResult
-} from '../../../types';
+} from '$types';
 
 /**
  * Sends an OTP to the given phone number.
@@ -104,13 +104,4 @@ export const verify = async (
 
 		throw Error('Failed to verify OTP');
 	}
-};
-
-/**
- * Generates a 6 digit code.
- *
- * @returns {string}
- */
-export const generate = (): string => {
-	return Math.floor(100000 + Math.random() * 900000).toString();
 };

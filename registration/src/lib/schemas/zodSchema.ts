@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import validator from 'validator';
 
-export const createUserSchema = z.object({
+const createUserSchema = z.object({
 	nickName: z.string().regex(/^[a-zA-Z0-9._-]{3,20}$/, { message: 'Invalid nickname' }),
 	firstName: z
 		.string()

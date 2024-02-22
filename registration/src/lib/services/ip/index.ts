@@ -1,7 +1,7 @@
 import { env } from '$env/dynamic/public';
 import { getUrl } from '$lib/utils/url';
 import validator from 'validator';
-import type { CountryInformation } from '../../../types';
+import type { CountryInformation } from '$types';
 
 /**
  * Returns the user country based on his IP address

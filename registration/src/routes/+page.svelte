@@ -7,12 +7,12 @@
 		registrationStep,
 		verified,
 		phone
-	} from './../store';
+	} from '$store';
 	import AccessSelect from '$lib/components/landing/AccessSelect.svelte';
 	import Hero from '$lib/components/landing/Hero.svelte';
 	import type { ActionData, PageData } from './$types';
 	import type { CountryCode } from 'svelte-tel-input/types';
-	import type { ApplicationType } from '../types';
+	import type { ApplicationType } from '$types';
 
 	export let form: ActionData;
 	export let data: PageData;

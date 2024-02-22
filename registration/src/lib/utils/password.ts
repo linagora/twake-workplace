@@ -12,15 +12,3 @@
  */
 export const validatePassword = (password: string): boolean =>
 	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/g.test(password);
-
-/**
- * Validates OTP
- *
- * a valid OTP should be:
- * 	- 6 digits long
- *  - contain only numbers
- *
- * @param {string} code - the OTP to validate
- * @return {boolean} - whether the OTP format is valid or not
- */
-export const validateOTP = (code: string): boolean => /^\d{6}$/.test(code);
