@@ -3,6 +3,7 @@ import { generateNickNames } from '$lib/utils/username';
 import type { User } from '$types';
 import ldapClient from '$services/ldap/client';
 import validator from 'validator';
+import logger from '$services/logger';
 
 /**
  * Checks if a nickname is available.
@@ -20,7 +21,7 @@ export const checkNickNameAvailability = async (nickName: string): Promise<boole
 
 		return false;
 	} catch (error) {
-		console.error('Failed to check nickname availability', { error });
+		logger.error(`Failed to check nickname availability: ${nickName}`, { error });
 
 		return false;
 	}
@@ -42,7 +43,7 @@ export const checkPhoneAvailability = async (phone: string): Promise<boolean> =>
 
 		return false;
 	} catch (error) {
-		console.error('Failed to check phone availability', { error });
+		logger.error(`Failed to check phone availability: ${phone}`, { error });
 
 		return false;
 	}
@@ -103,7 +104,9 @@ export const signup = async (
 
 		await ldapClient.insert<User>(`cn=${cn},ou=users`, entry);
 	} catch (error) {
-		console.error('Failed to create user', { error });
+		logger.error('Failed to create user', { error });
+
+		throw error;
 	}
 };
 
@@ -135,7 +138,8 @@ export const fetchUser = async (login: string): Promise<User | null> => {
 
 		return user[0] || null;
 	} catch (error) {
-		console.error('Failed to fetch current user', { error });
+		logger.error(`Failed to fetch the user from login: ${login}`, { error });
+
 		return null;
 	}
 };
@@ -157,8 +161,12 @@ export const suggestAvailableNickNames = async (
 
 	await Promise.all(
 		nickNames.map(async (nick) => {
-			if ((await checkNickNameAvailability(nick)) === true) {
-				suggestedNickNames.push(nick);
+			try {
+				if ((await checkNickNameAvailability(nick)) === true) {
+					suggestedNickNames.push(nick);
+				}
+			} catch (error) {
+				logger.error(`Failed to check nickname availability: ${nick}`, { error });
 			}
 		})
 	);

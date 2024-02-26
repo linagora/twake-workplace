@@ -1,3 +1,5 @@
+import logger from '$services/logger';
+
 /**
  * check if username is taken using the check-nickname API
  *
@@ -13,7 +15,8 @@ export const isNickNameTaken = async (nickname: string): Promise<boolean> => {
 
 		return response.status !== 200;
 	} catch (error) {
-		console.debug('failed to check nickname');
+		logger.error(`failed to check nickname ${nickname}`, error);
+
 		return false;
 	}
 };
@@ -34,7 +37,8 @@ export const suggestNickNames = async (firstname: string, lastname: string): Pro
 
 		return await response.json();
 	} catch (error) {
-		console.debug('failed to suggest nicknames');
+		logger.error(`failed to fetch suggested nicknames for ${firstname} ${lastname}`, error);
+
 		return [];
 	}
 };
@@ -55,7 +59,8 @@ export const isPhoneTaken = async (phone: string): Promise<boolean> => {
 
 		return !available;
 	} catch (error) {
-		console.debug('failed to check phone');
+		logger.error(`Failed to check phone number: ${phone}`, phone);
+
 		return false;
 	}
 };

@@ -5,6 +5,7 @@ import type {
 	IValidateOTPPayload,
 	VerificationResult
 } from '$types';
+import logger from '$services/logger';
 
 /**
  * Sends an OTP to the given phone number.
@@ -16,6 +17,8 @@ export const send = async (to: string): Promise<string> => {
 		const API_ENDPOINT = `${env.SMS_SERVICE_API}/generate`;
 
 		if (!API_ENDPOINT) {
+			logger.fatal('SMS_SERVICE_API is not set');
+
 			throw new Error('SMS_SERVICE_API is not set');
 		}
 
@@ -40,13 +43,12 @@ export const send = async (to: string): Promise<string> => {
 		const json = (await response.json()) as ISmsSentResponse;
 
 		if (!json.otp_request_token) {
-			console.error('Failed to send message', json);
 			throw Error('Failed to send OTP');
 		}
 
 		return json.otp_request_token;
 	} catch (error) {
-		console.error('Failed to send message', error);
+		logger.error(`Failed to send OTP to ${to}`, error);
 
 		throw Error('Failed to send OTP');
 	}
@@ -69,6 +71,8 @@ export const verify = async (
 		const API_ENDPOINT = `${env.SMS_SERVICE_API}/validate`;
 
 		if (!API_ENDPOINT) {
+			logger.fatal('SMS_SERVICE_API is not set');
+
 			throw new Error('SMS_SERVICE_API is not set');
 		}
 
@@ -100,7 +104,7 @@ export const verify = async (
 
 		return 'timeout';
 	} catch (error) {
-		console.error('Failed to verify OTP', error);
+		logger.error(`Failed to verify OTP for ${phone}`, error);
 
 		throw Error('Failed to verify OTP');
 	}

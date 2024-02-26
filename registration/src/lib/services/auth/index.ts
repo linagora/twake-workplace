@@ -2,6 +2,7 @@ import { browser } from '$app/environment';
 import { env } from '$env/dynamic/private';
 import { getUrl } from '$lib/utils/url';
 import type { AuthResponse, TokenResponse } from '$types';
+import logger from '$services/logger';
 
 class LemonLdapAuthService {
 	portal = '';
@@ -9,7 +10,7 @@ class LemonLdapAuthService {
 
 	constructor() {
 		if (!env.AUTH_URL) {
-			console.warn('LemonLDAP auth service: missing portal url');
+			logger.error('LemonLDAP auth service: missing portal url');
 			return;
 		}
 
@@ -33,7 +34,7 @@ class LemonLdapAuthService {
 
 			return token;
 		} catch (err) {
-			console.error('Failed to fetch login token', { err });
+			logger.error('Failed to fetch login token', [err]);
 			throw err;
 		}
 	};
@@ -64,7 +65,7 @@ class LemonLdapAuthService {
 
 			return id;
 		} catch (err) {
-			console.error('Failed to authenticate', { err });
+			logger.error('Failed to authenticate user', { err });
 			throw err;
 		}
 	};
@@ -77,10 +78,10 @@ class LemonLdapAuthService {
 			if (browser) {
 				window.location.href = `${this.portal}/login`;
 			} else {
-				console.warn('Failed to redirect to login, not in browser environment');
+				logger.warn('Failed to redirect to login, not in browser environment');
 			}
 		} catch (err) {
-			console.error('Failed to redirect to login', { err });
+			logger.error('Failed to redirect to login', { err });
 			throw err;
 		}
 	};
