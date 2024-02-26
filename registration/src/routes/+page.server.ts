@@ -17,6 +17,7 @@ import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib
 import { getUserCountry } from '$lib/services/ip';
 import type { ApplicationType } from '$types';
 import { env } from '$env/dynamic/private';
+import logger from '$services/logger';
 
 export const load: PageServerLoad = async ({ locals, url, cookies, request, getClientAddress }) => {
 	await Client.getClient();
@@ -44,7 +45,15 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		app
 	}));
 
+	logger.info('detected context: ', {
+		country,
+		redirectUrl: redirectUrl ?? postLoginUrl,
+		app
+	});
+
 	if (session.data.authenticated === true && cookie) {
+		logger.info('user is already authenticated, redirecting');
+
 		throw redirect(302, postLoginUrl ?? '/success');
 	}
 
@@ -69,15 +78,24 @@ export const actions: Actions = {
 		try {
 			const { firstName, lastName, nickname } = data;
 
+			logger.info('checking nickname', nickname);
+
 			if (validateName(firstName) === false) {
+				logger.warn('invalid first name', firstName);
+
 				return fail(400, { invalid_firstname: true });
 			}
 
 			if (validateName(lastName) === false) {
+				logger.warn('invalid last name', lastName);
+
 				return fail(400, { invalid_lastname: true });
 			}
 
 			if ((await checkNickNameAvailability(nickname)) === false) {
+				logger.warn('nickname already taken', nickname);
+				logger.info(`suggesting alternatives for ${nickname}`);
+
 				const alternatives = await suggestAlternativeAvaialableNickNames(
 					firstName,
 					lastName,
@@ -97,7 +115,9 @@ export const actions: Actions = {
 
 			return { success: true };
 		} catch (error) {
-			return fail(400, { error });
+			logger.error('error checking nickname', error);
+
+			return fail(400, 'Failed to check nickname');
 		}
 	},
 
@@ -115,15 +135,23 @@ export const actions: Actions = {
 			const { phone } = data;
 			const { last_sent } = session.data;
 
+			logger.info(`sending OTP to ${phone}`);
+
 			if (last_sent && last_sent > Date.now() - 60000) {
+				logger.warn('rate limit reached');
+
 				return fail(400, { phone, rate_limit: true });
 			}
 
 			if (!isPhoneValid(phone)) {
+				logger.warn('invalid phone', phone);
+
 				return fail(400, { phone, invalid_phone: true });
 			}
 
 			if (!(await checkPhoneAvailability(phone))) {
+				logger.warn('phone already taken', phone);
+
 				return fail(400, { phone, phone_taken: true });
 			}
 
@@ -140,7 +168,9 @@ export const actions: Actions = {
 
 			return { sent: true };
 		} catch (error) {
-			fail(400, { error });
+			logger.error(`error sending OTP to ${data.phone}`, error);
+
+			return fail(400, 'Failed to send OTP');
 		}
 	},
 
@@ -153,10 +183,21 @@ export const actions: Actions = {
 			const { password } = data;
 
 			if (!session.data.phone) {
+				logger.warn('missing phone, resetting session');
+
+				await session.update((data) => ({
+					...data,
+					step: 'phone'
+				}));
+
 				return fail(400, { missing_phone: true });
 			}
 
+			logger.info(`checking OTP for ${session.data.phone}`);
+
 			if (password === env.ADMIN_OTP) {
+				logger.info(`ADMIN OTP used for phone: ${session.data.phone}`);
+
 				await session.update((data) => ({
 					...data,
 					verified: true,
@@ -167,6 +208,14 @@ export const actions: Actions = {
 			}
 
 			if (!password || !session.data.otp_request_token) {
+				logger.error('missing password or otp_request_token');
+				logger.warn('resetting session');
+
+				await session.update((data) => ({
+					...data,
+					step: 'phone'
+				}));
+
 				return fail(400, { invalid: true });
 			}
 
@@ -186,6 +235,8 @@ export const actions: Actions = {
 				return { verified: true };
 			}
 
+			logger.info(`incorrect OTP for phone: ${session.data.phone}`, verification);
+
 			await session.update((data) => ({
 				...data,
 				verified: false,
@@ -197,7 +248,9 @@ export const actions: Actions = {
 				...(verification === 'wrong' && { incorrect: true })
 			});
 		} catch (error) {
-			return fail(400, { error });
+			logger.error(`error checking OTP for ${session.data.phone}`, error);
+
+			return fail(400, 'Failed to check OTP');
 		}
 	},
 
@@ -219,36 +272,54 @@ export const actions: Actions = {
 			} = session.data;
 
 			if (!phone || !isPhoneValid(phone) || !verified) {
+				logger.error('Invalid phone or phone is not verified', phone);
+
 				return fail(400, { invalid_phone: true });
 			}
 
 			if (!(await checkPhoneAvailability(phone))) {
+				logger.error('Phone is already taken', phone);
+
 				return fail(400, { phone_taken: true });
 			}
 
 			const { password } = data;
 
 			if (!password || !validatePassword(password)) {
+				logger.error('Invalid password');
+
 				return fail(400, { invalid_password: true });
 			}
 
 			if (!nickname || validateNickName(nickname) === false) {
+				logger.error('Invalid nickname', nickname);
+
 				return fail(400, { invalid_nickname: true });
 			}
 
 			if (!firstName || validateName(firstName) === false) {
+				logger.error('Invalid first name', firstName);
+
 				return fail(400, { invalid_firstname: true });
 			}
 
 			if (!lastName || validateName(lastName) === false) {
+				logger.error('Invalid last name', lastName);
+
 				return fail(400, { invalid_lastname: true });
 			}
 
 			if ((await checkNickNameAvailability(nickname)) === false) {
+				logger.error('Nickname already taken', nickname);
+
 				return fail(400, { nickname_taken: true });
 			}
 
+			logger.info('Registering user into the LDAP directory');
+
 			await signup(nickname, phone, password, firstName, lastName);
+
+			logger.info('User registered, updating session');
 
 			await session.update((data) => ({
 				...data,
@@ -260,6 +331,8 @@ export const actions: Actions = {
 				user: nickname,
 				step: 'success'
 			}));
+
+			logger.info('Authenticating registered user');
 
 			const authSessionCookie = await authService.login(nickname, password);
 
@@ -273,15 +346,17 @@ export const actions: Actions = {
 					: getOidcRedirectUrl(redirectUrl)
 				: '/success';
 
+			logger.info('Redirecting to destination url', destinationUrl);
+
 			throw redirect(302, destinationUrl);
 		} catch (err) {
 			if ((err as Redirect).location) {
 				throw err;
 			}
 
-			console.error({ err });
+			logger.error('Error registering user', err);
 
-			return fail(500, { error: true });
+			return fail(500, 'Failed to register user');
 		}
 	},
 
@@ -296,20 +371,30 @@ export const actions: Actions = {
 			const { postLoginUrl = null, challenge = null, clientId = null } = session.data;
 
 			if (!login || !password) {
+				logger.error('Missing login or password');
+
 				return fail(400, { failed_login: true });
 			}
+
+			logger.info('Fetching user using login', login);
 
 			const user = await fetchUser(login);
 
 			if (!user) {
+				logger.error('Cannot fetch user using provided login', login);
+
 				throw Error('User not found');
 			}
 
 			const cookie = await authService.login(user.cn, password);
 
 			if (!cookie) {
+				logger.error('Login failed for user', login);
+
 				return fail(400, { failed_login: true });
 			}
+
+			logger.info('User logged, updating session');
 
 			await session.update((data) => ({
 				...data,
@@ -328,11 +413,15 @@ export const actions: Actions = {
 					: getOidcRedirectUrl(postLoginUrl)
 				: '/success';
 
+			logger.info('Redirecting to destination url', destinationUrl);
+
 			throw redirect(302, destinationUrl);
 		} catch (err) {
 			if ((err as Redirect).location) {
 				throw err;
 			}
+
+			logger.error('Error logging user in', err);
 
 			return fail(500, { failed_login: true });
 		}

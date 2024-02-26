@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/public';
 import { getUrl } from '$lib/utils/url';
 import validator from 'validator';
 import type { CountryInformation } from '$types';
+import logger from '$services/logger';
 
 /**
  * Returns the user country based on his IP address
@@ -12,6 +13,8 @@ import type { CountryInformation } from '$types';
 export const getUserCountry = async (ip: string): Promise<string> => {
 	try {
 		if (!validator.isIP(ip)) {
+			logger.warn(`invalid IP adress: ${ip}`, { service: 'IP service' });
+
 			return '';
 		}
 
@@ -21,7 +24,7 @@ export const getUserCountry = async (ip: string): Promise<string> => {
 
 		return info.country ?? '';
 	} catch (err) {
-		console.error('Failed to fetch the IP country', err);
+		logger.error('user country lookup failed', { service: 'IP service' });
 
 		return '';
 	}
