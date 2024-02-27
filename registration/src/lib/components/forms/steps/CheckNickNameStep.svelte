@@ -66,6 +66,7 @@
 	action="?/checkNickName"
 	method="POST"
 	class="hidden"
+	autocomplete="off"
 	bind:this={checkNicknameForm}
 >
 	<input type="text" name="nickname" bind:value={nickName} required />
