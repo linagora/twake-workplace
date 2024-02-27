@@ -153,7 +153,7 @@
 		{#if isOpen}
 			<div
 				id="dropdown-countries"
-				class="fixed top-0 left-0 lg:absolute z-10 w-full h-full lg:h-fit bg-white divide-y divide-gray-100 shadow overflow-hidden lg:translate-y-11 rounded-[8px] bg-[var(--m-3-sys-light-bg-surface-surface,_#F4F4F4)] [box-shadow:0px]"
+				class="fixed top-0 left-0 lg:absolute z-10 w-full h-full lg:h-fit bg-white border border-t-0 border-r-0 border-l-disabled divide-y divide-gray-100 shadow overflow-hidden lg:translate-y-11 rounded-sm bg-[var(--m-3-sys-light-bg-surface-surface,_#F4F4F4)] [box-shadow:0px]"
 				data-popper-reference-hidden=""
 				data-popper-escaped=""
 				data-popper-placement="bottom"
@@ -180,7 +180,7 @@
 							<button
 								on:click={() => (isSearching = true)}
 								type="button"
-								class="px-5 py-2 text-gray-900 focus:outline-none w-full sticky top-0 text-center text-[22px] lg:text-sm lg:text-left lg:px-5 font-semibold"
+								class="px-5 py-2 text-gray-900 focus:outline-none w-full sticky top-0 text-center text-[22px] lg:text-sm lg:text-left lg:py-1 font-semibold lg:font-medium"
 							>
 								{$t('Choose-a-country')}
 							</button>
