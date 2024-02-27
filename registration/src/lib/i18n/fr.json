@@ -26,7 +26,7 @@
 	"username_info_tooltip": "Le nom d'utilisateur que vous saisissez sera utilisé pour former votre identifiant Matrix ainsi que votre adresse e-mail Twake.",
 	"Ok-got-it": "Ok, j'ai compris",
 	"username_taken": "Désolé, ce nom d'utilisateur est déjà pris",
-	"weak_password": "Mot de passe faible. Utilisez des lettres majuscules et minuscules et des chiffres.",
+	"weak_password": "Mot de passe faible. il doit comporter au moins 8 caractères et contenir une lettre majuscule, une lettre minuscule et un chiffre",
 	"password_mismatch": "Les mots de passe ne correspondent pas",
 	"Number is already registered": "Le numéro est déjà enregistré.",
 	"instead": "au lieu de",

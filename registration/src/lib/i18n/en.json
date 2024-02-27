@@ -26,7 +26,7 @@
 	"username_info_tooltip": "Username you enter will be used to form you Matrix ID as well as your Twake mail address.",
 	"Ok-got-it": "Ok, got it",
 	"username_taken": "Sorry, this username is already taken",
-	"weak_password": "Weak password. Use upper and lower case letters and numbers.",
+	"weak_password": "Weak password. it must be at least 8 characters long and contain an uppercase letter, lowercase letter, and number",
 	"password_mismatch": "Passwords do not match",
 	"Number is already registered": "Number is already registered.",
 	"instead": "instead",
