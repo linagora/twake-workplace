@@ -2,6 +2,7 @@
 	import Logout from '$components/icons/Logout.svelte';
 	import Avatar from '$components/icons/Avatar.svelte';
 	import { t } from 'svelte-i18n';
+	import { clickOutside } from '$utils/html';
 
 	export let user: string;
 	export let username: string;
@@ -13,7 +14,12 @@
 	};
 </script>
 
-<div class="flex flex-col gap-2 w-full">
+<div
+	class="flex flex-col gap-2 w-full"
+	use:clickOutside={() => {
+		open = false;
+	}}
+>
 	<button
 		aria-label="user menu"
 		type="button"
