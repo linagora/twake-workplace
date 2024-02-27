@@ -1,4 +1,6 @@
 import formsPlugin from '@tailwindcss/forms';
+import defaultTheme from 'tailwindcss/defaultTheme'
+
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -27,6 +29,10 @@ export default {
 			transformOrigin: {
 				0: '0%'
 			}
+		},
+		screens: {
+			xs: { max: '300px' },
+			...defaultTheme.screens
 		}
 	},
 	plugins: [
