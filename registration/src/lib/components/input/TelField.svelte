@@ -205,7 +205,7 @@
 							>
 								<div class="inline-flex items-center space-x-2 text-left">
 									<span class="flag flag-{country.iso2.toLowerCase()} flex-shrink-0 mr-3" />
-									<span class="mr-2 text-center text-[17px] font-medium tracking-[0px]"
+									<span class="mr-1 text-left text-[17px] font-medium tracking-[0px]"
 										>{country.name}</span
 									>
 									<span class="text-center text-[17px] font-medium tracking-[0px]"
