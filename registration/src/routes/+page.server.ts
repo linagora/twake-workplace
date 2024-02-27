@@ -117,7 +117,7 @@ export const actions: Actions = {
 		} catch (error) {
 			logger.error('error checking nickname', error);
 
-			return fail(400, 'Failed to check nickname');
+			return fail(400, { message: 'Failed to check nickname' });
 		}
 	},
 
@@ -170,7 +170,7 @@ export const actions: Actions = {
 		} catch (error) {
 			logger.error(`error sending OTP to ${data.phone}`, error);
 
-			return fail(400, 'Failed to send OTP');
+			return fail(400, { message: 'Failed to send OTP' });
 		}
 	},
 
@@ -250,7 +250,7 @@ export const actions: Actions = {
 		} catch (error) {
 			logger.error(`error checking OTP for ${session.data.phone}`, error);
 
-			return fail(400, 'Failed to check OTP');
+			return fail(400, { message: 'Failed to check OTP' });
 		}
 	},
 
@@ -356,7 +356,7 @@ export const actions: Actions = {
 
 			logger.error('Error registering user', err);
 
-			return fail(500, 'Failed to register user');
+			return fail(500, { message: 'Failed to register user' });
 		}
 	},
 
