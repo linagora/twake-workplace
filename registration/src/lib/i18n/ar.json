@@ -9,7 +9,7 @@
 	"Confirm password": "تأكيد كلمة المرور",
 	"Phone number": "رقم الهاتف",
 	"uela": "أوافق على <a href='#/ue' class='text-primary'> اتفاقية المستخدم </a> و <a href='#/ue' class='text-primary'> استخدام البيانات الشخصية </a> الشروط بموجب الشروط المنصوص عليها في اتفاقية <a href='#/pp' class='text-primary'> سياسة الخصوصية </a> .",
-	"Cellphone / Username / Email": "الهاتف المحمول / اسم المستخدم / البريد الإلكتروني",
+	"Cellphone / Username / Email": "رقم الهاتف / اسم المستخدم / البريد الإلكتروني",
 	"Login with SSO": "تسجيل الدخول باستخدام تسجيل الدخول الأحادي",
 	"recover password": "إستعادة كلمة المرور",
 	"logged_twake_id": "معرف تويك - حساب واحد لكل شيء",

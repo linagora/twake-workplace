@@ -9,7 +9,7 @@
 	"Confirm password": "Xác nhận mật khẩu",
 	"Phone number": "Số điện thoại",
 	"uela": "Tôi đồng ý với <a href='#/ue' class='text-primary'> Thỏa thuận người dùng </a> và <a href='#/ue' class='text-primary'> Việc sử dụng dữ liệu cá nhân </a> các điều khoản theo các điều kiện được quy định trong thỏa thuận <a href='#/pp' class='text-primary'> Chính sách quyền riêng tư </a> .",
-	"Cellphone / Username / Email": "Điện thoại di động / Tên người dùng / Email",
+	"Cellphone / Username / Email": "Số điện thoại/Tên người dùng/Email",
 	"Login with SSO": "Đăng nhập bằng SSO",
 	"recover password": "Khôi phục mật khẩu",
 	"logged_twake_id": "Twake ID - một tài khoản cho mọi thứ",

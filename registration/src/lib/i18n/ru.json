@@ -9,7 +9,7 @@
 	"Confirm password": "Подтвердите пароль",
 	"Phone number": "Номер телефона",
 	"uela": "Я согласен с <a href='#/ue' class='text-primary'> Пользовательским соглашением </a> и <a href='#/ue' class='text-primary'> Использованием персональных данных </a> на условиях, предусмотренных в соглашении <a href='#/pp' class='text-primary'> Политике конфиденциальности </a> .",
-	"Cellphone / Username / Email": "Мобильный телефон / Имя пользователя / Электронная почта",
+	"Cellphone / Username / Email": "Номер телефона / Имя пользователя / Электронная почта",
 	"Login with SSO": "Вход в систему с помощью SSO",
 	"recover password": "восстановить пароль",
 	"logged_twake_id": "Twake ID - одна учетная запись для всего",
