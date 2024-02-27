@@ -30,10 +30,10 @@
 			>
 		</div>
 	</button>
-	<div class="z-20 mt-2 overflow-hidden bg-white rounded-md shadow-xl {open ? 'block' : 'hidden'}">
+	<div class="z-20 mt-1 overflow-hidden bg-white rounded-md shadow-xl {open ? 'block' : 'hidden'}">
 		<a
 			href="/logout"
-			class="flex items-center p-3 -mt-2 text-sm transition-colors duration-200 transform hover:bg-gray-100"
+			class="flex items-center justify-center p-2.5 text-sm transition-colors duration-200 transform hover:bg-gray-100"
 		>
 			<Logout />
 
