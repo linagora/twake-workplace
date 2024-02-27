@@ -26,7 +26,7 @@
 	"username_info_tooltip": "Tên người dùng bạn nhập sẽ được sử dụng để tạo ID ma trận cũng như địa chỉ thư Twake của bạn.",
 	"Ok-got-it": "Ok, hiểu rồi",
 	"username_taken": "Xin lỗi, tên người dùng này đã được sử dụng",
-	"weak_password": "Mật khẩu yếu. Sử dụng chữ hoa và chữ thường và số.",
+	"weak_password": "Mật khẩu yếu. nó phải dài ít nhất 8 ký tự và chứa chữ in hoa, chữ thường và số",
 	"password_mismatch": "Mật khẩu không khớp",
 	"Number is already registered": "Số đã được đăng ký.",
 	"instead": "thay vì",

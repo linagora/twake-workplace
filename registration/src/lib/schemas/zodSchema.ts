@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import validator from 'validator';
+import { validatePassword } from '../utils/password';
 
 const createUserSchema = z.object({
 	nickName: z.string().regex(/^[a-zA-Z0-9._-]{3,20}$/, { message: 'Invalid nickname' }),
@@ -11,7 +12,7 @@ const createUserSchema = z.object({
 		.string()
 		.trim()
 		.regex(/^[A-Za-z]|[A-Za-z][A-Za-zs]*[A-Za-z]$/, { message: 'Invalid Lastname' }),
-	password: z.string().regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/g, {
+	password: z.string().refine((val) => validatePassword(val), {
 		message:
 			'Password must be at least 8 characters and contain an uppercase letter, lowercase letter, and number'
 	}),
