@@ -32,6 +32,7 @@ export default {
 		},
 		screens: {
 			xs: { max: '300px' },
+			large: { raw: '(min-height: 800px;min-height: 1024px)' },
 			...defaultTheme.screens
 		}
 	},

@@ -12,7 +12,7 @@
 	$: showHeader = $registrationStep !== 'home' || $activeTab === 'login';
 </script>
 
-<div class="w-full flex flex-col md:flex-row justify-end h-full lg:max-h-[768px] lg:min-h-[768px]">
+<div class="w-full flex flex-col md:flex-row justify-end h-full lg:max-h-[668px] large:min-h-[768px] large:max-h-[768px] 2xl:max-h-[768px]">
 	<div
 		class="{showHeader
 			? 'bg-white'

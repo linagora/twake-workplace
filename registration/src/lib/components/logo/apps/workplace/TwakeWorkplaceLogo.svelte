@@ -7,7 +7,7 @@
 </script>
 
 {#if type === 'header'}
-	<div class="h-8 w-48">
+	<div class="w-[195px] h-[36px] p-px flex items-center justify-center">
 		<Header />
 	</div>
 {:else}
