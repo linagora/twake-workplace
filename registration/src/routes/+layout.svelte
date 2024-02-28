@@ -1,7 +1,5 @@
 <script>
 	import '$src/app.css';
-
-	let currentYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
