@@ -26,7 +26,7 @@
 	$: phone.set(data.phone ?? '');
 </script>
 
-<div class="flex w-full h-full lg:px-10 xl:px-[124px]">
+<div class="flex w-full h-full lg:px-10 xl:px-[124px] 2xl:px-52 3xl:px-72 4xl:px-96">
 	<div class="flex flex-col lg:flex-row w-full lg:pt-9 xl:space-x-24 h-full">
 		<Hero />
 		<AccessSelect />

@@ -1,23 +1,25 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
 	import Logo from '$components/logo/Logo.svelte';
+
+	const currentYear = new Date().getFullYear();
 </script>
 
 <div
-	class="hidden lg:flex flex-col w-full lg:max-w-[508px] px-10 lg:px-0 space-y-6 font-[Inter] pt-52 items-center lg:items-start"
+	class="hidden lg:flex flex-col w-full lg:max-w-[508px] px-10 lg:px-0 space-y-6 pt-52 items-center lg:items-start pb-9"
 >
 	<Logo />
-	<div class="flex flex-col space-y-5 w-full h-screen lg:h-fit">
+	<div class="flex flex-col space-y-5 w-full h-screen lg:h-full">
 		<h1
-			class="text-2xl leading-8 lg:text-4xl not-italic font-semibold lg:leading-[44px] text-center lg:text-left w-full text-disabled-text"
+			class="text-2xl leading-8 lg:text-3xl xl:text-4xl not-italic font-semibold lg:leading-[44px] text-center lg:text-left w-full text-disabled-text"
 		>
 			{$t('welcome')}
 		</h1>
-		<a
-			href="#start"
-			class=" lg:hidden flex items-center rounded-full justify-center w-full h-12 bg-blue-500 text-base font-medium leading-5 tracking-wide text-center text-white"
+	</div>
+	<div class="pt-auto">
+		<span
+			class="overflow-hidden text-sm not-italic font-medium leading-5 tracking-[0.1px] text-blueGray px-2"
+			>© 2000-{currentYear}, LINAGORA</span
 		>
-			{$t('Start your journey')}
-		</a>
 	</div>
 </div>

@@ -16,7 +16,7 @@
 	<div
 		class="{showHeader
 			? 'bg-white'
-			: 'lg:bg-white'} md:shadow-xl md:rounded-3xl flex flex-col w-full xl:w-[504px] md:px-[60px] h-full"
+			: 'lg:bg-white'} shadow-[0px_0px_52px_0px_rgba(0,0,0,0.08)] md:rounded-3xl flex flex-col w-full lg:w-[400px] xl:w-[504px] md:px-[60px] h-full"
 	>
 		<FormHeader show={showHeader} />
 		{#if $registrationStep === 'nickname' || $activeTab === 'login'}

@@ -1,7 +1,5 @@
 <script>
 	import '$src/app.css';
-
-	let currentYear = new Date().getFullYear();
 </script>
 
 <svelte:head>
@@ -18,10 +16,6 @@
 	class="w-full h-[100dvh] min-h-[max(100vh,768px)] overflow-x-hidden overflow-y-scroll gradiant flex flex-col font-[Inter]"
 >
 	<slot />
-	<span
-		class="hidden overflow-hidden lg:block absolute bottom-[35px] left-72 text-sm not-italic font-medium leading-5 tracking-[0.1px] text-blueGray"
-		>© 2000-{currentYear}, LINAGORA</span
-	>
 </div>
 
 <style>
