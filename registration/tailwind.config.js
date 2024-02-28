@@ -33,7 +33,9 @@ export default {
 		screens: {
 			xs: { max: '300px' },
 			large: { raw: '(min-height: 800px;min-width: 1024px)' },
-			...defaultTheme.screens
+			...defaultTheme.screens,
+			"3xl": { min: '1930px' },
+			"4xl": { min: '2100px' }
 		}
 	},
 	plugins: [
