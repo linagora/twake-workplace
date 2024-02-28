@@ -13,7 +13,7 @@
 </svelte:head>
 
 <div
-	class="w-full h-[100dvh] min-h-[max(100vh,768px)] overflow-x-hidden overflow-y-scroll gradiant flex flex-col font-[Inter]"
+	class="w-full h-[100dvh] max-h-[max(100dvh,768px)] min-h-[min(100dvh,768px)] overflow-x-hidden overflow-y-scroll gradiant flex flex-col font-[Inter]"
 >
 	<slot />
 </div>
