@@ -14,6 +14,7 @@ export const activeTab = writable<Tab>('register');
 export const userCountry = writable<CountryCode | null>(null);
 export const app = writable<ApplicationType>('default');
 export const registrationStep = writable<RegistrationStepType>('home');
+export const showBanner = writable<boolean>(true);
 
 verified.subscribe((v) => {
 	if (v === true) {
@@ -87,4 +88,16 @@ export const nextRegistrationStep = () => {
 		registrationStep.set('success');
 		return;
 	}
+};
+
+export const getAppName = () => {
+	const currentApp = get(app);
+
+	return currentApp === 'chat'
+		? 'Twake chat'
+		: currentApp === 'tdrive'
+		? 'Twake drive'
+		: currentApp === 'tmail'
+		? 'Twake mail'
+		: 'Twake';
 };
