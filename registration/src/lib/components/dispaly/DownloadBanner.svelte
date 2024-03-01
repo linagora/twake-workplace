@@ -1,0 +1,39 @@
+<script lang="ts">
+	import { app } from '$src/store';
+	import DownloadButton from '../button/DownloadButton.svelte';
+	import CloseIcon from '../icons/CloseIcon.svelte';
+	import AppLogo from '../logo/AppLogo.svelte';
+	import { t } from 'svelte-i18n';
+
+	export let name: string;
+	export let url: string;
+</script>
+
+<div class="absolute lg:hidden top-4 px-3 w-full z-50">
+	<div class="w-full h-[105px] banner rounded-[10px] [shadow-box:0px] relative">
+		<div class="w-[24px] h-[24px] absolute right-[7px] top-[6px]">
+			<CloseIcon />
+		</div>
+		<div class="flex flex-row items-center h-full w-full">
+			<div class="px-3 shrink-0">
+				<AppLogo type="icon" />
+			</div>
+			<div class="flex flex-col h-full space-y-2 pt-6 grow">
+				<div class="flex flex-col justify-center text-[16px] font-medium not-italic leading-[20px]">
+					{$t('download-app', { values: { name } })}
+				</div>
+				<div class="text-black text-[13px] not-italic leading-[16px]">
+					{$t('Faster-and-more-convenient')}
+				</div>
+			</div>
+			<DownloadButton {url} />
+		</div>
+	</div>
+</div>
+
+<style>
+	.banner {
+		background: linear-gradient(0deg, rgba(122, 184, 255, 0.09) 0%, rgba(122, 184, 255, 0.09) 100%),
+			#fffbfe;
+	}
+</style>
