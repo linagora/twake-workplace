@@ -72,7 +72,7 @@ export type PlatformType = 'web' | 'android' | 'ios' | 'server';
 
 export type ApplicationType = 'tdrive' | 'tmail' | 'chat' | 'default';
 
-export type LogoType = 'landing' | 'header';
+export type LogoType = 'landing' | 'header' | 'icon';
 
 export interface IApplicationStorePayload {
 	type: 'play_store_url' | 'app_store_url';
