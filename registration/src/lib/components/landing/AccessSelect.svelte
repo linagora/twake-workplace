@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
-	import { activeTab, registrationStep } from '$store';
+	import { activeTab, registrationStep, getAppName, app } from '$store';
 	import LoginForm from '$components/forms/LoginForm.svelte';
 	import FormHeader from '$components/dispaly/FormHeader.svelte';
 	import CheckPhoneStep from '$components/forms/steps/CheckPhoneStep.svelte';
@@ -8,11 +8,18 @@
 	import CheckNickNameStep from '$components/forms/steps/CheckNickNameStep.svelte';
 	import CheckPasswordStep from '$components/forms/steps/CheckPasswordStep.svelte';
 	import MainScreen from '$components/landing/MainScreen.svelte';
+	import DownloadBanner from '$components/dispaly/DownloadBanner.svelte';
+	import { getApplicationStoreUrl } from '$lib/utils/product';
 
 	$: showHeader = $registrationStep !== 'home' || $activeTab === 'login';
+	$: appName = getAppName();
+	$: appUrl = getApplicationStoreUrl($app)?.url || '';
 </script>
 
-<div class="w-full flex flex-col md:flex-row justify-end h-full lg:max-h-[668px] large:min-h-[768px] large:max-h-[768px] 2xl:max-h-[768px]">
+<div
+	class="w-full flex flex-col md:flex-row justify-end h-full lg:max-h-[668px] large:min-h-[768px] large:max-h-[768px] 2xl:max-h-[768px]"
+>
+	<DownloadBanner name={appName} url={appUrl} />
 	<div
 		class="{showHeader
 			? 'bg-white'
