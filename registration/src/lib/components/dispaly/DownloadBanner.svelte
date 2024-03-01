@@ -7,13 +7,14 @@
 
 	export let name: string;
 	export let url: string;
+  export let show: boolean;
 
 	const hideBanner = () => {
 		showBanner.set(false);
 	};
 </script>
 
-{#if $showBanner}
+{#if show}
 	<div class="absolute lg:hidden top-4 px-3 w-full z-50">
 		<div class="w-full h-[105px] banner rounded-[10px] [shadow-box:0px] relative">
 			<button

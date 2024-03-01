@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
-	import { activeTab, registrationStep, getAppName, app } from '$store';
+	import { activeTab, registrationStep, getAppName, app, showBanner } from '$store';
 	import LoginForm from '$components/forms/LoginForm.svelte';
 	import FormHeader from '$components/dispaly/FormHeader.svelte';
 	import CheckPhoneStep from '$components/forms/steps/CheckPhoneStep.svelte';
@@ -14,12 +14,13 @@
 	$: showHeader = $registrationStep !== 'home' || $activeTab === 'login';
 	$: appName = getAppName();
 	$: appUrl = getApplicationStoreUrl($app)?.url || '';
+	$: showDownloadBanner = $showBanner && $app !== 'default';
 </script>
 
 <div
 	class="w-full flex flex-col md:flex-row justify-end h-full lg:max-h-[668px] large:min-h-[768px] large:max-h-[768px] 2xl:max-h-[768px]"
 >
-	<DownloadBanner name={appName} url={appUrl} />
+	<DownloadBanner name={appName} url={appUrl} show={showDownloadBanner} />
 	<div
 		class="{showHeader
 			? 'bg-white'
