@@ -14,7 +14,7 @@
 	$: showHeader = $registrationStep !== 'home' || $activeTab === 'login';
 	$: appName = getAppName();
 	$: appUrl = getApplicationStoreUrl($app)?.url || '';
-	$: showDownloadBanner = $showBanner && $app !== 'default';
+	$: showDownloadBanner = $showBanner && $app !== 'default' && appUrl.length > 0;
 </script>
 
 <div
