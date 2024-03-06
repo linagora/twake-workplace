@@ -167,7 +167,7 @@ export const actions: Actions = {
 		} catch (error) {
 			logger.error(`error sending OTP to ${data.phone}`, error);
 
-			return fail(400, { message: 'Failed to send OTP' });
+			return fail(400, { message: 'Failed to send OTP', send_failed: true });
 		}
 	},
 
@@ -247,7 +247,7 @@ export const actions: Actions = {
 		} catch (error) {
 			logger.error(`error checking OTP for ${session.data.phone}`, error);
 
-			return fail(400, { message: 'Failed to check OTP' });
+			return fail(400, { message: 'Failed to check OTP', check_failed: true });
 		}
 	},
 
