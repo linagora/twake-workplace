@@ -5,23 +5,19 @@ import logger from '$services/logger';
 
 class LdapClient {
 	private client: ldapjs.Client | undefined;
-	private ready: Promise<void>;
+	private ready: Promise<void> | undefined;
 	private base: string | undefined;
-
-	constructor() {
-		this.ready = this.initClient();
-	}
 
 	/**
 	 * Initializes the LDAP client.
 	 */
-	private initClient = async (): Promise<void> => {
+	public initClient = async (): Promise<void> => {
 		const { LDAP_URL, LDAP_DN, LDAP_ADMIN_PASSWORD, LDAP_BASE } = env;
 
 		if (!LDAP_URL || !LDAP_DN || !LDAP_ADMIN_PASSWORD || !LDAP_BASE) {
-			logger.fatal('missing LDAP credentials, cannot init the LDAP service');
+			logger.fatal('Missing LDAP credentials, cannot init the LDAP service');
 
-			return;
+			throw new Error('Cannot connecto to LDAP, missing credentials');
 		}
 
 		this.base = LDAP_BASE;
@@ -30,7 +26,27 @@ class LdapClient {
 			url: LDAP_URL
 		});
 
-		return new Promise((resolve, reject) => {
+		this.ready = new Promise((resolve, reject) => {
+			client.on('error', (err) => {
+				logger.fatal('LDAP connection error', [err]);
+
+				reject(err);
+			});
+
+			client.on('connect', () => {
+				logger.info('LDAP connection established');
+			});
+
+			client.on('close', () => {
+				logger.info('LDAP connection closed');
+			});
+
+			client.on('connectRefused', (err) => {
+				logger.fatal('LDAP connection refused', err);
+
+				reject(new Error('LDAP connection refused'));
+			});
+
 			client.bind(LDAP_DN, LDAP_ADMIN_PASSWORD, (err) => {
 				if (err) {
 					logger.fatal('LDAP authentication failed', [err]);
