@@ -83,5 +83,7 @@
   "set-a-strong-password-with-letters-numbers-and-symbols": "Définissez un mot de passe fort avec des lettres, des chiffres et des symboles",
   "Faster-and-more-convenient": "Plus rapide et plus pratique",
   "download-app": "Téléchargez la nouvelle application {name}",
-  "Download": "Télécharger"
+  "Download": "Télécharger",
+  "failed-to-send-otp": "Échec de l'envoi d'OTP, veuillez réessayer plus tard",
+  "otp-check-failed": "Échec de la vérification d'OTP, veuillez essayer d'envoyer un nouveau code"
 }

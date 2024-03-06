@@ -83,5 +83,7 @@
   "set-a-strong-password-with-letters-numbers-and-symbols": "Установите надежный пароль с буквами, цифрами и символами.",
   "Faster-and-more-convenient": "Быстрее и удобнее",
   "download-app": "Загрузите новое приложение {name}",
-  "Download": "Скачать"
+  "Download": "Скачать",
+  "failed-to-send-otp": "Не удалось отправить OTP. Повторите попытку позже.",
+  "otp-check-failed": "Не удалось проверить OTP. Попробуйте отправить новый код."
 }

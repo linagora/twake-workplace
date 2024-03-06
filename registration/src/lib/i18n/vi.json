@@ -83,5 +83,7 @@
   "set-a-strong-password-with-letters-numbers-and-symbols": "Đặt mật khẩu mạnh bằng chữ cái, số và ký hiệu",
   "Faster-and-more-convenient": "Nhanh hơn và thuận tiện hơn",
   "download-app": "Tải xuống ứng dụng {name} mới",
-  "Download": "Tải xuống"
+  "Download": "Tải xuống",
+  "failed-to-send-otp": "Không gửi được OTP, vui lòng thử lại sau",
+  "otp-check-failed": "Không kiểm tra được OTP, vui lòng thử gửi mã mới"
 }
