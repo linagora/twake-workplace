@@ -83,5 +83,7 @@
   "set-a-strong-password-with-letters-numbers-and-symbols": "قم بتعيين كلمة مرور قوية مكونة من أحرف وأرقام ورموز",
   "Faster-and-more-convenient": "أسرع وأكثر ملاءمة",
   "download-app": "قم بتنزيل تطبيق {name} الجديد",
-  "Download": "تحميل"
+  "Download": "تحميل",
+  "failed-to-send-otp": "فشل إرسال كلمة المرور، يرجى المحاولة مرة أخرى لاحقًا",
+  "otp-check-failed": "فشل التحقق من كلمة المرور، يرجى محاولة إرسال رمز جديد"
 }

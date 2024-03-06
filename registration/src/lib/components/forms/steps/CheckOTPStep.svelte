@@ -75,6 +75,13 @@
 						{$t('entered-code-is-incorrect-try-again')}
 					</div>
 				{/if}
+				{#if $form?.check_failed}
+					<div
+						class="text-xs font-medium leading-4 tracking-tight text-center text-error px-5 pt-1"
+					>
+						{$t('otp-check-failed')}
+					</div>
+				{/if}
 				{#if timeout}
 					<div
 						class="text-xs font-medium leading-4 tracking-tight text-center text-error px-5 pt-1"

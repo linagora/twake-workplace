@@ -82,5 +82,7 @@
   "set-a-strong-password-with-letters-numbers-and-symbols": "Set a strong password with letters, numbers, and symbols",
   "download-app": "Download the new {name} app",
   "Faster-and-more-convenient": "Faster and more convenient",
-  "Download": "Download"
+  "Download": "Download",
+  "failed-to-send-otp": "Failed to send OTP, please try again later",
+  "otp-check-failed": "Failed to check OTP, please try a sending a new code"
 }

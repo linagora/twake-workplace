@@ -102,6 +102,10 @@ export const verify = async (
 			return 'wrong';
 		}
 
+		if (json.code === 198) {
+			throw Error('OTP Request not found');
+		}
+
 		return 'timeout';
 	} catch (error) {
 		logger.error(`Failed to verify OTP for ${phone}`, error);

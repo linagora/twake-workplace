@@ -71,6 +71,10 @@
 		<div class="text-xs font-medium leading-4 pt-1 tracking-wide text-left text-error px-5">
 			{$t('invalid phone number')}
 		</div>
+	{:else if $form?.send_failed}
+		<div class="text-xs font-medium leading-4 pt-1 tracking-wide text-left text-error px-5">
+			{$t('failed-to-send-otp')}
+		</div>
 	{:else if phoneTaken}
 		<div class="relative w-full">
 			<UsedPhone checked={phoneChecked} />
