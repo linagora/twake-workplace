@@ -1,5 +1,4 @@
 import type { Actions, PageServerLoad } from './$types';
-import Client from '$lib/services/ldap/client';
 import { send, verify } from '$lib/services/otp';
 import { type Redirect, fail, redirect } from '@sveltejs/kit';
 import { isPhoneValid } from '$lib/utils/phone';
@@ -20,8 +19,6 @@ import { env } from '$env/dynamic/private';
 import logger from '$services/logger';
 
 export const load: PageServerLoad = async ({ locals, url, cookies, request, getClientAddress }) => {
-	await Client.getClient();
-
 	const country = await getUserCountry(
 		request.headers.get('x-forwarded-for') || getClientAddress()
 	);
