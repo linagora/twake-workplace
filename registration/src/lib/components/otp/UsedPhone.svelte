@@ -26,7 +26,7 @@
 		class="lg:hidden absolute z-10 top-2 origin-top-right flex items-center p-3 rounded bg-[#313033] w-full pl-4 py-[10px] left-6 -mx-6"
 		role="alert"
 	>
-		<div class="ms-3 text-sm font-medium text-gray-800 dark:text-gray-300 w-9/12 text-left">
+		<div class="ms-3 text-sm font-medium text-gray-300 w-9/12 text-left">
 			{$t('this-number-is-already-registered-sign-in-instead')}
 		</div>
 		<button
