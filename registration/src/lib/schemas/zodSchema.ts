@@ -3,15 +3,9 @@ import validator from 'validator';
 import { validatePassword } from '../utils/password';
 
 const createUserSchema = z.object({
-	nickName: z.string().regex(/^[a-zA-Z0-9._-]{3,20}$/, { message: 'Invalid nickname' }),
-	firstName: z
-		.string()
-		.trim()
-		.regex(/^[A-Za-z]|[A-Za-z][A-Za-zs]*[A-Za-z]$/, { message: 'Invalid Firstname' }),
-	lastName: z
-		.string()
-		.trim()
-		.regex(/^[A-Za-z]|[A-Za-z][A-Za-zs]*[A-Za-z]$/, { message: 'Invalid Lastname' }),
+	nickName: z.string().min(3).max(32),
+	firstName: z.string().trim().min(1),
+	lastName: z.string().trim().min(1),
 	password: z.string().refine((val) => validatePassword(val), {
 		message:
 			'Password must be at least 8 characters and contain an uppercase letter, lowercase letter, and number'
