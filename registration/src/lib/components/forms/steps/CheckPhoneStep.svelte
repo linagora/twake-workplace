@@ -18,20 +18,19 @@
 	let phoneTaken = false;
 
 	$: disabled = !valid || phoneTaken || loading || !value || !phoneChecked;
+	$: validPhoneFormat = createUserFormSchema.safeParse({ phone: value }).success;
 
 	const checkPhone = async () => {
-		if (!value || !createUserFormSchema.safeParse({ value }).success || phoneChecked) return;
+		phoneChecked = false;
+		phoneTaken = false;
+
+		if (!value || !validPhoneFormat || phoneChecked) return;
 
 		loading = true;
 		phoneChecked = true;
 		phoneTaken = await isPhoneTaken(value);
 
 		loading = false;
-	};
-
-	const invalidatePhoneCheck = () => {
-		phoneChecked = false;
-		phoneTaken = false;
 	};
 
 	const handler = () => {
@@ -63,8 +62,7 @@
 			bind:value
 			bind:selectedCountry={$userCountry}
 			{loading}
-			onInput={invalidatePhoneCheck}
-			onBlur={checkPhone}
+			onInput={checkPhone}
 		/>
 	</div>
 	{#if $form?.invalid_phone || $form?.phone_taken}
