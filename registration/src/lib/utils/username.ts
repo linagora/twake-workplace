@@ -1,3 +1,5 @@
+import { createUserFormSchema } from '$lib/schemas/zodSchema';
+
 /**
  * Validates a name.
  *
@@ -5,7 +7,10 @@
  * @param {string} name - the string to validate.
  * @returns {boolean} - true if the string is valid, false otherwise.
  */
-export const validateName = (name: string): boolean => /^[a-zA-Z ]{3,}$/.test(name);
+export const validateName = (name: string): boolean =>
+	createUserFormSchema.safeParse({
+		firstname: name
+	}).success;
 
 /**
  * Validates a nickname.
@@ -15,7 +20,8 @@ export const validateName = (name: string): boolean => /^[a-zA-Z ]{3,}$/.test(na
  * @param {string} name - the nickname to validate.
  * @returns {boolean} - true if the nickname is valid, false otherwise.
  */
-export const validateNickName = (name: string): boolean => /^[a-zA-Z0-9._-]{3,20}$/.test(name);
+export const validateNickName = (nickName: string): boolean =>
+	createUserFormSchema.safeParse({ nickName }).success;
 
 /**
  * Generates nicknames.
