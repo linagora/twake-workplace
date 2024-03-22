@@ -36,7 +36,7 @@ export const sendSMS = async (phone: string, message: string) => {
 
 		const responseBody = await response.json();
 
-		if (response.status !== 201) {
+		if (response.status !== 201 && response.status !== 200) {
 			throw Error('Failed to send SMS', { cause: responseBody.message });
 		}
 	} catch (error) {
