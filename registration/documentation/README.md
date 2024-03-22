@@ -215,7 +215,7 @@ POST
 
 #### Authorization Header
 
-The request requires an authorization header send-sms-key containing the authentication token.
+The request requires a Bearer Authorization header containing the authentication token.
 
 #### Request Body
 
