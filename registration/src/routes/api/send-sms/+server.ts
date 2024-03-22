@@ -11,10 +11,10 @@ export const POST: RequestHandler = async ({ request }) => {
 			throw error(500, 'Missing LEMON_SMS_AUTH_KEY');
 		}
 
-		const authKey = request.headers.get('send-sms-key');
+		const authHeader = request.headers.get('Authorization');
 
-		if (!authKey || authKey !== env.LEMON_SMS_AUTH_KEY) {
-			logger.error('Invalid send sms auth key', { authKey });
+		if (!authHeader || authHeader !== `Bearer ${env.LEMON_SMS_AUTH_KEY}`) {
+			logger.error('Invalid Authorization header', { authHeader });
 
 			throw error(401, 'Invalid or missing auth key');
 		}
