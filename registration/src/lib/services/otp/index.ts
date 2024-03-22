@@ -1,6 +1,6 @@
 import { env } from '$env/dynamic/private';
 import type {
-	ISmsSendPayload,
+	IOtpSendPayload,
 	ISmsSentResponse,
 	IValidateOTPPayload,
 	VerificationResult
@@ -14,15 +14,15 @@ import logger from '$services/logger';
  */
 export const send = async (to: string): Promise<string> => {
 	try {
-		const API_ENDPOINT = `${env.SMS_SERVICE_API}/generate`;
-
-		if (!API_ENDPOINT) {
+		if (!env.SMS_SERVICE_API) {
 			logger.fatal('SMS_SERVICE_API is not set');
 
 			throw new Error('SMS_SERVICE_API is not set');
 		}
 
-		const payload: ISmsSendPayload = {
+		const API_ENDPOINT = `${env.SMS_SERVICE_API}/service/otp/generate`;
+
+		const payload: IOtpSendPayload = {
 			channel: 'sms',
 			code_length: 6,
 			phone_number: to,
@@ -68,7 +68,7 @@ export const verify = async (
 	otp_request_token: string
 ): Promise<VerificationResult> => {
 	try {
-		const API_ENDPOINT = `${env.SMS_SERVICE_API}/validate`;
+		const API_ENDPOINT = `${env.SMS_SERVICE_API}/service/otp/validate`;
 
 		if (!API_ENDPOINT) {
 			logger.fatal('SMS_SERVICE_API is not set');

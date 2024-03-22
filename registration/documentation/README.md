@@ -3,6 +3,7 @@
 - [Validate nickname](#validate-nickname)
 - [validate phone](#validate-phone)
 - [Suggest nicknames](#suggest-nicknames)
+- [Send SMS](#send-sms)
 
 ## Validate nickname
 
@@ -190,4 +191,71 @@ Body: [
 - Status Code 400: The endpoint will return a `400 Bad Request` status code in the following cases:
   - If the is not provided firstname or lastname
   - If the provided firstname or lastname is invalid.
+- Status code 500: Internal error
+
+## Send SMS
+
+### Description
+
+This API endpoint allows sending SMS to a specific phone number.
+
+### Endpoint URL
+
+```
+/api/send-sms
+```
+
+### HTTP Method
+
+```
+POST
+```
+
+### Request Parameters
+
+#### Authorization Header
+
+The request requires an authorization header send-sms-key containing the authentication token.
+
+#### Request Body
+
+The request body should be in JSON format and include the following property:
+
+| Parameter | Type   | Description       |
+| --------- | ------ | ----------------- |
+| phone     | string | the target phone. |
+| message   | string | the sms text.     |
+
+Example:
+
+```json
+{
+	"phone": "+21622222222",
+	"message": "some test message"
+}
+```
+
+### Response
+
+The API endpoint returns the following response:
+
+| Status Code | Description                                        |
+| ----------- | -------------------------------------------------- |
+| 200         | OK - the SMS was sent successfully                 |
+| 400         | Bad Request - Invalid or missing phone or message. |
+| 401         | Forbidden - invalid or missing SMS auth key        |
+| 500         | Internal error. something unexpected occured       |
+
+Example Response (Status Code: 200 - OK):
+
+```
+Status: 200 OK
+Body: ok
+```
+
+### Error Handling
+
+- Status Code 400: The endpoint will return a `400 Bad Request` status code in the following cases:
+  - invalid or missing phone number or message.
+- Status code 401: Unauthorized
 - Status code 500: Internal error

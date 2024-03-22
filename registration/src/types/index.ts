@@ -1,4 +1,4 @@
-export interface ISmsSendPayload {
+export interface IOtpSendPayload {
 	phone_number: string;
 	text: string;
 	channel: 'sms' | 'voice_sms';
@@ -25,14 +25,14 @@ export interface IValidateOTPResponse {
 	remaining_number_of_attempts: number;
 }
 
-export interface Message {
-	destinations: Destination[];
-	from: string;
+export interface SendSMSPayload {
 	text: string;
+	recipients: Destination[];
+	sender: string;
 }
 
 export interface Destination {
-	to: string;
+	phone_number: string;
 }
 
 export type SearchResult = Record<string, string | string[] | number>;
