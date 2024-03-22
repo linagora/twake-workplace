@@ -24,6 +24,7 @@ sub sendSMS {
     my $hreq = HTTP::Request->new( POST => $smsApi );
     $hreq->header( 'Content-Type' => 'application/json' );
     $hreq->header( Accept         => 'application/json' );
+    $hreq->header( Authorization  => "Bearer: $smsToken" );
     $hreq->content(
         to_json( {
                 phone   => $phone,
@@ -31,7 +32,7 @@ sub sendSMS {
             }
         )
     );
-    my $resp = $ua->req($hreq);
+    my $resp = $ua->request($hreq);
     return $resp->is_success;
 }
 
