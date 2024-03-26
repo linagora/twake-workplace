@@ -129,11 +129,12 @@ class LdapClient {
 	};
 
 	/**
-	 * Find LDAP
-	 * @param field
-	 * @param value
-	 * @param attributes
-	 * @returns
+	 * Find LDAP operation
+	 *
+	 * @param {string} field - the field to search
+	 * @param {string | number} value - the value to search
+	 * @param {string[]} attributes - the LDAP attributes to return.
+	 * @returns {Promise<SearchResult[]>} - the search results.
 	 */
 	public find = async (
 		field?: string,
@@ -146,6 +147,7 @@ class LdapClient {
 	};
 
 	/**
+	 * INSERT LDAP operation
 	 *
 	 * @param {string} dn - the common name
 	 * @param {T} entry - the generic LDAP object to insert
