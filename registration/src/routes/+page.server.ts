@@ -14,7 +14,7 @@ import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
 import { getUserCountry } from '$lib/services/ip';
-import type { ApplicationType } from '$types';
+import type { ApplicationType, RegistrationStepType } from '$types';
 import { env } from '$env/dynamic/private';
 import logger from '$services/logger';
 
@@ -54,11 +54,13 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		throw redirect(302, postLoginUrl ?? '/success');
 	}
 
+	const initialStep: RegistrationStepType = redirectUrl ? 'phone' : 'home';
+
 	return {
 		app,
 		country,
 		isLogin: !!postLoginUrl,
-		step: session.data.step || 'home',
+		step: session.data.step || initialStep,
 		verified: session.data.verified,
 		phone: session.data.phone
 	};
