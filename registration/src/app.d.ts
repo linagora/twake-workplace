@@ -38,4 +38,7 @@ interface SessionData {
 	country?: string;
 	app?: ApplicationType;
 	step: RegistrationStepType = 'home';
+	recovery_phone?: string;
+	recovery_otp_request_token?: string;
+	verified_recovery_phone?: boolean;
 }
