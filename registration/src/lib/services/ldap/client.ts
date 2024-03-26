@@ -1,6 +1,6 @@
 import ldapjs from 'ldapjs';
 import { env } from '$env/dynamic/private';
-import type { SearchResult } from '$types';
+import type { LDAPChangePayload, SearchResult } from '$types';
 import logger from '$services/logger';
 
 class LdapClient {
@@ -159,6 +159,29 @@ class LdapClient {
 			client.add(userDn, entry as Record<string, string | number>, (err) => {
 				if (err) {
 					logger.error('LDAP insert error', [err]);
+
+					reject(err);
+				}
+
+				resolve();
+			});
+		});
+	};
+
+	/**
+	 * Update LDAP operation
+	 *
+	 * @param {string} dn - the common name
+	 * @param {LDAPChangePayload} change - the ldap change payload
+	 */
+	public update = async (dn: string, change: LDAPChangePayload): Promise<void> => {
+		const client = await this.getClient();
+		const userDn = `${dn},${this.base}`;
+
+		return new Promise((resolve, reject) => {
+			client.modify(userDn, change, (err) => {
+				if (err) {
+					logger.error('LDAP update error', [err]);
 
 					reject(err);
 				}
