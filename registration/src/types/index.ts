@@ -94,3 +94,13 @@ export type RegistrationStepType =
 	| 'nickname'
 	| 'password'
 	| 'success';
+
+export interface LDAPModification {
+	type: string;
+	values: string[];
+}
+
+export interface LDAPChangePayload {
+	operation: 'add' | 'delete' | 'replace';
+	modification: LDAPModification;
+}
