@@ -80,7 +80,6 @@ export const checkEmailAvailability = async (email: string): Promise<boolean> =>
  * @param {string} password - the user password.
  * @param {string} firstName - the first name of the user.
  * @param {string} lastName - the last name of the user.
- * @param {string} mail - the email to send the recovery email to.
  */
 export const signup = async (
 	cn: string,
@@ -181,7 +180,7 @@ export const suggestAvailableNickNames = async (
  * @param {string} firstName - the first name of the user.
  * @param {string} lastName - the last name of the user.
  * @param {string} current - the current nickname of the user to exclude.
- * @returns
+ * @returns {Promise<string[]>} - a list of suggested alternative available nicknames.
  */
 export const suggestAlternativeAvaialableNickNames = async (
 	firstName: string,
