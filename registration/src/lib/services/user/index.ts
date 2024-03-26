@@ -1,9 +1,10 @@
 import { env } from '$env/dynamic/public';
 import { generateNickNames } from '$lib/utils/username';
-import type { User } from '$types';
+import type { LDAPChangePayload, User } from '$types';
 import ldapClient from '$services/ldap';
 import validator from 'validator';
 import logger from '$services/logger';
+import { isPhoneValid } from '$src/lib/utils/phone';
 
 /**
  * Checks if a nickname is available.
@@ -188,3 +189,47 @@ export const suggestAlternativeAvaialableNickNames = async (
 	current: string
 ): Promise<string[]> =>
 	(await suggestAvailableNickNames(firstName, lastName)).filter((nickName) => nickName !== current);
+
+/**
+ * Update user password
+ *
+ * @param {string} username - the nickname of the user.
+ * @param {string} password - the new password.
+ */
+export const updateUserPassword = async (username: string, password: string): Promise<void> => {
+	try {
+		const payload = {
+			operation: 'replace',
+			modification: {
+				type: 'userPassword',
+				values: [password]
+			}
+		} satisfies LDAPChangePayload;
+
+		await ldapClient.update(`cn=${username}`, payload);
+	} catch (error) {
+		logger.error(`Failed to update user password for user: ${username}`, { error });
+
+		throw error;
+	}
+};
+
+/**
+ * Get user using phone number
+ *
+ * @param {string} phone - the phone number of the user.
+ * @returns {Promise<User | null>} - the user.
+ */
+export const getUserByPhone = async (phone: string): Promise<User | null> => {
+	try {
+		if (!isPhoneValid(phone)) {
+			throw new Error('Invalid phone number');
+		}
+
+		return fetchUser(phone);
+	} catch (error) {
+		logger.error(`Failed to get user by phone: ${phone}`, { error });
+
+		return null;
+	}
+};
