@@ -11,8 +11,9 @@ import logger from '$services/logger';
  * Sends an OTP to the given phone number.
  *
  * @param {string} to - the phone number to send the message to.
+ * @param {string} text - the text to send.
  */
-export const send = async (to: string): Promise<string> => {
+export const send = async (to: string, text?: string): Promise<string> => {
 	try {
 		if (!env.SMS_SERVICE_API) {
 			logger.fatal('SMS_SERVICE_API is not set');
@@ -27,7 +28,7 @@ export const send = async (to: string): Promise<string> => {
 			code_length: 6,
 			phone_number: to,
 			sender: 'Twake',
-			text: 'Your verification code: '
+			text: text ?? 'Your verification code: '
 		};
 
 		const response = await fetch(API_ENDPOINT, {
@@ -111,5 +112,20 @@ export const verify = async (
 		logger.error(`Failed to verify OTP for ${phone}`, error);
 
 		throw Error('Failed to verify OTP');
+	}
+};
+
+/**
+ * Send recovery OTP
+ *
+ * @param {string} to - the phone number to send the message to.
+ */
+export const sendRecoveryOtp = async (to: string): Promise<string> => {
+	try {
+		return await send(to, 'Your recovery code is: ');
+	} catch (err) {
+		logger.error('Error sending recovery OTP', err);
+
+		throw Error('Failed to send recovery OTP');
 	}
 };
