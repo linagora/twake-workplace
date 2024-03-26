@@ -3,7 +3,6 @@
 	import PrimaryButton from '$components/button/PrimaryButton.svelte';
 	import AppLogo from '$components/logo/AppLogo.svelte';
 	import SecondaryButton from '$components/button/SecondaryButton.svelte';
-	import LinkButton from '$components/button/LinkButton.svelte';
 	import { activeTab, registrationStep } from '$store';
 
 	const startRegistration = () => {
@@ -32,8 +31,5 @@
 		<SecondaryButton handler={startLogin}>
 			{$t('Sign in')}
 		</SecondaryButton>
-		<LinkButton>
-			{$t('Use-company-server')}
-		</LinkButton>
 	</div>
 </div>
