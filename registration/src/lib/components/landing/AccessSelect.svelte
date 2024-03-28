@@ -15,6 +15,11 @@
 	$: appName = getAppName();
 	$: appUrl = getApplicationStoreUrl($app)?.url || '';
 	$: showDownloadBanner = $showBanner && $app !== 'default' && appUrl.length > 0;
+
+	const switchToRegistration = () => {
+		$activeTab = 'register';
+		$registrationStep = $registrationStep === 'home' ? 'phone' : $registrationStep;
+	};
 </script>
 
 <div
@@ -38,7 +43,7 @@
 						'register'
 							? 'text-primary border-[#0A84FF]'
 							: 'border-gray-100 border-b text-disabled-text'} "
-						on:click={() => ($activeTab = 'register')}
+						on:click={switchToRegistration}
 					>
 						{$t('Sign up')}
 					</button>
