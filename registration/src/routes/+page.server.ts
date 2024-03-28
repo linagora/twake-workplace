@@ -55,7 +55,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 	}
 
 	const initialStep: RegistrationStepType = redirectUrl ? 'phone' : 'home';
-	const isLogin = postLoginUrl && session.data.step === 'home';
+	const isLogin = postLoginUrl && (session.data.step === undefined || session.data.step === 'home');
 
 	return {
 		app,
