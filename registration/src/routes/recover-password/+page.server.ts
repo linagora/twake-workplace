@@ -31,7 +31,7 @@ export const actions: Actions = {
 			if (await checkPhoneAvailability(phone)) {
 				logger.error("Phone doesn't exist", phone);
 
-				return fail(400, { phone, phone_taken: true });
+				return fail(400, { phone, phone_not_found: true });
 			}
 
 			const { last_sent } = session.data;
