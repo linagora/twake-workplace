@@ -67,5 +67,8 @@
   "download-app": "Tải xuống ứng dụng {name} mới",
   "Download": "Tải xuống",
   "failed-to-send-otp": "Không gửi được OTP, vui lòng thử lại sau",
-  "otp-check-failed": "Không kiểm tra được OTP, vui lòng thử gửi mã mới"
+  "otp-check-failed": "Không kiểm tra được OTP, vui lòng thử gửi mã mới",
+  "recover-password": "Khôi phục mật khẩu",
+  "recovery-phone-prompt": "Vui lòng nhập số điện thoại liên quan\n\nvới tài khoản của bạn. \nChúng tôi sẽ gửi cho bạn mã xác minh để đặt lại mật khẩu của bạn",
+  "phone-not-found": "Số điện thoại này không được liên kết với bất kỳ tài khoản nào"
 }
