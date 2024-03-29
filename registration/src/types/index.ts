@@ -104,3 +104,5 @@ export interface LDAPChangePayload {
 	operation: 'add' | 'delete' | 'replace';
 	modification: LDAPModification;
 }
+
+export type PasswordRecoveryStepType = 'phone' | 'otp' | 'password' | 'success';
