@@ -3,7 +3,7 @@ import { Logger } from 'tslog';
 const logger = new Logger({
 	name: 'registration-logger',
 	type: 'pretty',
-	hideLogPositionForProduction: true
+	hideLogPositionForProduction: false
 });
 
 export default logger;
