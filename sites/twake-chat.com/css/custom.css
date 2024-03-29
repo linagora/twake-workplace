@@ -1,0 +1,6 @@
+.t-popup.t-popup_show {
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
+}
+
+.t702__wrapper, .t-popup__container, .t702__img { border-radius: 12px; } .t702__img { border-bottom-left-radius: 0px !important; border-bottom-right-radius: 0px !important; }
