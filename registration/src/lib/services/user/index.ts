@@ -5,6 +5,7 @@ import ldapClient from '$services/ldap';
 import validator from 'validator';
 import logger from '$services/logger';
 import { isPhoneValid } from '$src/lib/utils/phone';
+import ldap from 'ldapjs';
 
 /**
  * Checks if a nickname is available.
@@ -197,15 +198,17 @@ export const suggestAlternativeAvaialableNickNames = async (
  */
 export const updateUserPassword = async (username: string, password: string): Promise<void> => {
 	try {
-		const payload = {
-			operation: 'replace',
-			modification: {
-				type: 'userPassword',
-				values: [password]
-			}
-		} satisfies LDAPChangePayload;
+		const passwordAttribute = new ldap.Attribute({
+			type: 'userPassword',
+			vals: password
+		});
 
-		await ldapClient.update(`cn=${username}`, payload);
+		const payload = new ldap.Change({
+			operation: 'replace',
+			modification: passwordAttribute
+		} satisfies LDAPChangePayload)
+
+		await ldapClient.update(`cn=${username},ou=users`, payload);
 	} catch (error) {
 		logger.error(`Failed to update user password for user: ${username}`, { error });
 

@@ -176,12 +176,12 @@ class LdapClient {
 	 * @param {string} dn - the common name
 	 * @param {LDAPChangePayload} change - the ldap change payload
 	 */
-	public update = async (dn: string, change: LDAPChangePayload): Promise<void> => {
+	public update = async (dn: string, change: ldapjs.Change): Promise<void> => {
 		const client = await this.getClient();
 		const userDn = `${dn},${this.base}`;
 
 		return new Promise((resolve, reject) => {
-			client.modify(userDn, change, (err) => {
+			client.modify(userDn, [change], (err) => {
 				if (err) {
 					logger.error('LDAP update error', [err]);
 
