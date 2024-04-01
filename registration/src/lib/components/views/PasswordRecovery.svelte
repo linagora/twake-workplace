@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { passwordRecoveryStep, rewindPasswordRecoveryStep } from '$store';
-	import PhoneStep from '$components/forms/recovery-steps/PhoneStep.svelte';
+	import PhoneStep from '$components/forms/steps/recovery/PhoneStep.svelte';
 	import OtpStep from '$components/forms/steps/recovery/OTPStep.svelte';
-	import PasswordStep from '$components/forms/recovery-steps/PasswordStep.svelte';
-	import RecoverySuccessStep from '$components/forms/recovery-steps/RecoverySuccessStep.svelte';
+	import PasswordStep from '$components/forms/steps/recovery/PasswordStep.svelte';
+	import RecoverySuccessStep from '$components/forms/steps/recovery/RecoverySuccessStep.svelte';
 	import NavigateBack from '$components/buttons/NavigateBack.svelte';
 
 	$: showNavigation = $passwordRecoveryStep !== 'success';
