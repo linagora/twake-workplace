@@ -3,7 +3,7 @@ on:
     branches:
       - main
     paths:
-      - registration/**
+      - 'registration/**'
 
 jobs:
   test:

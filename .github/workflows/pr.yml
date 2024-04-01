@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - registration/**
+      - 'registration/**'
 
   merge_group:
   workflow_dispatch:
