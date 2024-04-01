@@ -2,9 +2,9 @@
 	import type { PasswordType } from '$types';
 	import FieldError from '$components/dispaly/FieldError.svelte';
 	import ErrorIcon from '$components/icons/ErrorIcon.svelte';
-	import Hide from '$components/icons/hide.svelte';
-	import Show from '$components/icons/show.svelte';
-	import Valid from '$components/icons/valid.svelte';
+	import Hide from '$components/icons/HideIcon.svelte';
+	import Show from '$components/icons/ShowIcon.svelte';
+	import Valid from '$components/icons/ValidIcon.svelte';
 	import { t } from 'svelte-i18n';
 
 	export let value: string;

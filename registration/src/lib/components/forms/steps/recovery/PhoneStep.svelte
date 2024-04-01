@@ -2,7 +2,7 @@
 	import TelField from '$components/input/TelField.svelte';
 	import { t } from 'svelte-i18n';
 	import { userCountry, recoveryForm } from '$store';
-	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import { createUserFormSchema } from '$lib/schemas/zodSchema';
 	import { isPhoneTaken } from '$utils/api';
 	import type { E164Number } from 'svelte-tel-input/types';

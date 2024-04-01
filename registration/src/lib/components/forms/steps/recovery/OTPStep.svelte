@@ -1,16 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import OtpField from '$components/input/OtpField.svelte';
 	import { maskPhone } from '$utils/phone';
 	import { t } from 'svelte-i18n';
-	import {
-		recoveryForm,
-		nextRegistrationStep,
-		recoveryPhone,
-		registrationStep,
-		verified
-	} from '$store';
+	import { recoveryForm, recoveryPhone } from '$store';
 
 	let value = '';
 	let resendCounter = 60;
@@ -30,9 +24,8 @@
 	};
 
 	const handleCheckOtp = () => {
-    console.log("checking", $recoveryPhone)
+		console.log('checking', $recoveryPhone);
 		if (!$recoveryPhone || disabled) return;
-
 
 		checkOtpForm.requestSubmit();
 	};

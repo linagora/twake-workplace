@@ -1,5 +1,5 @@
 <script lang="ts">
-	import NavigateBack from '$lib/components/button/NavigateBack.svelte';
+	import NavigateBack from '$components/buttons/NavigateBack.svelte';
 	import AppLogo from '$lib/components/logo/AppLogo.svelte';
 	import { activeTab, registrationStep, rewindRegistrationStep } from '$store';
 

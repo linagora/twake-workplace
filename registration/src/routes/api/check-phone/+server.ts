@@ -1,6 +1,6 @@
 import { checkPhoneAvailability } from '$lib/services/user';
 import { isPhoneValid } from '$lib/utils/phone';
-import logger from '$src/lib/services/logger';
+import logger from '$services/logger';
 import { error, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {

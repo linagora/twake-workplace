@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { t } from 'svelte-i18n';
 	import { form } from '$store';
-	import SubmitButton from '$components/button/SubmitButton.svelte';
+	import SubmitButton from '$components/buttons/SubmitButton.svelte';
 	import PasswordField from '$components/input/PasswordField.svelte';
 	import TextField from '$components/input/TextField.svelte';
 
