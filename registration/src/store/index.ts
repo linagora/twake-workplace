@@ -114,7 +114,7 @@ export const nextPasswordRecoveryStep = () => {
 	if (currentStep === 'phone') return passwordRecoveryStep.set('otp');
 	if (currentStep === 'otp') return passwordRecoveryStep.set('password');
 	if (currentStep === 'password') return passwordRecoveryStep.set('success');
-	if (currentStep === 'success') return goto('/?login', { replaceState: true });
+	if (currentStep === 'success') return goto('/login');
 };
 
 export const rewindPasswordRecoveryStep = () => {
