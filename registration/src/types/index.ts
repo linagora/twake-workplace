@@ -1,3 +1,5 @@
+import type { Attribute } from 'ldapjs';
+
 export interface IOtpSendPayload {
 	phone_number: string;
 	text: string;
@@ -94,3 +96,15 @@ export type RegistrationStepType =
 	| 'nickname'
 	| 'password'
 	| 'success';
+
+export interface LDAPModification {
+	type: string;
+	values: string[];
+}
+
+export interface LDAPChangePayload {
+	operation: 'add' | 'delete' | 'replace';
+	modification: LDAPModification | Attribute;
+}
+
+export type PasswordRecoveryStepType = 'phone' | 'otp' | 'password' | 'success';

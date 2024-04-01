@@ -1,9 +1,11 @@
 import { env } from '$env/dynamic/public';
 import { generateNickNames } from '$lib/utils/username';
-import type { User } from '$types';
+import type { LDAPChangePayload, User } from '$types';
 import ldapClient from '$services/ldap';
 import validator from 'validator';
 import logger from '$services/logger';
+import { isPhoneValid } from '$src/lib/utils/phone';
+import ldap from 'ldapjs';
 
 /**
  * Checks if a nickname is available.
@@ -79,7 +81,6 @@ export const checkEmailAvailability = async (email: string): Promise<boolean> =>
  * @param {string} password - the user password.
  * @param {string} firstName - the first name of the user.
  * @param {string} lastName - the last name of the user.
- * @param {string} mail - the email to send the recovery email to.
  */
 export const signup = async (
 	cn: string,
@@ -180,7 +181,7 @@ export const suggestAvailableNickNames = async (
  * @param {string} firstName - the first name of the user.
  * @param {string} lastName - the last name of the user.
  * @param {string} current - the current nickname of the user to exclude.
- * @returns
+ * @returns {Promise<string[]>} - a list of suggested alternative available nicknames.
  */
 export const suggestAlternativeAvaialableNickNames = async (
 	firstName: string,
@@ -188,3 +189,49 @@ export const suggestAlternativeAvaialableNickNames = async (
 	current: string
 ): Promise<string[]> =>
 	(await suggestAvailableNickNames(firstName, lastName)).filter((nickName) => nickName !== current);
+
+/**
+ * Update user password
+ *
+ * @param {string} username - the nickname of the user.
+ * @param {string} password - the new password.
+ */
+export const updateUserPassword = async (username: string, password: string): Promise<void> => {
+	try {
+		const passwordAttribute = new ldap.Attribute({
+			type: 'userPassword',
+			vals: password
+		});
+
+		const payload = new ldap.Change({
+			operation: 'replace',
+			modification: passwordAttribute
+		} satisfies LDAPChangePayload)
+
+		await ldapClient.update(`cn=${username},ou=users`, payload);
+	} catch (error) {
+		logger.error(`Failed to update user password for user: ${username}`, { error });
+
+		throw error;
+	}
+};
+
+/**
+ * Get user using phone number
+ *
+ * @param {string} phone - the phone number of the user.
+ * @returns {Promise<User | null>} - the user.
+ */
+export const getUserByPhone = async (phone: string): Promise<User | null> => {
+	try {
+		if (!isPhoneValid(phone)) {
+			throw new Error('Invalid phone number');
+		}
+
+		return fetchUser(phone);
+	} catch (error) {
+		logger.error(`Failed to get user by phone: ${phone}`, { error });
+
+		return null;
+	}
+};

@@ -129,11 +129,12 @@ class LdapClient {
 	};
 
 	/**
-	 * Find LDAP
-	 * @param field
-	 * @param value
-	 * @param attributes
-	 * @returns
+	 * Find LDAP operation
+	 *
+	 * @param {string} field - the field to search
+	 * @param {string | number} value - the value to search
+	 * @param {string[]} attributes - the LDAP attributes to return.
+	 * @returns {Promise<SearchResult[]>} - the search results.
 	 */
 	public find = async (
 		field?: string,
@@ -146,6 +147,7 @@ class LdapClient {
 	};
 
 	/**
+	 * INSERT LDAP operation
 	 *
 	 * @param {string} dn - the common name
 	 * @param {T} entry - the generic LDAP object to insert
@@ -159,6 +161,29 @@ class LdapClient {
 			client.add(userDn, entry as Record<string, string | number>, (err) => {
 				if (err) {
 					logger.error('LDAP insert error', [err]);
+
+					reject(err);
+				}
+
+				resolve();
+			});
+		});
+	};
+
+	/**
+	 * Update LDAP operation
+	 *
+	 * @param {string} dn - the common name
+	 * @param {LDAPChangePayload} change - the ldap change payload
+	 */
+	public update = async (dn: string, change: ldapjs.Change): Promise<void> => {
+		const client = await this.getClient();
+		const userDn = `${dn},${this.base}`;
+
+		return new Promise((resolve, reject) => {
+			client.modify(userDn, [change], (err) => {
+				if (err) {
+					logger.error('LDAP update error', [err]);
 
 					reject(err);
 				}

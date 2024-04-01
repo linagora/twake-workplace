@@ -35,7 +35,7 @@
   "Invalid credentials": "Invalid credentials",
   "invalid Username": "invalid Username",
   "accept terms and conditions": "accept terms and conditions",
-  "invalid phone number": "Number you entered is invalid. Try again.",
+  "invalid phone number": "the number you entered is invalid. Try again.",
   "login": "login",
   "hide or show": "hide or show",
   "sign-in-instead": "sign in instead",
@@ -67,5 +67,15 @@
   "Faster-and-more-convenient": "Faster and more convenient",
   "Download": "Download",
   "failed-to-send-otp": "Failed to send OTP, please try again later",
-  "otp-check-failed": "Failed to check OTP, please try a sending a new code"
+  "otp-check-failed": "Failed to check OTP, please try a sending a new code",
+  "recover-password": "Recover Password",
+  "recovery-phone-prompt": "Please enter the phone number associated\nwith your account. We’ll send you a verification code to reset your password",
+  "phone-not-found": "This phone number is not associated to any account",
+  "no-code-received": "Didn't get the code?",
+  "set-new-password": "Set your new password",
+  "new-password-policy": "Strong passwords keep you safe! Mix uppercase and lowercase letters, numbers and symbols",
+  "set-password": "Set Password",
+  "go-sign-in": "Go to sign in",
+  "password-updated": "Your password is now updated. You can now sign in with your new password",
+  "forgot-password": "Forgot your pasword?"
 }

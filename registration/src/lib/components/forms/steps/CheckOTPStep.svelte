@@ -98,7 +98,7 @@
 			<div class="w-full h-12 px-6 py-3.5 justify-center items-center inline-flex">
 				<div class="text-center flex space-x-1">
 					<span class="text-gray-400 text-sm font-medium leading-tight tracking-tight"
-						>Didn't get the code?</span
+						>{$t('no-code-received')}</span
 					>
 					<button type="button" disabled={resendCounter > 0} on:click={handleSendOtp}>
 						{#if resendCounter === 0}

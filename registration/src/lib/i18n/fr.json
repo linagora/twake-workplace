@@ -67,5 +67,15 @@
   "download-app": "Téléchargez la nouvelle application {name}",
   "Download": "Télécharger",
   "failed-to-send-otp": "Échec de l'envoi d'OTP, veuillez réessayer plus tard",
-  "otp-check-failed": "Échec de la vérification d'OTP, veuillez essayer d'envoyer un nouveau code"
+  "otp-check-failed": "Échec de la vérification d'OTP, veuillez essayer d'envoyer un nouveau code",
+  "recover-password": "Récupérer mot de passe",
+  "recovery-phone-prompt": "Veuillez saisir le numéro de téléphone associé\n\navec votre compte. \nNous vous enverrons un code de vérification pour réinitialiser votre mot de passe",
+  "phone-not-found": "Ce numéro de téléphone n'est associé à aucun compte",
+  "no-code-received": "Vous n'avez pas reçu le code ?",
+  "set-new-password": "Définissez votre nouveau mot de passe",
+  "new-password-policy": "Des mots de passe forts assurent votre sécurité ! \nMélangez des lettres majuscules et minuscules, des chiffres et des symboles",
+  "set-password": "Définir le mot de passe",
+  "go-sign-in": "Allez vous connecter",
+  "password-updated": "Votre mot de passe est maintenant mis à jour. \nVous pouvez maintenant vous connecter avec votre nouveau mot de passe",
+  "forgot-password": "Vous avez oublié votre mot de passe ?"
 }

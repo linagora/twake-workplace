@@ -37,6 +37,17 @@
 			feedback={false}
 			error={$t('Invalid credentials')}
 		/>
+		<div class="flex justify-center items-center rounded-[100px] w-full">
+			<div class="flex p-[14px] justify-center items-center">
+				<a
+					href="/recover-password"
+					title={$t('forgot-password')}
+					class="text-center text-[14px] font-medium tracking-[0px] not-italic leading-[20px] text-primary"
+				>
+					{$t('forgot-password')}
+				</a>
+			</div>
+		</div>
 	</div>
 	<div class="flex flex-col items-center space-y-5 flex-1 justify-end h-full py-4">
 		<SubmitButton ariaLabel={$t('Sign in')} {disabled}>{$t('Sign in')}</SubmitButton>
