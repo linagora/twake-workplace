@@ -3,6 +3,7 @@ import type { ActionData } from '../routes/$types';
 import type { RegistrationStepType, ApplicationType, Tab, PasswordRecoveryStepType } from '$types';
 import type { CountryCode } from 'svelte-tel-input/types';
 import type { ActionData as RecoveryActionData } from '../routes/recover-password/$types';
+import { goto } from '$app/navigation';
 
 export const form = writable<ActionData>();
 export const verified = writable<boolean>(false);
@@ -110,34 +111,16 @@ export const getAppName = () => {
 export const nextPasswordRecoveryStep = () => {
 	const currentStep = get(passwordRecoveryStep);
 
-	if (currentStep === 'phone') {
-		passwordRecoveryStep.set('otp');
-		return;
-	}
-
-	if (currentStep === 'otp') {
-		passwordRecoveryStep.set('password');
-		return;
-	}
-
-	if (currentStep === 'password') {
-		passwordRecoveryStep.set('success');
-		return;
-	}
+	if (currentStep === 'phone') return passwordRecoveryStep.set('otp');
+	if (currentStep === 'otp') return passwordRecoveryStep.set('password');
+	if (currentStep === 'password') return passwordRecoveryStep.set('success');
+	if (currentStep === 'success') return goto('/?login', { replaceState: true });
 };
 
 export const rewindPasswordRecoveryStep = () => {
 	const currentStep = get(passwordRecoveryStep);
 
-	if (currentStep === 'phone') return;
-
-	if (currentStep === 'otp') {
-		passwordRecoveryStep.set('phone');
-		return;
-	}
-
-	if (currentStep === 'password') {
-		passwordRecoveryStep.set('otp');
-		return;
-	}
+	if (currentStep === 'phone') return goto('/');
+	if (currentStep === 'otp') return passwordRecoveryStep.set('phone');
+	if (currentStep === 'password') return passwordRecoveryStep.set('otp');
 };
