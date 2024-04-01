@@ -4,7 +4,7 @@ import type { LDAPChangePayload, User } from '$types';
 import ldapClient from '$services/ldap';
 import validator from 'validator';
 import logger from '$services/logger';
-import { isPhoneValid } from '$src/lib/utils/phone';
+import { isPhoneValid } from '$utils/phone';
 import ldap from 'ldapjs';
 
 /**

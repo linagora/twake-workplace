@@ -1,4 +1,4 @@
-import logger from '$src/lib/services/logger';
+import logger from '$services/logger';
 import { error, type RequestHandler } from '@sveltejs/kit';
 import { sendSMS } from '$services/sms';
 import { env } from '$env/dynamic/private';

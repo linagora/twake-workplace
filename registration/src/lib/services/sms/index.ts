@@ -1,6 +1,6 @@
 import { env } from '$env/dynamic/private';
 import logger from '$services/logger';
-import type { SendSMSPayload } from '$src/types';
+import type { SendSMSPayload } from '$types';
 
 export const sendSMS = async (phone: string, message: string) => {
 	try {
