@@ -29,6 +29,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 	const clientId = url.searchParams.get('client_id') ?? undefined;
 	const challenge = url.searchParams.get('challenge_code') ?? undefined;
 	const app = (url.searchParams.get('app') as ApplicationType) ?? 'default';
+	const willLogin = url.searchParams.get('login') !== null;
 
 	const cookie = cookies.get(authService.cookieName);
 
@@ -60,7 +61,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 	return {
 		app,
 		country,
-		isLogin,
+		isLogin: isLogin || willLogin,
 		step: session.data.step || initialStep,
 		verified: session.data.verified,
 		phone: session.data.phone
