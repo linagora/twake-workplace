@@ -1,3 +1,5 @@
+import type { Attribute } from 'ldapjs';
+
 export interface IOtpSendPayload {
 	phone_number: string;
 	text: string;
@@ -102,7 +104,7 @@ export interface LDAPModification {
 
 export interface LDAPChangePayload {
 	operation: 'add' | 'delete' | 'replace';
-	modification: LDAPModification;
+	modification: LDAPModification | Attribute;
 }
 
 export type PasswordRecoveryStepType = 'phone' | 'otp' | 'password' | 'success';
