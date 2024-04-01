@@ -4,12 +4,19 @@ import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { sendRecoveryOtp, verify } from '$services/otp';
 import { isPhoneValid } from '$utils/phone';
-import { validatePassword } from '$src/lib/utils/password';
+import { validatePassword } from '$utils/password';
+import { getUserCountry } from '$services/ip';
 
-export const load = (async ({ locals: { session } }) => {
+export const load = (async ({ locals: { session }, getClientAddress, request }) => {
+	const country = await getUserCountry(
+		request.headers.get('x-forwarded-for') || getClientAddress()
+	);
+
 	return {
-		phone: session.data.recovery_phone,
-		verified: session.data.verified_recovery_phone
+		phone: session.data.recovery_phone ?? '',
+		verified: session.data.verified_recovery_phone ?? false,
+		step: session.data.recovery_step ?? 'phone',
+		country
 	};
 }) satisfies PageServerLoad;
 
@@ -48,7 +55,9 @@ export const actions: Actions = {
 				...data,
 				recovery_otp_request_token: token,
 				last_sent: Date.now(),
-				verified_recovery_phone: false
+				verified_recovery_phone: false,
+				recovery_step: 'otp',
+				recovery_phone: phone
 			}));
 
 			return { sent: true };
@@ -84,7 +93,8 @@ export const actions: Actions = {
 			if (verification === 'correct') {
 				await session.update((data) => ({
 					...data,
-					verified_recovery_phone: true
+					verified_recovery_phone: true,
+					recovery_step: 'password'
 				}));
 
 				return { verified_recovery: true };
@@ -142,7 +152,15 @@ export const actions: Actions = {
 				throw Error('User not found');
 			}
 
-			await updateUserPassword(user.cn, password);
+			await updateUserPassword(user.cn[0], password);
+
+			await session.update((data) => ({
+				...data,
+				recovery_phone: undefined,
+				recovery_otp_request_token: undefined,
+				verified_recovery_phone: false,
+				recovery_step: 'success'
+			}));
 
 			return { success: true };
 		} catch (err) {
