@@ -70,5 +70,12 @@
   "otp-check-failed": "Không kiểm tra được OTP, vui lòng thử gửi mã mới",
   "recover-password": "Khôi phục mật khẩu",
   "recovery-phone-prompt": "Vui lòng nhập số điện thoại liên quan\n\nvới tài khoản của bạn. \nChúng tôi sẽ gửi cho bạn mã xác minh để đặt lại mật khẩu của bạn",
-  "phone-not-found": "Số điện thoại này không được liên kết với bất kỳ tài khoản nào"
+  "phone-not-found": "Số điện thoại này không được liên kết với bất kỳ tài khoản nào",
+  "no-code-received": "Bạn không nhận được mã?",
+  "set-new-password": "Đặt mật khẩu mới của bạn",
+  "new-password-policy": "Mật khẩu mạnh giúp bạn an toàn! \nTrộn chữ hoa và chữ thường, số và ký hiệu",
+  "set-password": "Đặt mật khẩu",
+  "go-sign-in": "Đi để đăng nhập",
+  "password-updated": "Mật khẩu của bạn hiện đã được cập nhật. \nBây giờ bạn có thể đăng nhập bằng mật khẩu mới của mình",
+  "forgot-password": "Bạn quên mật khẩu?"
 }
