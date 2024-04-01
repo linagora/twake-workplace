@@ -9,12 +9,17 @@
 		recoveryPhone,
 		verifiedRecovery
 	} from '$store';
+	import type { CountryCode } from 'svelte-tel-input/types';
 
 	export let data: PageData;
 	export let form: ActionData;
 
-	$: ({ phone, verified } = data);
+	$: ({ phone, verified, step, country } = data);
 	$: recoveryForm.set(form);
+	$: passwordRecoveryStep.set(step);
+	$: recoveryPhone.set(phone);
+	$: verifiedRecovery.set(verified);
+	$: userCountry.set(country as CountryCode);
 </script>
 
 <div class="flex w-full h-full lg:px-10 xl:px-[124px] 2xl:px-52 3xl:px-72 4xl:px-96">
