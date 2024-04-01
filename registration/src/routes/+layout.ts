@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { getLocaleFromNavigator, locale, waitLocale } from 'svelte-i18n';
 import type { LayoutLoad } from './$types';
 import '$lib/i18n';
-import logger from '$src/lib/services/logger';
+import logger from '$services/logger';
 
 export const load: LayoutLoad = async () => {
 	if (browser) {

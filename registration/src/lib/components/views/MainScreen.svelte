@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
-	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import AppLogo from '$components/logo/AppLogo.svelte';
-	import SecondaryButton from '$components/button/SecondaryButton.svelte';
+	import SecondaryButton from '$components/buttons/SecondaryButton.svelte';
 	import { activeTab, registrationStep } from '$store';
 
 	const startRegistration = () => {

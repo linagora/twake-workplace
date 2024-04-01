@@ -2,8 +2,8 @@
 	import { clickOutside } from '$utils/html';
 	import ErrorIcon from '$components/icons/ErrorIcon.svelte';
 	import InfoIcon from '$components/icons/InfoIcon.svelte';
-	import Spin from '$components/icons/Spin.svelte';
-	import Valid from '$components/icons/valid.svelte';
+	import Spin from '$components/icons/SpinnerIcon.svelte';
+	import Valid from '$components/icons/ValidIcon.svelte';
 	import InfoTooltip from '$components/dispaly/InfoTooltip.svelte';
 
 	export let label: string;

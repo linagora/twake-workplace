@@ -6,7 +6,7 @@
 	} from '$store';
 	import type { PageData } from './$types';
 	import SuccessCard from '$lib/components/landing/SuccessCard.svelte';
-	import LoggedUser from '$lib/components/nav/LoggedUser.svelte';
+	import LoggedUser from '$components/user/LoggedUser.svelte';
 	import LoggedHero from '$lib/components/landing/LoggedHero.svelte';
 
 	export let data: PageData;

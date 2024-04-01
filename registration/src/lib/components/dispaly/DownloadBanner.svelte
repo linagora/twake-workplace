@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { showBanner } from '$src/store';
-	import DownloadButton from '../button/DownloadButton.svelte';
-	import CloseIcon from '../icons/CloseIcon.svelte';
-	import AppLogo from '../logo/AppLogo.svelte';
+	import { showBanner } from '$store';
+	import DownloadButton from '$components/buttons/DownloadButton.svelte';
+	import CloseIcon from '$components/icons/CloseIcon.svelte';
+	import AppLogo from '$components/logo/AppLogo.svelte';
 	import { t } from 'svelte-i18n';
 
 	export let name: string;
 	export let url: string;
-  export let show: boolean;
+	export let show: boolean;
 
 	const hideBanner = () => {
 		showBanner.set(false);

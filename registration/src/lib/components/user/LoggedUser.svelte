@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Logout from '$components/icons/Logout.svelte';
-	import Avatar from '$components/icons/Avatar.svelte';
+	import Logout from '$components/icons/LogoutIcon.svelte';
+	import Avatar from '$components/icons/AvatarIcon.svelte';
 	import { t } from 'svelte-i18n';
 	import { clickOutside } from '$utils/html';
 

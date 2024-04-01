@@ -5,9 +5,9 @@
 	import FormHeader from '$components/dispaly/FormHeader.svelte';
 	import CheckPhoneStep from '$components/forms/steps/CheckPhoneStep.svelte';
 	import CheckOtpStep from '$components/forms/steps/CheckOTPStep.svelte';
-	import CheckNickNameStep from '$components/forms/steps/CheckNickNameStep.svelte';
+	import CheckNickNameStep from '$components/forms/steps/registration/CheckNickNameStep.svelte';
 	import CheckPasswordStep from '$components/forms/steps/CheckPasswordStep.svelte';
-	import MainScreen from '$components/landing/MainScreen.svelte';
+	import MainScreen from '$components/views/MainScreen.svelte';
 	import DownloadBanner from '$components/dispaly/DownloadBanner.svelte';
 	import { getApplicationStoreUrl } from '$lib/utils/product';
 

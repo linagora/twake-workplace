@@ -12,9 +12,9 @@
 	} from 'svelte-tel-input/types';
 	import 'svelte-tel-input/styles/flags.css';
 	import { t } from 'svelte-i18n';
-	import NavigateBack from '$lib/components/button/NavigateBack.svelte';
+	import NavigateBack from '$components/buttons/NavigateBack.svelte';
 	import SearchIcon from '$lib/components/icons/SearchIcon.svelte';
-	import Spin from '$lib/components/icons/Spin.svelte';
+	import Spin from '$components/icons/SpinnerIcon.svelte';
 
 	export let clickOutside = true;
 	export let closeOnClick = true;
