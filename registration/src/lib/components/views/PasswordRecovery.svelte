@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { passwordRecoveryStep, rewindPasswordRecoveryStep } from '$store';
-	import FormHeader from '$components/dispaly/FormHeader.svelte';
 	import PhoneStep from '$components/forms/recovery-steps/PhoneStep.svelte';
 	import OtpStep from '$components/forms/recovery-steps/OTPStep.svelte';
 	import PasswordStep from '$components/forms/recovery-steps/PasswordStep.svelte';
