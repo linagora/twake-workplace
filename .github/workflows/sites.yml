@@ -1,3 +1,5 @@
+name: sites
+
 on:
   push:
     branches:
@@ -6,7 +8,7 @@ on:
       - 'sites/**'
 
 jobs:
-  publish:
+  publish-sites:
     name: Publish twake-chat.com site
     uses: ./.github/workflows/twake-chat-site-publish.yml
     secrets: inherit
