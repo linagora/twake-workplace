@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import PasswordField from '$components/input/PasswordField.svelte';
 	import { createUserFormSchema, fullCreateUserFormSchema } from '$lib/schemas/zodSchema';
 	import { t } from 'svelte-i18n';

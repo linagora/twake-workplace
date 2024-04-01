@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import TextField from '$components/input/TextField.svelte';
 	import AvailableNicknames from '$components/user/AvailableNicknames.svelte';
 	import { env } from '$env/dynamic/public';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import OtpField from '$components/input/OtpField.svelte';
 	import PhoneConfirmed from '$components/otp/PhoneConfirmed.svelte';
 	import { maskPhone } from '$utils/phone';

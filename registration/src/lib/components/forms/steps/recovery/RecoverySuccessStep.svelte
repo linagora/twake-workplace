@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { nextPasswordRecoveryStep } from '$src/store';
+	import { nextPasswordRecoveryStep } from '$store';
 	import { t } from 'svelte-i18n';
-	import PrimaryButton from '$components/button/PrimaryButton.svelte';
+	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import Confirmed from '$components/icons/Confirmed.svelte';
 </script>
 
