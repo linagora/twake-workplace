@@ -3,7 +3,6 @@
 	import { t } from 'svelte-i18n';
 	import { userCountry, form } from '$store';
 	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
-	import { createUserFormSchema } from '$lib/schemas/zodSchema';
 	import { isPhoneTaken } from '$utils/api';
 	import type { E164Number } from 'svelte-tel-input/types';
 	import { enhance } from '$app/forms';
@@ -18,13 +17,12 @@
 	let phoneTaken = false;
 
 	$: disabled = !valid || phoneTaken || loading || !value || !phoneChecked;
-	$: validPhoneFormat = createUserFormSchema.safeParse({ phone: value }).success;
 
 	const checkPhone = async () => {
 		phoneChecked = false;
 		phoneTaken = false;
 
-		if (!value || !validPhoneFormat || phoneChecked) return;
+		if (!value || !valid || phoneChecked) return;
 
 		loading = true;
 		phoneChecked = true;
