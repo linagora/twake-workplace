@@ -34,7 +34,7 @@ class LemonLdapAuthService {
 
 			return token;
 		} catch (err) {
-			logger.error('Failed to fetch login token', [err]);
+			logger.error('[LemonLdap] Failed to fetch login token from portal', { err });
 			throw err;
 		}
 	};
@@ -60,12 +60,12 @@ class LemonLdapAuthService {
 			const { id } = (await response.json()) as AuthResponse;
 
 			if (!id) {
-				throw new Error('Failed to authenticate');
+				throw new Error('invalid credentials');
 			}
 
 			return id;
 		} catch (err) {
-			logger.error('Failed to authenticate user', { err });
+			logger.error('[LemonLdap] Failed to authenticate user', { err });
 			throw err;
 		}
 	};

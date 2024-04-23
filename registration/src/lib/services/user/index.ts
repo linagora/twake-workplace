@@ -23,7 +23,7 @@ export const checkNickNameAvailability = async (nickName: string): Promise<boole
 
 		return false;
 	} catch (error) {
-		logger.error(`Failed to check nickname availability: ${nickName}`, { error });
+		logger.error(`Failed to check nickname availability`, { serivce: 'USER', error });
 
 		return false;
 	}
@@ -45,7 +45,7 @@ export const checkPhoneAvailability = async (phone: string): Promise<boolean> =>
 
 		return false;
 	} catch (error) {
-		logger.error(`Failed to check phone availability: ${phone}`, { error });
+		logger.error(`Failed to check phone availability`, { serivce: 'USER', error });
 
 		return false;
 	}
@@ -67,7 +67,7 @@ export const checkEmailAvailability = async (email: string): Promise<boolean> =>
 
 		return false;
 	} catch (error) {
-		console.error('Failed to check email availability', { error });
+		console.error('Failed to check email availability', { serivce: 'USER', error });
 
 		return false;
 	}
@@ -105,7 +105,7 @@ export const signup = async (
 
 		await ldapClient.insert<User>(`cn=${cn},ou=users`, entry);
 	} catch (error) {
-		logger.error('Failed to create user', { error });
+		logger.error('[LDAP] Failed to insert new user in LDAP', { serivce: 'USER', error });
 
 		throw error;
 	}
@@ -139,7 +139,7 @@ export const fetchUser = async (login: string): Promise<User | null> => {
 
 		return user[0] || null;
 	} catch (error) {
-		logger.error(`Failed to fetch the user from login: ${login}`, { error });
+		logger.error(`[LDAP] Failed to fetch the user from LDAP using login: ${login}`, { error });
 
 		return null;
 	}
@@ -157,22 +157,27 @@ export const suggestAvailableNickNames = async (
 	lastName: string
 ): Promise<string[]> => {
 	const suggestedNickNames: string[] = [];
+	try {
+		const nickNames = generateNickNames(firstName, lastName);
 
-	const nickNames = generateNickNames(firstName, lastName);
-
-	await Promise.all(
-		nickNames.map(async (nick) => {
-			try {
-				if ((await checkNickNameAvailability(nick)) === true) {
-					suggestedNickNames.push(nick);
+		await Promise.all(
+			nickNames.map(async (nick) => {
+				try {
+					if ((await checkNickNameAvailability(nick)) === true) {
+						suggestedNickNames.push(nick);
+					}
+				} catch (error) {
+					logger.error(`Failed to check nickname availability: ${nick}`, { error });
 				}
-			} catch (error) {
-				logger.error(`Failed to check nickname availability: ${nick}`, { error });
-			}
-		})
-	);
+			})
+		);
 
-	return suggestedNickNames.slice(0, 5);
+		return suggestedNickNames.slice(0, 5);
+	} catch (error) {
+		logger.error(`Failed to suggest available nicknames`, { service: 'USER', error });
+
+		return suggestedNickNames;
+	}
 };
 
 /**
@@ -206,11 +211,11 @@ export const updateUserPassword = async (username: string, password: string): Pr
 		const payload = new ldap.Change({
 			operation: 'replace',
 			modification: passwordAttribute
-		} satisfies LDAPChangePayload)
+		} satisfies LDAPChangePayload);
 
 		await ldapClient.update(`cn=${username},ou=users`, payload);
 	} catch (error) {
-		logger.error(`Failed to update user password for user: ${username}`, { error });
+		logger.error(`[LDAP] Failed to update user password in LDAP`, { service: 'USER', error });
 
 		throw error;
 	}
@@ -230,7 +235,7 @@ export const getUserByPhone = async (phone: string): Promise<User | null> => {
 
 		return fetchUser(phone);
 	} catch (error) {
-		logger.error(`Failed to get user by phone: ${phone}`, { error });
+		logger.error(`[LDAP] Failed to get user by phone from LDAP`, { service: 'USER', error });
 
 		return null;
 	}

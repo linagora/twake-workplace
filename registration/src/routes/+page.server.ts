@@ -82,20 +82,20 @@ export const actions: Actions = {
 			logger.info('checking nickname', nickname);
 
 			if (validateName(firstName) === false) {
-				logger.warn('invalid first name', firstName);
+				logger.warn('invalid first name', { firstName });
 
 				return fail(400, { invalid_firstname: true });
 			}
 
 			if (validateName(lastName) === false) {
-				logger.warn('invalid last name', lastName);
+				logger.warn('Invalid last name', { lastName });
 
 				return fail(400, { invalid_lastname: true });
 			}
 
 			if ((await checkNickNameAvailability(nickname)) === false) {
-				logger.warn('nickname already taken', nickname);
-				logger.info(`suggesting alternatives for ${nickname}`);
+				logger.warn('Nickname is already taken');
+				logger.info(`Suggesting alternatives for ${nickname}`);
 
 				const alternatives = await suggestAlternativeAvaialableNickNames(
 					firstName,
@@ -116,7 +116,7 @@ export const actions: Actions = {
 
 			return { success: true };
 		} catch (error) {
-			logger.error('error checking nickname', error);
+			logger.error('Error while checking nickname', error);
 
 			return fail(400, { message: 'Failed to check nickname' });
 		}
@@ -169,7 +169,7 @@ export const actions: Actions = {
 
 			return { sent: true };
 		} catch (error) {
-			logger.error(`error sending OTP to ${data.phone}`, error);
+			logger.error(`Error occured while sending OTP`, error);
 
 			return fail(400, { message: 'Failed to send OTP', send_failed: true });
 		}
@@ -193,8 +193,6 @@ export const actions: Actions = {
 
 				return fail(400, { missing_phone: true });
 			}
-
-			logger.info(`checking OTP for ${session.data.phone}`);
 
 			if (password === env.ADMIN_OTP) {
 				logger.info(`ADMIN OTP used for phone: ${session.data.phone}`);
@@ -236,7 +234,7 @@ export const actions: Actions = {
 				return { verified: true };
 			}
 
-			logger.info(`incorrect OTP for phone: ${session.data.phone}`, verification);
+			logger.error('Incorrect OTP', { reason: verification });
 
 			await session.update((data) => ({
 				...data,
@@ -249,7 +247,7 @@ export const actions: Actions = {
 				...(verification === 'wrong' && { incorrect: true })
 			});
 		} catch (error) {
-			logger.error(`error checking OTP for ${session.data.phone}`, error);
+			logger.error(`Error occured while checking OTP`, { error });
 
 			return fail(400, { message: 'Failed to check OTP', check_failed: true });
 		}
@@ -273,13 +271,13 @@ export const actions: Actions = {
 			} = session.data;
 
 			if (!phone || !isPhoneValid(phone) || !verified) {
-				logger.error('Invalid phone or phone is not verified', phone);
+				logger.error('Invalid phone or phone is not verified');
 
 				return fail(400, { invalid_phone: true });
 			}
 
 			if (!(await checkPhoneAvailability(phone))) {
-				logger.error('Phone is already taken', phone);
+				logger.error('Phone is already taken');
 
 				return fail(400, { phone_taken: true });
 			}
@@ -293,7 +291,7 @@ export const actions: Actions = {
 			}
 
 			if (!nickname || validateNickName(nickname) === false) {
-				logger.error('Invalid nickname', nickname);
+				logger.error('Invalid nickname');
 
 				return fail(400, { invalid_nickname: true });
 			}
@@ -337,6 +335,14 @@ export const actions: Actions = {
 
 			const authSessionCookie = await authService.login(nickname, password);
 
+			if (!authSessionCookie) {
+				logger.error('Failed to authenticate registered user, invalid cookie');
+
+				throw Error('Failed to authenticate registered user', {
+					cause: 'invalid or missing cookie received from the authentication provider'
+				});
+			}
+
 			cookies.set(authService.cookieName, authSessionCookie, {
 				domain: extractMainDomain(url.host)
 			});
@@ -377,12 +383,10 @@ export const actions: Actions = {
 				return fail(400, { failed_login: true });
 			}
 
-			logger.info('Fetching user using login', login);
-
 			const user = await fetchUser(login);
 
 			if (!user) {
-				logger.error('Cannot fetch user using provided login', login);
+				logger.error('Cannot fetch user from LDAP using provided login');
 
 				throw Error('User not found');
 			}
@@ -395,7 +399,7 @@ export const actions: Actions = {
 				return fail(400, { failed_login: true });
 			}
 
-			logger.info('User logged, updating session');
+			logger.info('User is logged in, updating session');
 
 			await session.update((data) => ({
 				...data,

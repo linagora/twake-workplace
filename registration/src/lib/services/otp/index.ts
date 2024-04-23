@@ -44,12 +44,13 @@ export const send = async (to: string, text?: string): Promise<string> => {
 		const json = (await response.json()) as ISmsSentResponse;
 
 		if (!json.otp_request_token) {
-			throw Error('Failed to send OTP');
+			logger.error(`invalid reponse: otp_request_token not found`, json);
+			throw Error('invalid otp_request_token', { cause: json });
 		}
 
 		return json.otp_request_token;
 	} catch (error) {
-		logger.error(`Failed to send OTP to ${to}`, error);
+		logger.error(`Failed to send OTP`, { service: 'OTP', error });
 
 		throw Error('Failed to send OTP');
 	}
@@ -100,16 +101,22 @@ export const verify = async (
 		}
 
 		if (json.code === 199 || json.message === 'Wrong OTP code.') {
+			logger.warn('Failed to verify OTP: wrong code', json);
+
 			return 'wrong';
 		}
 
 		if (json.code === 198) {
+			logger.error('Failed to verify OTP: timeout', json);
+
 			throw Error('OTP Request not found');
 		}
 
+		logger.error('OTP verification timeout: Too many wrong attempts or Request timeout', json);
+
 		return 'timeout';
 	} catch (error) {
-		logger.error(`Failed to verify OTP for ${phone}`, error);
+		logger.error(`Failed to verify OTP`, { service: 'OTP', error });
 
 		throw Error('Failed to verify OTP');
 	}
@@ -124,7 +131,7 @@ export const sendRecoveryOtp = async (to: string): Promise<string> => {
 	try {
 		return await send(to, 'Your recovery code is: ');
 	} catch (err) {
-		logger.error('Error sending recovery OTP', err);
+		logger.error('Error sending recovery OTP', { service: 'OTP', err });
 
 		throw Error('Failed to send recovery OTP');
 	}

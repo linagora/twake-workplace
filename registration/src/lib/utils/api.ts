@@ -15,7 +15,7 @@ export const isNickNameTaken = async (nickname: string): Promise<boolean> => {
 
 		return response.status !== 200;
 	} catch (error) {
-		logger.error(`failed to check nickname ${nickname}`, error);
+		logger.error(`[API] Failed to check nickname`, { error });
 
 		return false;
 	}
@@ -37,7 +37,7 @@ export const suggestNickNames = async (firstname: string, lastname: string): Pro
 
 		return await response.json();
 	} catch (error) {
-		logger.error(`failed to fetch suggested nicknames for ${firstname} ${lastname}`, error);
+		logger.error(`[API] Failed to fetch suggested nicknames`, { error });
 
 		return [];
 	}
@@ -59,7 +59,7 @@ export const isPhoneTaken = async (phone: string): Promise<boolean> => {
 
 		return !available;
 	} catch (error) {
-		logger.error(`Failed to check phone number: ${phone}`, phone);
+		logger.error(`[API] Failed to check phone number`, { error });
 
 		return false;
 	}
