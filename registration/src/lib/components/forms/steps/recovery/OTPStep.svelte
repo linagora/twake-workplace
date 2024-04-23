@@ -10,6 +10,7 @@
 	let resendCounter = 60;
 	let sendOtpForm: HTMLFormElement;
 	let checkOtpForm: HTMLFormElement;
+	let loading = false;
 
 	setInterval(() => {
 		if (resendCounter > 0) resendCounter--;
@@ -35,11 +36,19 @@
 </script>
 
 <form
-	use:enhance
 	action="?/verifyRecoveryOTP"
 	method="POST"
 	class="hidden"
 	bind:this={checkOtpForm}
+	use:enhance={() => {
+		loading = true;
+
+		return async ({ update }) => {
+			loading = false;
+
+			update();
+		};
+	}}
 >
 	<input type="text" name="password" bind:value required />
 </form>
@@ -84,7 +93,7 @@
 		</div>
 	</div>
 	<div class="mt-auto py-4">
-		<PrimaryButton ariaLabel="next" {disabled} handler={handleCheckOtp}
+		<PrimaryButton ariaLabel="next" {disabled} handler={handleCheckOtp} {loading}
 			>{$t('Confirm')}</PrimaryButton
 		>
 		<div class="w-full h-12 px-6 py-3.5 justify-center items-center inline-flex">

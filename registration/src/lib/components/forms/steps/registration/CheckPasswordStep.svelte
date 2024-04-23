@@ -9,6 +9,7 @@
 
 	let password = '';
 	let confirmPassword = '';
+	let loading = false;
 
 	$: disabled = !fullCreateUserFormSchema.safeParse({
 		password,
@@ -22,7 +23,21 @@
 	};
 </script>
 
-<form use:enhance action="?/register" method="POST" class="hidden" bind:this={sendPasswordForm}>
+<form
+	action="?/register"
+	method="POST"
+	class="hidden"
+	bind:this={sendPasswordForm}
+	use:enhance={() => {
+		loading = true;
+
+		return async ({ update }) => {
+			loading = false;
+
+			update();
+		};
+	}}
+>
 	<input type="text" name="password" bind:value={password} required />
 </form>
 
@@ -55,6 +70,6 @@
 		/>
 	</div>
 	<div class="flex flex-col mt-auto gap-4 space-y-4 py-4">
-		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Sign up')}</PrimaryButton>
+		<PrimaryButton ariaLabel="next" {disabled} {handler} {loading}>{$t('Sign up')}</PrimaryButton>
 	</div>
 </div>

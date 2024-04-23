@@ -15,6 +15,7 @@
 	let loading = false;
 	let phoneChecked = false;
 	let phoneTaken = true;
+	let formLoading = false;
 
 	$: disabled = !valid || !phoneTaken || loading || !value || !phoneChecked;
 	$: validPhoneFormat = createUserFormSchema.safeParse({ phone: value }).success;
@@ -39,7 +40,21 @@
 	};
 </script>
 
-<form use:enhance action="?/sendRecoveryOTP" method="POST" class="hidden" bind:this={sendOtpForm}>
+<form
+	action="?/sendRecoveryOTP"
+	method="POST"
+	class="hidden"
+	bind:this={sendOtpForm}
+	use:enhance={() => {
+		formLoading = true;
+
+		return async ({ update }) => {
+			formLoading = false;
+
+			update();
+		};
+	}}
+>
 	<input type="text" name="phone" bind:value required />
 </form>
 
@@ -70,7 +85,7 @@
 		<div class="text-xs font-medium leading-4 pt-1 tracking-wide text-left text-error px-5">
 			{$t('invalid phone number')}
 		</div>
-  {:else if !phoneTaken}
+	{:else if !phoneTaken}
 		<div class="text-xs font-medium leading-4 pt-1 tracking-wide text-left text-error px-5">
 			{$t('phone-not-found')}
 		</div>
@@ -80,6 +95,8 @@
 		</div>
 	{/if}
 	<div class="mt-auto py-4">
-		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Next')}</PrimaryButton>
+		<PrimaryButton ariaLabel="next" {disabled} {handler} loading={formLoading}
+			>{$t('Next')}</PrimaryButton
+		>
 	</div>
 </div>

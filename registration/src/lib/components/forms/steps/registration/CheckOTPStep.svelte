@@ -11,6 +11,7 @@
 	let resendCounter = 60;
 	let sendOtpForm: HTMLFormElement;
 	let checkOtpForm: HTMLFormElement;
+	let loading = false;
 
 	setInterval(() => {
 		if (resendCounter > 0) resendCounter--;
@@ -35,7 +36,21 @@
 	$: incorrect = $form?.incorrect;
 </script>
 
-<form use:enhance action="?/checkOtp" method="POST" class="hidden" bind:this={checkOtpForm}>
+<form
+	action="?/checkOtp"
+	method="POST"
+	class="hidden"
+	bind:this={checkOtpForm}
+	use:enhance={() => {
+		loading = true;
+
+		return async ({ update }) => {
+			loading = false;
+
+			update();
+		};
+	}}
+>
 	<input type="text" name="password" bind:value required />
 </form>
 
@@ -45,9 +60,9 @@
 
 <div class="flex flex-col px-4 lg:px-0 h-full pb-[28px] lg:pb-6">
 	{#if $verified && $registrationStep === 'confirmed'}
-    <div class="flex flex-col items-center justify-center h-full">
-      <PhoneConfirmed />
-    </div>
+		<div class="flex flex-col items-center justify-center h-full">
+			<PhoneConfirmed />
+		</div>
 		<div class="mt-auto py-4">
 			<PrimaryButton ariaLabel="next" handler={nextRegistrationStep}
 				>{$t('continue-sign-up')}</PrimaryButton
@@ -93,7 +108,7 @@
 			</div>
 		</div>
 		<div class="mt-auto py-4">
-			<PrimaryButton ariaLabel="next" {disabled} handler={handleCheckOtp}
+			<PrimaryButton ariaLabel="next" {disabled} handler={handleCheckOtp} {loading}
 				>{$t('Confirm')}</PrimaryButton
 			>
 			<div class="w-full h-12 px-6 py-3.5 justify-center items-center inline-flex">
