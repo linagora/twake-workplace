@@ -13,7 +13,7 @@ import logger from '$services/logger';
 export const getUserCountry = async (ip: string): Promise<string> => {
 	try {
 		if (!validator.isIP(ip)) {
-			logger.warn(`invalid IP adress: ${ip}`, { service: 'IP service' });
+			logger.error(`invalid IP adress: ${ip}`, { service: 'IP service' });
 
 			return '';
 		}
@@ -21,6 +21,10 @@ export const getUserCountry = async (ip: string): Promise<string> => {
 		const api = getUrl(env.PUBLIC_GEO_API_URL);
 		const response = await fetch(`${api}/ip/country/${ip}.json`);
 		const info = (await response.json()) as CountryInformation;
+
+		if (!info.country || !info.country.length) {
+			logger.error(`Cannot detect user country`, { service: 'IP service', info });
+		}
 
 		return info.country ?? '';
 	} catch (err) {
