@@ -45,8 +45,9 @@
 
 <div class="flex flex-col px-4 lg:px-0 h-full pb-[28px] lg:pb-6">
 	{#if $verified && $registrationStep === 'confirmed'}
-		<div class="w-[386px] h-[238px]" />
-		<PhoneConfirmed />
+    <div class="flex flex-col items-center justify-center h-full">
+      <PhoneConfirmed />
+    </div>
 		<div class="mt-auto py-4">
 			<PrimaryButton ariaLabel="next" handler={nextRegistrationStep}
 				>{$t('continue-sign-up')}</PrimaryButton
