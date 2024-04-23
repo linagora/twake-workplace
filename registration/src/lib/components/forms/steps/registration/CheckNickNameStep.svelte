@@ -17,6 +17,7 @@
 	let accepted = false;
 	let alternativeNicknames: string[] = [];
 	let checkNicknameForm: HTMLFormElement;
+	let formLoading = false;
 
 	$: validNickName = nickName.length > 0 && nickNamechecked && !nickNameTaken;
 	$: suffix = `@${env.PUBLIC_SIGNUP_EMAIL_DOMAIN}`;
@@ -62,12 +63,20 @@
 </script>
 
 <form
-	use:enhance
 	action="?/checkNickName"
 	method="POST"
 	class="hidden"
 	autocomplete="off"
 	bind:this={checkNicknameForm}
+	use:enhance={() => {
+		formLoading = true;
+
+		return async ({ update }) => {
+			formLoading = false;
+
+			update();
+		};
+	}}
 >
 	<input type="text" name="nickname" bind:value={nickName} required />
 	<input type="text" name="firstName" bind:value={firstName} required />
@@ -123,7 +132,9 @@
 		{/if}
 	</div>
 	<div class="flex flex-col lg:mt-auto gap-4 space-y-4 py-4">
-		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Next')}</PrimaryButton>
+		<PrimaryButton ariaLabel="next" {disabled} {handler} loading={formLoading}
+			>{$t('Next')}</PrimaryButton
+		>
 		<div class="flex items-start gap-[8px] self-stretch">
 			<input
 				type="checkbox"

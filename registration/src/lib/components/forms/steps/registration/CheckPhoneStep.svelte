@@ -15,6 +15,7 @@
 	let loading = false;
 	let phoneChecked = false;
 	let phoneTaken = false;
+	let formLoading = false;
 
 	$: disabled = !valid || phoneTaken || loading || !value || !phoneChecked;
 
@@ -38,7 +39,21 @@
 	};
 </script>
 
-<form use:enhance action="?/sendOtp" method="POST" class="hidden" bind:this={sendOtpForm}>
+<form
+	action="?/sendOtp"
+	method="POST"
+	class="hidden"
+	bind:this={sendOtpForm}
+	use:enhance={() => {
+		formLoading = true;
+
+		return async ({ update }) => {
+			formLoading = false;
+
+			update();
+		};
+	}}
+>
 	<input type="text" name="phone" bind:value required />
 </form>
 
@@ -77,6 +92,8 @@
 		</div>
 	{/if}
 	<div class="mt-auto py-4">
-		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('Next')}</PrimaryButton>
+		<PrimaryButton ariaLabel="next" {disabled} {handler} loading={formLoading}
+			>{$t('Next')}</PrimaryButton
+		>
 	</div>
 </div>

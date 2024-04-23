@@ -6,9 +6,9 @@
 	import { t } from 'svelte-i18n';
 
 	let sendPasswordForm: HTMLFormElement;
-
 	let password = '';
 	let confirmPassword = '';
+	let loading = false;
 
 	$: disabled = !fullCreateUserFormSchema.safeParse({
 		password,
@@ -22,7 +22,21 @@
 	};
 </script>
 
-<form use:enhance action="?/resetPassword" method="POST" class="hidden" bind:this={sendPasswordForm}>
+<form
+	action="?/resetPassword"
+	method="POST"
+	class="hidden"
+	bind:this={sendPasswordForm}
+	use:enhance={() => {
+		loading = true;
+
+		return async ({ update }) => {
+			loading = false;
+
+			update();
+		};
+	}}
+>
 	<input type="text" name="password" bind:value={password} required />
 </form>
 
@@ -55,6 +69,6 @@
 		/>
 	</div>
 	<div class="flex flex-col mt-auto gap-4 space-y-4 py-4">
-		<PrimaryButton ariaLabel="next" {disabled} {handler}>{$t('set-password')}</PrimaryButton>
+		<PrimaryButton ariaLabel="next" {disabled} {handler} {loading}>{$t('set-password')}</PrimaryButton>
 	</div>
 </div>
