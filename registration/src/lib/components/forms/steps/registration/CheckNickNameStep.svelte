@@ -53,7 +53,7 @@
 			lastName,
 			nickName,
 			accepted
-		}).success || nickNameTaken;
+		}).success || nickNameTaken || formLoading;
 
 	const handler = async () => {
 		if (disabled) return;

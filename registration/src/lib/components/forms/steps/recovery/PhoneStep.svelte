@@ -17,7 +17,7 @@
 	let phoneTaken = true;
 	let formLoading = false;
 
-	$: disabled = !valid || !phoneTaken || loading || !value || !phoneChecked;
+	$: disabled = !valid || !phoneTaken || loading || !value || !phoneChecked || formLoading;
 	$: validPhoneFormat = createUserFormSchema.safeParse({ phone: value }).success;
 
 	const checkPhone = async () => {

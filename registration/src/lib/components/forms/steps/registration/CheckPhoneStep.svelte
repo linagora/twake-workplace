@@ -17,7 +17,7 @@
 	let phoneTaken = false;
 	let formLoading = false;
 
-	$: disabled = !valid || phoneTaken || loading || !value || !phoneChecked;
+	$: disabled = !valid || phoneTaken || loading || !value || !phoneChecked || formLoading;
 
 	const checkPhone = async () => {
 		phoneChecked = false;

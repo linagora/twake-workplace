@@ -11,7 +11,7 @@
 	let loading = false;
 
 	$: failedLogin = $form?.failed_login === true;
-	$: disabled = login.length === 0 || password.length === 0;
+	$: disabled = login.length === 0 || password.length === 0 || loading;
 </script>
 
 <form
