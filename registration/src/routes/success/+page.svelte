@@ -27,8 +27,8 @@
 				<LoggedUser {username} {user} />
 			</div>
 		</div>
-		<div class="flex space-x-4 w-full h-full lg:px-48 lg:py-4">
-			<div class="w-full h-full overflow-hidden">
+		<div class="flex w-full hvh lg:px-10 xl:px-[124px] 2xl:px-52 3xl:px-72 4xl:px-96 lg:py-4">
+			<div class="w-full h-full">
 				<div class="flex flex-col-reverse lg:flex-row-reverse w-full lg:pt-9 xl:space-x-24 h-full">
 					<SuccessCard {user} bind:id={username} {phone} />
 					<div class="hidden lg:block w-full">

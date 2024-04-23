@@ -11,7 +11,7 @@
 </script>
 
 <div
-	class="lg:space-y-5 py-10 lg:py-4 xl:py-5 bg-[#FFFBFE] md:shadow-xl lg:rounded-3xl flex flex-col space-y-5 w-full xl:w-1/2 px-5 xl:px-10 h-full"
+	class="lg:space-y-5 py-10 lg:py-4 xl:py-5 bg-[#FFFBFE] md:shadow-xl lg:rounded-3xl flex flex-col space-y-5 w-full lg:w-4/5 xl:w-1/2 px-5 xl:px-10 h-full"
 >
 	<div
 		class="flex flex-col space-y-4 w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
