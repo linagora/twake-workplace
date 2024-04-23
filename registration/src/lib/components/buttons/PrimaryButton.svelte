@@ -16,11 +16,11 @@
 		? 'bg-slate-200 text-slate-400'
 		: 'bg-primary text-white'} text-sm font-medium leading-5 tracking-wide text-center"
 >
+	<slot />
+
 	{#if loading}
 		<span class="flex items-center px-1 text-white">
 			<Spinner />
 		</span>
-	{:else}
-		<slot />
 	{/if}
 </button>
