@@ -14,7 +14,7 @@
 	$: disabled = !fullCreateUserFormSchema.safeParse({
 		password,
 		confirmPassword
-	}).success;
+	}).success || loading;
 
 	const handler = () => {
 		if (disabled) return;

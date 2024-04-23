@@ -31,7 +31,7 @@
 		checkOtpForm.requestSubmit();
 	};
 
-	$: disabled = value.length < 6;
+	$: disabled = value.length < 6 || loading;
 	$: timeout = $recoveryForm?.timeout;
 </script>
 
