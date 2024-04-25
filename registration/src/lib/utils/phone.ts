@@ -1,3 +1,4 @@
+import { parsePhoneNumberWithError } from 'svelte-tel-input';
 import validator from 'validator';
 
 /**
@@ -7,15 +8,15 @@ import validator from 'validator';
  * @returns {string} - the masked phone number.
  */
 export const maskPhone = (phone: string): string => {
-	const code = phone.slice(0, 3);
-	const number = phone.slice(3);
+	const parsed = parsePhoneNumberWithError(phone);
+	const code = parsed.countryCallingCode;
+	const number = parsed.nationalNumber;
+	const firstPart = number.substring(0, 2);
+	const lastPart = number.substring(number.length - 2);
+	const middlePart = number.substring(2, number.length - 2);
+	const middleMask = middlePart.replace(/\d/g, '*');
 
-	const inBetween = number
-		.slice(3, number.length - 1)
-		.replace(/(\d{3})(?=\d)/g, '$1 ')
-		.replace(/[0-9]/g, '*');
-
-	return `${code} ${number.slice(0, 3)} ${inBetween} ${number.slice(-1)}`;
+	return `+${code} ${firstPart} ${middleMask} ${lastPart}`;
 };
 
 /**
