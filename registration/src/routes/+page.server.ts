@@ -10,7 +10,7 @@ import {
 	signup,
 	suggestAlternativeAvaialableNickNames
 } from '$lib/services/user';
-import { validateName, validateNickName } from '$lib/utils/username';
+import { validateName, checkNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
 import { getUserCountry } from '$lib/services/ip';
@@ -290,7 +290,7 @@ export const actions: Actions = {
 				return fail(400, { invalid_password: true });
 			}
 
-			if (!nickname || validateNickName(nickname) === false) {
+			if (!nickname || checkNickName(nickname) === false) {
 				logger.error('Invalid nickname');
 
 				return fail(400, { invalid_nickname: true });
