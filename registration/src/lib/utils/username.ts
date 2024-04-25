@@ -13,14 +13,27 @@ export const validateName = (name: string): boolean =>
 	}).success;
 
 /**
- * Validates a nickname.
+ * Checks if a nickname is valid.
  *
- * a valid nickname must be between 3 and 20 characters long and contain only letters and numbers.
+ * a valid username must be:
+ *  - 6–30 characters long.
+ *  - can contain letters (a-z), numbers (0-9), and periods (.).
+ *  - username cannot contain two periods in a row.
+ *  - username cannot end or start with a period.
  *
- * @param {string} name - the nickname to validate.
- * @returns {boolean} - true if the nickname is valid, false otherwise.
+ * @param {string} nickName - the username to check.
+ * @returns {boolean} - true if the username is valid, false otherwise.
  */
 export const validateNickName = (nickName: string): boolean =>
+	/^(?!.*\.{2,})[a-zA-Z0-9](?:[a-zA-Z0-9.]{4,28}[a-zA-Z0-9])?$/g.test(nickName);
+
+/**
+ * validated the nickname using zod schema.
+ *
+ * @param {string} nickName - the nickname to validate.
+ * @returns {boolean} - true if the nickname is valid, false otherwise.
+ */
+export const checkNickName = (nickName: string): boolean =>
 	createUserFormSchema.safeParse({ nickName }).success;
 
 /**
@@ -37,8 +50,6 @@ export const generateNickNames = (firstName: string, lastName: string): string[]
 
 	nickNames.push(`${firstName}.${lastName}`);
 	nickNames.push(`${lastName}.${firstName}`);
-	nickNames.push(`${firstName}_${lastName}`);
-	nickNames.push(`${firstName}-${lastName}`);
 
 	for (let i = 0; i < firstName.length; i++) {
 		nickNames.push(`${firstName.substring(0, i)}${lastName}`);

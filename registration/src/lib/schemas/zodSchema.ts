@@ -1,9 +1,10 @@
 import { z } from 'zod';
 import validator from 'validator';
 import { validatePassword } from '$utils/password';
+import { validateNickName } from '$utils/username';
 
 const createUserSchema = z.object({
-	nickName: z.string().min(3).max(32),
+	nickName: z.string().refine((val) => validateNickName(val)),
 	firstName: z.string().trim().min(1),
 	lastName: z.string().trim().min(1),
 	password: z.string().refine((val) => validatePassword(val), {
