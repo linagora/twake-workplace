@@ -1,12 +1,13 @@
 import { z } from 'zod';
 import validator from 'validator';
 import { validatePassword } from '$utils/password';
+import { checkUserName } from '../utils/username';
 
 const createUserSchema = z.object({
-	nickName: z.string().min(3).max(32),
+	nickName: z.string().refine(checkUserName),
 	firstName: z.string().trim().min(1),
 	lastName: z.string().trim().min(1),
-	password: z.string().refine((val) => validatePassword(val), {
+	password: z.string().refine(validatePassword, {
 		message:
 			'Password must be at least 8 characters and contain an uppercase letter, lowercase letter, and number'
 	}),
