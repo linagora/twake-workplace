@@ -7,8 +7,13 @@ export const load: PageServerLoad = async ({ cookies, locals }) => {
 	logger.info('Logging out', { user: locals.session.data?.nickname ?? '' });
 
 	await locals.session.destroy();
+	const cookie = cookies.get(authService.cookieName);
 
-	cookies.delete(authService.cookieName);
+	if (cookie) {
+		await authService.logout(cookie);
+
+		cookies.delete(authService.cookieName);
+	}
 
 	throw redirect(302, '/');
 };

@@ -85,6 +85,24 @@ class LemonLdapAuthService {
 			throw err;
 		}
 	};
+
+	/**
+	 * Logout from the lemonldap.
+	 */
+	logout = async (cookie: string) => {
+		try {
+			await fetch(`${this.portal}/?logout=1`, {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					Cookie: `${this.cookieName}=${cookie}`
+				}
+			});
+		} catch (err) {
+			logger.error('Failed to logout', { err });
+			throw err;
+		}
+	};
 }
 
 export default new LemonLdapAuthService();
