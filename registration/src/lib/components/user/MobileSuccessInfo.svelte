@@ -2,6 +2,7 @@
 	import { env } from '$env/dynamic/public';
 	import OutlineButton from '$components/buttons/OutlineButton.svelte';
 	import { t } from 'svelte-i18n';
+	import MobileLogout from './MobileLogout.svelte';
 
 	export let user: string;
 	export let id: string;
@@ -22,7 +23,7 @@
 					{user}!
 				</h1>
 			</div>
-			<img src="/images/arrow-forward.svg" alt="next" />
+			<MobileLogout />
 		</div>
 		<div class="flex flex-col gap-0.5 px-4">
 			<span
