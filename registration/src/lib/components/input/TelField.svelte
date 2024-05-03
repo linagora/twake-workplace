@@ -67,7 +67,11 @@
 			return countries.sort((a, b) => a.label.localeCompare(b.label));
 		}
 
-		return countries.filter(({ name }) => name.toLocaleLowerCase().includes(normalizedText));
+		return countries.filter(
+			({ name, dialCode }) =>
+				name.toLocaleLowerCase().includes(normalizedText) ||
+				`+${dialCode.toString()}`.includes(normalizedText)
+		);
 	};
 
 	const handleSelect = (val: CountryCode, e?: Event) => {
