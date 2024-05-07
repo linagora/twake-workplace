@@ -7,6 +7,10 @@
 	import type { E164Number } from 'svelte-tel-input/types';
 	import { enhance } from '$app/forms';
 	import UsedPhone from '$components/otp/UsedPhone.svelte';
+  import { PhoneInput } from 'react-international-phone';
+  import 'react-international-phone/style.css';
+	import TelFieldReact from '$src/lib/components/input/TelFieldReact.svelte';
+
 
 	export let value: null | E164Number = null;
 	export let valid = true;
@@ -70,7 +74,7 @@
 		</div>
 	</div>
 	<div class="py-4">
-		<TelField
+		<TelFieldReact
 			bind:valid
 			bind:value
 			bind:selectedCountry={$userCountry}
