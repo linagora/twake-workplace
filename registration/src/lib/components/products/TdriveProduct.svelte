@@ -2,10 +2,15 @@
 	import { t } from 'svelte-i18n';
 	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
 	import { redirectUrl as redirectUrlStore } from '$store';
+	import { getApplicationGotoLink } from '$src/lib/utils/product';
 
 	const open = () => {
 		$redirectUrlStore ? openRedirectLink($redirectUrlStore, 'tdrive') : attemptToOpenApp('tdrive');
 	};
+
+	const webUrl = getApplicationGotoLink('tdrive');
+
+	$: displayUrl = new URL(webUrl).hostname;
 </script>
 
 <div class="flex flex-row space-x-5 bg-gray-100 p-5 rounded-3xl w-full">
@@ -14,12 +19,12 @@
 	</div>
 	<div class="flex flex-col gap-1 w-full items-start justify-start">
 		<h1 class="hidden lg:block text-[22px] not-italic font-semibold leading-7 text-left text-black">
-			Twake Drive
+			Drive
 		</h1>
 		<h1
 			class="lg:hidden text-center text-base not-italic font-semibold leading-6 tracking-[0.15px] text-disabled-text"
 		>
-			Twake Drive (web)
+			Drive (web)
 		</h1>
 		<span
 			class="hidden lg:block text-xs not-italic font-medium leading-4 tracking-[0.4px] text-coolgray-400 text-left lg:pr-10"
@@ -27,7 +32,7 @@
 		>
 		<span
 			class="lg:hidden text-xs not-italic font-medium leading-4 tracking-[0.4px] text-primary text-left"
-			>tdrive.linagora.com</span
+			>{displayUrl}</span
 		>
 	</div>
 	<button
