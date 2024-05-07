@@ -24,7 +24,7 @@
 			{$t('end-to-end-encryption-collaborative-features-for-secure-and-efficient-teamwork')}
 		</div>
 	</div>
-	<div class="flex flex-col mt-auto gap-4 space-y-4 py-4">
+	<div class="flex flex-col mt-auto gap-[16pt] py-4">
 		<PrimaryButton ariaLabel="next" handler={startRegistration}
 			>{$t('Create-Twake-ID')}</PrimaryButton
 		>

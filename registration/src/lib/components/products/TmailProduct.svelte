@@ -14,12 +14,12 @@
 	</div>
 	<div class="flex flex-col w-full items-start justify-start">
 		<h1 class="hidden lg:block text-[22px] not-italic font-semibold leading-7 text-left text-black">
-			Tmail
+			Mail
 		</h1>
 		<h1
 			class="lg:hidden text-center text-base not-italic font-semibold leading-6 tracking-[0.15px] text-disabled-text"
 		>
-			Twake Mail ({$t('mobile-app')})
+			Mail ({$t('mobile-app')})
 		</h1>
 		<span
 			class="text-xs not-italic font-medium leading-4 tracking-[0.4px] text-coolgray-400 text-left lg:pr-10"

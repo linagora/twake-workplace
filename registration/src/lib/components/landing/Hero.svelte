@@ -6,15 +6,17 @@
 </script>
 
 <div
-	class="hidden lg:flex flex-col w-full lg:max-w-[508px] px-10 lg:px-0 space-y-6 pt-52 items-center lg:items-start pb-9"
+	class="hidden lg:flex flex-col w-full lg:max-w-[508px] px-10 lg:px-0 space-y-6 pt-52 justify-center items-start pb-9"
 >
-	<Logo />
-	<div class="flex flex-col space-y-5 w-full h-screen lg:h-full">
-		<h1
-			class="text-2xl leading-8 lg:text-3xl xl:text-4xl not-italic font-semibold lg:leading-[44px] text-center lg:text-left w-full text-disabled-text"
-		>
-			{$t('welcome')}
-		</h1>
+	<div class="flex flex-col h-full justify-center">
+		<Logo />
+		<div class="flex flex-col space-y-5 w-full h-full 4xl:h-auto">
+			<h1
+				class="text-[16pt] leading-8 not-italic font-semibold lg:leading-[44px] text-center lg:text-left w-full text-disabled-text"
+			>
+				{$t('welcome')}
+			</h1>
+		</div>
 	</div>
 	<div class="pt-auto">
 		<span

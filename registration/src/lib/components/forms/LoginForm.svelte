@@ -17,7 +17,7 @@
 <form
 	action="?/login"
 	method="POST"
-	class="flex flex-col space-y-4 px-4 py-3 xl:px-3 lg:space-y-5 w-full h-full lg:px-0 pb-[28px] lg:pb-6"
+	class="flex flex-col space-y-4 py-3 px-4 lg:space-y-5 w-full h-full lg:px-0 pb-[28px] lg:pb-6"
 	use:enhance={() => {
 		loading = true;
 

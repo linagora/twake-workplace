@@ -139,7 +139,7 @@
 			<input
 				type="checkbox"
 				bind:checked={accepted}
-				class="mt-1 form-checkbox h-6 w-6 focus:ring-0 rounded"
+				class="mt-1 form-checkbox h-[18px] w-[18px] focus:ring-0 rounded"
 				name="accept"
 				aria-label={$t('accept terms and conditions')}
 			/>
