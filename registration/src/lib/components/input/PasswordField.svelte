@@ -45,7 +45,7 @@
 		/>
 		<label
 			for={name}
-			class="absolute left-0 peer-focus:text-primary bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 overflow-hidden text-ellipsis text-[11px] not-italic font-medium leading-4 tracking-[0.5px] {notValid
+			class="absolute left-0 peer-focus:text-primary bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 overflow-hidden text-ellipsis text-[12px] not-italic font-medium leading-4 tracking-[0.5px] {notValid
 				? 'text-error peer-focus:text-error'
 				: 'text-disabled-text peer-focus:text-primary'}">{label}</label
 		>
