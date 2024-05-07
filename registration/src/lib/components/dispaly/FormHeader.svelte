@@ -13,7 +13,7 @@
 	<NavigateBack handler={rewindRegistrationStep} show={showNavigation} />
 	{#if show}
 		<div class="flex p-0 flex-col justify-center items-center self-stretch w-full">
-			<div class="flex w-full p-[12px] flex-col items-center gap-[10px]">
+			<div class="flex w-full p-[12px] pt-[30px] flex-col items-center gap-[10px]">
 				<AppLogo />
 			</div>
 		</div>

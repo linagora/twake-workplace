@@ -7,7 +7,7 @@
 	<button
 		type="button"
 		on:click={handler}
-		class="flex w-[48px] h-[48px] flex-col justify-center items-center relative gap-[10px] lg:-ml-14"
+		class="flex w-[48px] h-[48px] flex-col justify-center items-center relative gap-[10px] lg:-ml-14 pt-[30px]"
 	>
 		<div class="flex p-[8px] justify-center items-center gap-[10px]">
 			<svg
