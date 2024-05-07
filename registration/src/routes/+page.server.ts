@@ -17,6 +17,7 @@ import { getUserCountry } from '$lib/services/ip';
 import type { ApplicationType, RegistrationStepType } from '$types';
 import { env } from '$env/dynamic/private';
 import logger from '$services/logger';
+import { DEMO_TOKEN } from '$lib/utils/demo';
 
 export const load: PageServerLoad = async ({ locals, url, cookies, request, getClientAddress }) => {
 	const country = await getUserCountry(
@@ -155,8 +156,11 @@ export const actions: Actions = {
 
 				return fail(400, { phone, phone_taken: true });
 			}
+			let token = DEMO_TOKEN;
 
-			const token = await send(phone);
+			if (env.DEMO_MODE === 'false') {
+				token = await send(phone);
+			}
 
 			await session.set({
 				otp_request_token: token,
