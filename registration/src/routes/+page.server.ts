@@ -20,9 +20,9 @@ import logger from '$services/logger';
 import { DEMO_TOKEN } from '$lib/utils/demo';
 
 export const load: PageServerLoad = async ({ locals, url, cookies, request, getClientAddress }) => {
-	const country = await getUserCountry(
-		request.headers.get('x-forwarded-for') || getClientAddress()
-	);
+	const country = (
+		await getUserCountry(request.headers.get('x-forwarded-for') || getClientAddress())
+	).toLocaleLowerCase();
 	const { session } = locals;
 
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
