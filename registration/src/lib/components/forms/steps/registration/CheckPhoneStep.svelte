@@ -1,5 +1,4 @@
 <script lang="ts">
-	import TelField from '$components/input/TelField.svelte';
 	import { t } from 'svelte-i18n';
 	import { userCountry, form } from '$store';
 	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
@@ -7,10 +6,10 @@
 	import type { E164Number } from 'svelte-tel-input/types';
 	import { enhance } from '$app/forms';
 	import UsedPhone from '$components/otp/UsedPhone.svelte';
+	import TelField from '$components/input/TelField.svelte';
 
-	export let value: null | E164Number = null;
-	export let valid = true;
-
+	let value: null | E164Number = null;
+	let valid = true;
 	let sendOtpForm: HTMLFormElement;
 	let loading = false;
 	let phoneChecked = false;
