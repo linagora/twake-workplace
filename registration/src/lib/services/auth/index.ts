@@ -88,8 +88,10 @@ class LemonLdapAuthService {
 
 	/**
 	 * Logout from the lemonldap.
+	 *
+	 * @param {string} cookie - the lemonldap session cookie
 	 */
-	logout = async (cookie: string) => {
+	logout = async (cookie: string): Promise<void> => {
 		try {
 			await fetch(`${this.portal}/?logout=1`, {
 				method: 'POST',
@@ -101,6 +103,30 @@ class LemonLdapAuthService {
 		} catch (err) {
 			logger.error('Failed to logout', { err });
 			throw err;
+		}
+	};
+
+	/**
+	 * Verify login session
+	 *
+	 * @param {string} cookie - the lemonldap session cookie
+	 * @returns {Promise<boolean>} - true if the session is valid, false otherwise
+	 */
+	verify = async (cookie: string): Promise<boolean> => {
+		try {
+			const response = await fetch(this.portal, {
+				headers: {
+					Accept: 'application/json',
+					Cookie: `${this.cookieName}=${cookie}`
+				}
+			});
+
+			const { result }: { result: number } = await response.json();
+
+			return result === 1;
+		} catch (err) {
+			logger.error('[LemonLdap] Failed to verify login session', { err });
+			return false;
 		}
 	};
 }

@@ -1,16 +1,17 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import authService from '$lib/services/auth';
-import logger from '$services/logger';
 
 export const load: PageServerLoad = async ({ parent, cookies }) => {
 	const { session } = await parent();
 
 	const cookie = cookies.get(authService.cookieName);
 
-	if (!session.authenticated || !cookie) {
-		logger.info('User not authenticated, redirecting to main page');
-
+	if (cookie) {
+		if ((await authService.verify(cookie)) === false) {
+			throw redirect(302, '/');
+		}
+	} else {
 		throw redirect(302, '/');
 	}
 

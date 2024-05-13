@@ -50,10 +50,12 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		app
 	});
 
-	if (session.data.authenticated === true && cookie) {
-		logger.info('user is already authenticated, redirecting');
+	if (cookie) {
+		if (await authService.verify(cookie)) {
+			logger.info('user is already authenticated, redirecting');
 
-		throw redirect(302, postLoginUrl ?? '/success');
+			throw redirect(302, postLoginUrl ?? '/success');
+		}
 	}
 
 	const initialStep: RegistrationStepType = redirectUrl ? 'phone' : 'home';
