@@ -3,7 +3,6 @@ import { env } from '$env/dynamic/private';
 import { getUrl } from '$lib/utils/url';
 import type { AuthResponse, TokenResponse } from '$types';
 import logger from '$services/logger';
-import { Result } from 'postcss';
 
 class LemonLdapAuthService {
 	portal = '';
