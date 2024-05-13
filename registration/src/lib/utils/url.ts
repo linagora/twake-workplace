@@ -25,13 +25,9 @@ export const getUrl = (url: string): string => (url.endsWith('/') ? url : `${url
  * @returns {string} The extracted domain name.
  */
 export const extractMainDomain = (subdomain: string): string => {
-	const match = subdomain.match(/[^.]+.[^.]+$/);
+	const firstDotIndex = subdomain.indexOf('.');
 
-	if (match) {
-		return match[0];
-	}
-
-	return subdomain;
+	return subdomain.substring(firstDotIndex + 1);
 };
 
 /**

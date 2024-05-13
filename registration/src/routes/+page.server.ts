@@ -350,7 +350,8 @@ export const actions: Actions = {
 			}
 
 			cookies.set(authService.cookieName, authSessionCookie, {
-				domain: extractMainDomain(url.host)
+				domain: extractMainDomain(url.host),
+				path: '/'
 			});
 
 			const destinationUrl = redirectUrl
@@ -416,7 +417,10 @@ export const actions: Actions = {
 				phone: user.mobile
 			}));
 
-			cookies.set(authService.cookieName, cookie, { domain: extractMainDomain(url.host) });
+			cookies.set(authService.cookieName, cookie, {
+				domain: extractMainDomain(url.host),
+				path: '/'
+			});
 
 			const destinationUrl = postLoginUrl
 				? challenge && clientId
