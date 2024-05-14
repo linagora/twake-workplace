@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
 
-	export let user: string;
+	export let firstName: string;
+	export let lastName: string;
 </script>
 
 <div
@@ -14,7 +15,7 @@
 			{$t('Congratulations')},
 		</h1>
 		<h1 class="px-12">
-			{user}!
+			{`${firstName} ${lastName}`}!
 		</h1>
 	</div>
 

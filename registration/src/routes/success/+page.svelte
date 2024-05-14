@@ -11,9 +11,7 @@
 
 	export let data: PageData;
 
-	$: user = `${data.firstName} ${data.lastName}`;
-	$: username = data.username ?? '';
-	$: phone = data.phone ?? '';
+	$: ({ phone = '', email, firstName = '', lastName = '', username = '' } = data);
 	$: redirectUrlStore.set(data.redirectUrl);
 	$: challengeStore.set(data.challenge);
 	$: clientIdStore.set(data.clientId);
@@ -24,13 +22,15 @@
 		<div class="h-20 flex-row w-full lg:p-10 hidden lg:flex">
 			<div class="w-full" />
 			<div class="right-0 w-56">
-				<LoggedUser {username} {user} />
+				<LoggedUser {username} {firstName} {lastName} />
 			</div>
 		</div>
-		<div class="flex w-full lg:h-full h-[100vh] lg:px-10 xl:px-[124px] 2xl:px-52 3xl:px-72 4xl:px-96 lg:py-4">
+		<div
+			class="flex w-full lg:h-full h-[100vh] lg:px-10 xl:px-[124px] 2xl:px-52 3xl:px-72 4xl:px-96 lg:py-4"
+		>
 			<div class="w-full h-full">
 				<div class="flex flex-col-reverse lg:flex-row-reverse w-full lg:pt-9 xl:space-x-24 h-full">
-					<SuccessCard {user} bind:id={username} {phone} />
+					<SuccessCard {firstName} {lastName} {phone} {username} {email} />
 					<div class="hidden lg:block w-full">
 						<LoggedHero />
 					</div>

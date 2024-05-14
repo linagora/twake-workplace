@@ -5,9 +5,11 @@
 	import MobileSuccessInfo from '$components/user/MobileSuccessInfo.svelte';
 	import SuccessInfo from '$components/user/SuccessInfo.svelte';
 
-	export let user: string;
-	export let id: string;
-	export let phone: string;
+	export let firstName: string;
+	export let lastName: string;
+	export let username: string;
+	export let phone: string | null;
+	export let email: string | undefined;
 </script>
 
 <div
@@ -17,10 +19,10 @@
 		class="flex flex-col space-y-4 w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
 	>
 		<div class="lg:hidden w-full">
-			<MobileSuccessInfo {user} {id} {phone} />
+			<MobileSuccessInfo {firstName} {lastName} {username} {phone} {email} />
 		</div>
 		<div class="hidden lg:block w-full">
-			<SuccessInfo {user} />
+			<SuccessInfo {firstName} {lastName} />
 		</div>
 
 		<div class="flex flex-col space-y-4 w-full">

@@ -108,3 +108,9 @@ export interface LDAPChangePayload {
 }
 
 export type PasswordRecoveryStepType = 'phone' | 'otp' | 'password' | 'success';
+
+export interface lemonLDAPSessionInformation {
+	result: 0 | 'string';
+	error?: number;
+	token?: string;
+}

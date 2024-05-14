@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { env } from '$env/dynamic/private';
 import { getUrl } from '$lib/utils/url';
-import type { AuthResponse, TokenResponse } from '$types';
+import type { AuthResponse, TokenResponse, lemonLDAPSessionInformation } from '$types';
 import logger from '$services/logger';
 
 class LemonLdapAuthService {
@@ -127,6 +127,33 @@ class LemonLdapAuthService {
 		} catch (err) {
 			logger.error('[LemonLdap] Failed to verify login session', { err });
 			return false;
+		}
+	};
+
+	/**
+	 * Fetch the currently connected user from lemonldap
+	 *
+	 * @param {string} cookie - the lemonldap cookie
+	 * @returns {Promise<string>} - the connected user
+	 */
+	fetchUser = async (cookie: string): Promise<string | undefined> => {
+		try {
+			const response = await fetch(`${this.portal}/mysession?whoami`, {
+				headers: {
+					Accept: 'application/json',
+					Cookie: `${this.cookieName}=${cookie}`
+				}
+			});
+
+			const { result }: lemonLDAPSessionInformation = await response.json();
+
+			if (result === 0) {
+				throw Error('Invalid session');
+			}
+
+			return result;
+		} catch (err) {
+			logger.warn('[LemonLdap] Failed to fetch user', { err });
 		}
 	};
 }
