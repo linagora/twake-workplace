@@ -4,8 +4,9 @@
 	import { t } from 'svelte-i18n';
 	import { clickOutside } from '$utils/html';
 
-	export let user: string;
 	export let username: string;
+	export let firstName: string;
+	export let lastName: string;
 
 	let open = false;
 
@@ -29,7 +30,8 @@
 		<Avatar />
 		<div class="flex flex-col gap-0">
 			<h1 class=" text-[15px] font-semibold leading-5 tracking-normal text-left text-black">
-				{user}
+				{firstName}
+				{lastName}
 			</h1>
 			<span class="text-[13px] font-normal leading-4 tracking-normal text-left text-gray-500"
 				>@{username}</span

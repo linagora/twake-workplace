@@ -4,9 +4,11 @@
 	import { t } from 'svelte-i18n';
 	import MobileLogout from './MobileLogout.svelte';
 
-	export let user: string;
-	export let id: string;
-	export let phone: string;
+	export let firstName: string;
+	export let lastName: string;
+	export let username: string;
+	export let phone: string | null;
+	export let email: string | undefined;
 
 	$: suffix = `@${env.PUBLIC_SIGNUP_EMAIL_DOMAIN}`;
 </script>
@@ -20,7 +22,7 @@
 			<div class="flex flex-col px-4 gap-0 items-start grow">
 				<h1 class="text-xl font-semibold tracking-normal">{$t('Congratulations')},</h1>
 				<h1 class="text-xl font-semibold tracking-normal">
-					{user}!
+					{`${firstName} ${lastName}`}!
 				</h1>
 			</div>
 			<MobileLogout />
@@ -28,7 +30,7 @@
 		<div class="flex flex-col gap-0.5 px-4">
 			<span
 				class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left"
-				>@{id}</span
+				>@{username}</span
 			>
 			<span class="text-sm font-normal leading-5 text-left text-gray-500"
 				>{$t('twake-matrix-id')}</span
@@ -37,7 +39,7 @@
 		<div class="flex flex-col gap-0.5 px-4">
 			<span
 				class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left"
-				>{`${id}${suffix}`}</span
+				>{email ?? `${username}${suffix}`}</span
 			>
 			<span class="text-sm font-normal leading-5 text-left text-gray-500">{$t('twake-mail')}</span>
 		</div>
