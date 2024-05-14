@@ -33,8 +33,8 @@ export const load: PageServerLoad = async ({ parent, cookies }) => {
 				throw new Error('User not found in LDAP');
 			}
 
-			firstName = user.sn[0];
-			lastName = user.givenName[0];
+			firstName = user.givenName[0];
+			lastName = user.sn[0];
 			phone = user.mobile[0];
 			email = user.mail?.[0];
 		} catch (error) {
