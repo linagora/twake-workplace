@@ -134,7 +134,9 @@ export const fetchUser = async (login: string): Promise<User | null> => {
 		const user = (await ldapClient.find(filter, login, [
 			'cn',
 			'sn',
-			'givenName'
+			'givenName',
+			'mobile',
+      'mail'
 		])) as unknown as User[];
 
 		return user[0] || null;
