@@ -31,6 +31,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 	const challenge = url.searchParams.get('challenge_code') ?? undefined;
 	const app = (url.searchParams.get('app') as ApplicationType) ?? 'default';
 	const willLogin = url.searchParams.get('login') !== null;
+	const simpleRedirect = url.searchParams.get('simple_redirect') !== null;
 
 	const cookie = cookies.get(authService.cookieName);
 
@@ -41,7 +42,8 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		clientId,
 		country,
 		challenge,
-		app
+		app,
+		simpleRedirect
 	}));
 
 	logger.info('detected context: ', {
@@ -354,10 +356,6 @@ export const actions: Actions = {
 				path: '/'
 			});
 
-			if (url.searchParams.get('simple_redirect') && redirectUrl) {
-				throw redirect(302, redirectUrl);
-			}
-
 			const destinationUrl = redirectUrl
 				? challenge && clientId
 					? getOath2RedirectUri(challenge, redirectUrl, clientId)
@@ -386,7 +384,12 @@ export const actions: Actions = {
 			};
 
 			const { login, password } = data;
-			const { postLoginUrl = null, challenge = null, clientId = null } = session.data;
+			const {
+				postLoginUrl = null,
+				challenge = null,
+				clientId = null,
+				simpleRedirect
+			} = session.data;
 
 			if (!login || !password) {
 				logger.error('Missing login or password');
@@ -425,6 +428,10 @@ export const actions: Actions = {
 				domain: extractMainDomain(url.host),
 				path: '/'
 			});
+
+			if (simpleRedirect && postLoginUrl) {
+				throw redirect(302, postLoginUrl);
+			}
 
 			const destinationUrl = postLoginUrl
 				? challenge && clientId

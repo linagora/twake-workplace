@@ -52,7 +52,9 @@ export const handleProxy = (async ({ event }) => {
  */
 const redirectToLogin = (base: string, url: string): Response => {
 	const loginUrl = new URL(base);
+
 	loginUrl.searchParams.set('post_login_redirect_url', url);
+	loginUrl.searchParams.set('simple_redirect', 'true');
 
 	return Response.redirect(loginUrl.toString(), 302);
 };
