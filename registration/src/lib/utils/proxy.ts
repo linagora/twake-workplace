@@ -2,7 +2,7 @@ import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import logger from '$services/logger';
 
-export const PROXY_PATH = '/oath2';
+export const PROXY_PATH = '/oauth2';
 
 export const handleProxy = (async ({ event }) => {
 	const { request, url } = event;
