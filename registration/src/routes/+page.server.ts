@@ -354,6 +354,10 @@ export const actions: Actions = {
 				path: '/'
 			});
 
+			if (url.searchParams.get('simple_redirect') && redirectUrl) {
+				throw redirect(302, redirectUrl);
+			}
+
 			const destinationUrl = redirectUrl
 				? challenge && clientId
 					? getOath2RedirectUri(challenge, redirectUrl, clientId)
