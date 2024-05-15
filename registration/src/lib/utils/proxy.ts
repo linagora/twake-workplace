@@ -6,7 +6,7 @@ export const PROXY_PATHS = ['/oauth2', '/.well-known'];
 export const PROXY_AUTH_PATH = '/oauth2/authorize';
 
 export const handleProxy = (async ({ event }) => {
-	const { request, url } = event;
+	const { request, url, fetch: kitFetch } = event;
 
 	const proxiedUrl = new URL(env.AUTH_URL);
 	const requestHeaders = new Headers(request.headers);
@@ -22,10 +22,11 @@ export const handleProxy = (async ({ event }) => {
 	}
 
 	try {
-		const response = await fetch(proxiedUrl.toString(), {
+		const response = await kitFetch(proxiedUrl.toString(), {
 			redirect: 'manual',
 			method: request.method,
-			headers: requestHeaders
+			headers: requestHeaders,
+			body: request.body
 		});
 
 		const responseHeaders = new Headers(response.headers);
