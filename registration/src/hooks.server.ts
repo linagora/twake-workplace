@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/private';
 import { handleSession } from 'svelte-kit-cookie-session';
 import { errorHandler } from '$utils/error';
 import { ldapConnectionHandler } from '$utils/db';
+import { handleProxy, PROXY_PATH } from '$utils/proxy';
 
 export const handle = handleSession(
 	{
@@ -11,6 +12,10 @@ export const handle = handleSession(
 	},
 	async ({ event, resolve }) => {
 		await ldapConnectionHandler();
+
+		if (event.url.pathname.startsWith(PROXY_PATH)) {
+			return await handleProxy({ event, resolve });
+		}
 
 		return resolve(event);
 	}
