@@ -7,9 +7,7 @@ export const PROXY_PATH = '/oath2';
 export const handleProxy = (async ({ event }) => {
 	const { request, url } = event;
 
-	const PROXY_SERVER_URL = env.AUTH_URL;
-
-	const proxiedUrl = new URL(PROXY_SERVER_URL);
+	const proxiedUrl = new URL(env.AUTH_URL);
 	const requestHeaders = new Headers(request.headers);
 
 	proxiedUrl.pathname = url.pathname;
