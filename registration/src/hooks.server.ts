@@ -1,8 +1,7 @@
 import { env } from '$env/dynamic/private';
-import { error, type HandleServerError } from '@sveltejs/kit';
 import { handleSession } from 'svelte-kit-cookie-session';
-import logger from '$services/logger';
-import { init } from '$services/ldap';
+import { errorHandler } from '$utils/error';
+import { ldapConnectionHandler } from '$utils/db';
 
 export const handle = handleSession(
 	{
@@ -11,35 +10,10 @@ export const handle = handleSession(
 		expires: 1
 	},
 	async ({ event, resolve }) => {
-		try {
-			await init();
-		} catch (err) {
-			logger.fatal('Error initializing the LDAP connection', err);
-			throw error(500, 'Oops! Something went wrong. Please try again later.');
-		}
+		await ldapConnectionHandler();
 
 		return resolve(event);
 	}
 );
 
-export const handleError: HandleServerError = ({ error, event }) => {
-	const client = event.getClientAddress();
-	const { referrer, method, url } = event.request;
-
-	logger.fatal(
-		'Server error',
-		{
-			url,
-			client,
-			method,
-			referrer,
-			userAgent: event.request.headers.get('user-agent') || 'Unknown'
-		},
-		error
-	);
-
-	return {
-		message: 'Internal error',
-		status: 500
-	};
-};
+export const handleError = errorHandler;
