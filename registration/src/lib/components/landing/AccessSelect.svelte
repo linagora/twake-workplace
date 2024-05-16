@@ -2,13 +2,13 @@
 	import { t } from 'svelte-i18n';
 	import { activeTab, registrationStep, getAppName, app, showBanner } from '$store';
 	import LoginForm from '$components/forms/LoginForm.svelte';
-	import FormHeader from '$src/lib/components/display/FormHeader.svelte';
+	import FormHeader from '$components/display/FormHeader.svelte';
 	import CheckPhoneStep from '$components/forms/steps/registration/CheckPhoneStep.svelte';
 	import CheckOtpStep from '$components/forms/steps/registration/CheckOTPStep.svelte';
 	import CheckNickNameStep from '$components/forms/steps/registration/CheckNickNameStep.svelte';
 	import CheckPasswordStep from '$components/forms/steps/registration/CheckPasswordStep.svelte';
 	import MainScreen from '$components/views/MainScreen.svelte';
-	import DownloadBanner from '$src/lib/components/display/DownloadBanner.svelte';
+	import DownloadBanner from '$components/display/DownloadBanner.svelte';
 	import { getApplicationStoreUrl } from '$lib/utils/product';
 
 	$: showHeader = $registrationStep !== 'home' || $activeTab === 'login';
