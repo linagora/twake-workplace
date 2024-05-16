@@ -1,9 +1,9 @@
 <script>
 	import { page } from '$app/stores';
 	import { dev } from '$app/environment';
-	import Fail from '$components/dispaly/Fail.svelte';
-	import NotFound from '$components/dispaly/NotFound.svelte';
-	import InternalError from '$components/dispaly/InternalError.svelte';
+	import Fail from '$src/lib/components/display/Fail.svelte';
+	import NotFound from '$src/lib/components/display/NotFound.svelte';
+	import InternalError from '$src/lib/components/display/InternalError.svelte';
 </script>
 
 <div

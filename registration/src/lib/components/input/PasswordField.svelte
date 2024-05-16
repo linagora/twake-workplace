@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PasswordType } from '$types';
-	import FieldError from '$components/dispaly/FieldError.svelte';
+	import FieldError from '$src/lib/components/display/FieldError.svelte';
 	import ErrorIcon from '$components/icons/ErrorIcon.svelte';
 	import Hide from '$components/icons/HideIcon.svelte';
 	import Show from '$components/icons/ShowIcon.svelte';

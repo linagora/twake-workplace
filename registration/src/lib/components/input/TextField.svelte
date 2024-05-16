@@ -4,7 +4,7 @@
 	import InfoIcon from '$components/icons/InfoIcon.svelte';
 	import Spin from '$components/icons/SpinnerIcon.svelte';
 	import Valid from '$components/icons/ValidIcon.svelte';
-	import InfoTooltip from '$components/dispaly/InfoTooltip.svelte';
+	import InfoTooltip from '$src/lib/components/display/InfoTooltip.svelte';
 
 	export let label: string;
 	export let placeholder: string;
