@@ -77,5 +77,7 @@
   "set-password": "Đặt mật khẩu",
   "go-sign-in": "Đi để đăng nhập",
   "password-updated": "Mật khẩu của bạn hiện đã được cập nhật. \nBây giờ bạn có thể đăng nhập bằng mật khẩu mới của mình",
-  "forgot-password": "Bạn quên mật khẩu?"
+  "forgot-password": "Bạn quên mật khẩu?",
+  "not-found": "Không tìm thấy",
+  "404-error-message": "Ối! Chúng tôi không thể tìm thấy những gì bạn đang tìm kiếm."
 }
