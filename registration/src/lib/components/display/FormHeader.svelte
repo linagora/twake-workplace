@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NavigateBack from '$components/buttons/NavigateBack.svelte';
-	import AppLogo from '$lib/components/logo/AppLogo.svelte';
+	import AppLogo from '$components/logo/AppLogo.svelte';
 	import { activeTab, registrationStep, rewindRegistrationStep } from '$store';
 
 	export let show: boolean = true;

@@ -3,7 +3,7 @@
 	import 'react-international-phone/style.css';
 	import { t } from 'svelte-i18n';
 	import Spin from '$components/icons/SpinnerIcon.svelte';
-	import { isPhoneValid } from '$src/lib/utils/phone';
+	import { isPhoneValid } from '$utils/phone';
 
 	export let value: string | null = '';
 	export let selectedCountry: string | null;

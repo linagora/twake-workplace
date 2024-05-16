@@ -1,5 +1,5 @@
-import { suggestAvailableNickNames } from '$lib/services/user';
-import { validateName } from '$lib/utils/username';
+import { suggestAvailableNickNames } from '$services/user';
+import { validateName } from '$utils/username';
 import { error, json, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {

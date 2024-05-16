@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
-	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
+	import { attemptToOpenApp, openRedirectLink } from '$utils/url';
 	import { redirectUrl as redirectUrlStore } from '$store';
-	import { getApplicationGotoLink } from '$src/lib/utils/product';
+	import { getApplicationGotoLink } from '$utils/product';
 
 	const open = () => {
 		$redirectUrlStore ? openRedirectLink($redirectUrlStore, 'tdrive') : attemptToOpenApp('tdrive');

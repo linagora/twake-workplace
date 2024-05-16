@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isMobile } from '$lib/utils/device';
+	import { isMobile } from '$utils/device';
 	import { clickOutside } from '$utils/html';
 	import { t } from 'svelte-i18n';
 

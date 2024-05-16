@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { env } from '$env/dynamic/private';
-import { getUrl } from '$lib/utils/url';
+import { getUrl } from '$utils/url';
 import type { AuthResponse, TokenResponse, lemonLDAPSessionInformation } from '$types';
 import logger from '$services/logger';
 
