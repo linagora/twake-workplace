@@ -11,14 +11,13 @@ export const handle = handleSession(
 		expires: 1
 	},
 	async ({ event, resolve }) => {
-		await ldapConnectionHandler();
-
 		for (const path of PROXY_PATHS) {
 			if (event.url.pathname.startsWith(path)) {
 				return await handleProxy({ event, resolve });
 			}
 		}
 
+		await ldapConnectionHandler();
 		return resolve(event);
 	}
 );
