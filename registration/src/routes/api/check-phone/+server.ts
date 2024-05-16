@@ -1,5 +1,5 @@
-import { checkPhoneAvailability } from '$lib/services/user';
-import { isPhoneValid } from '$lib/utils/phone';
+import { checkPhoneAvailability } from '$services/user';
+import { isPhoneValid } from '$utils/phone';
 import logger from '$services/logger';
 import { error, type RequestHandler } from '@sveltejs/kit';
 

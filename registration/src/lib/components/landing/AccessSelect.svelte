@@ -9,7 +9,7 @@
 	import CheckPasswordStep from '$components/forms/steps/registration/CheckPasswordStep.svelte';
 	import MainScreen from '$components/views/MainScreen.svelte';
 	import DownloadBanner from '$components/display/DownloadBanner.svelte';
-	import { getApplicationStoreUrl } from '$lib/utils/product';
+	import { getApplicationStoreUrl } from '$utils/product';
 
 	$: showHeader = $registrationStep !== 'home' || $activeTab === 'login';
 	$: appName = getAppName();

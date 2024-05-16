@@ -1,23 +1,23 @@
 import type { Actions, PageServerLoad } from './$types';
-import { send, verify } from '$lib/services/otp';
+import { send, verify } from '$services/otp';
 import { type Redirect, fail, redirect } from '@sveltejs/kit';
-import { isPhoneValid } from '$lib/utils/phone';
-import { validatePassword } from '$lib/utils/password';
+import { isPhoneValid } from '$utils/phone';
+import { validatePassword } from '$utils/password';
 import {
 	checkNickNameAvailability,
 	checkPhoneAvailability,
 	fetchUser,
 	signup,
 	suggestAlternativeAvaialableNickNames
-} from '$lib/services/user';
-import { validateName, checkNickName } from '$lib/utils/username';
-import authService from '$lib/services/auth';
-import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
-import { getUserCountry } from '$lib/services/ip';
+} from '$services/user';
+import { validateName, checkNickName } from '$utils/username';
+import authService from '$services/auth';
+import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$utils/url';
+import { getUserCountry } from '$services/ip';
 import type { ApplicationType, RegistrationStepType } from '$types';
 import { env } from '$env/dynamic/private';
 import logger from '$services/logger';
-import { DEMO_TOKEN } from '$lib/utils/demo';
+import { DEMO_TOKEN } from '$utils/demo';
 
 export const load: PageServerLoad = async ({ locals, url, cookies, request, getClientAddress }) => {
 	const country = (

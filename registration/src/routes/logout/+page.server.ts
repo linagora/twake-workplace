@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import authService from '$lib/services/auth';
+import authService from '$services/auth';
 import { redirect } from '@sveltejs/kit';
 import logger from '$services/logger';
 

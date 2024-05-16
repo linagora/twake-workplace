@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from 'svelte-i18n';
-	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
+	import { attemptToOpenApp, openRedirectLink } from '$utils/url';
 	import { redirectUrl as redirectUrlStore } from '$store';
 
 	const open = () => {

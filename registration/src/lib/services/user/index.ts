@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/public';
-import { generateNickNames } from '$lib/utils/username';
+import { generateNickNames } from '$utils/username';
 import type { LDAPChangePayload, User } from '$types';
 import ldapClient from '$services/ldap';
 import validator from 'validator';

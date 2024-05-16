@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/public';
-import { getUrl } from '$lib/utils/url';
+import { getUrl } from '$utils/url';
 import validator from 'validator';
 import type { CountryInformation } from '$types';
 import logger from '$services/logger';

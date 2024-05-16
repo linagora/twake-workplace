@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Confirmed from '$lib/components/icons/ConfirmedIcon.svelte';
+	import Confirmed from '$components/icons/ConfirmedIcon.svelte';
 	import { t } from 'svelte-i18n';
 </script>
 

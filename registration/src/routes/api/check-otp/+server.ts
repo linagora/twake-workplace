@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { verify } from '$lib/services/otp';
+import { verify } from '$services/otp';
 
 export const POST: RequestHandler = async ({ request, locals }) => {
 	const { password } = await request.json();
