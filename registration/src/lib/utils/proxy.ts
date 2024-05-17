@@ -5,6 +5,7 @@ import authService from '$services/auth';
 
 export const PROXY_PATHS = ['/oauth2', '/.well-known'];
 export const PROXY_AUTH_PATH = '/oauth2/authorize';
+export const PROXY_LOGOUT_PATH = '/oauth2/logout';
 
 export const handleProxy = (async ({ event }) => {
 	const { request, url, cookies } = event;
@@ -15,6 +16,10 @@ export const handleProxy = (async ({ event }) => {
 		if (!cookie || !(await authService.verify(cookie))) {
 			return redirectToLogin(url.origin, url.toString());
 		}
+	}
+
+	if (url.pathname.startsWith(PROXY_LOGOUT_PATH)) {
+		return redirectToLogout(url.origin);
 	}
 
 	const proxiedUrl = new URL(env.AUTH_URL);
@@ -64,4 +69,16 @@ const redirectToLogin = (base: string, url: string): Response => {
 	loginUrl.searchParams.set('simple_redirect', 'true');
 
 	return Response.redirect(loginUrl.toString(), 302);
+};
+
+/**
+ * Redirects user back to logout route
+ *
+ * @param {string} base - the base url.
+ * @returns {Response} - the redirect response.
+ */
+const redirectToLogout = (base: string): Response => {
+	const logoutUrl = new URL('/logout', base);
+
+	return Response.redirect(logoutUrl.toString(), 302);
 };
