@@ -1,12 +1,21 @@
 import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import logger from '$services/logger';
+import authService from '$services/auth';
 
 export const PROXY_PATHS = ['/oauth2', '/.well-known'];
 export const PROXY_AUTH_PATH = '/oauth2/authorize';
 
 export const handleProxy = (async ({ event }) => {
-	const { request, url } = event;
+	const { request, url, cookies } = event;
+
+	if (url.pathname.startsWith(PROXY_AUTH_PATH)) {
+		const cookie = cookies.get(authService.cookieName);
+
+		if (!cookie || !(await authService.verify(cookie))) {
+			return redirectToLogin(url.origin, url.toString());
+		}
+	}
 
 	const proxiedUrl = new URL(env.AUTH_URL);
 	const requestHeaders = new Headers(request.headers);
@@ -16,10 +25,6 @@ export const handleProxy = (async ({ event }) => {
 
 	requestHeaders.delete('host');
 	requestHeaders.delete('connection');
-
-	if (url.pathname.startsWith(PROXY_AUTH_PATH)) {
-		return redirectToLogin(url.origin, proxiedUrl.toString());
-	}
 
 	try {
 		const response = await fetch(proxiedUrl.toString(), {
