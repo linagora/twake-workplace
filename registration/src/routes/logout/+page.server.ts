@@ -15,5 +15,5 @@ export const load: PageServerLoad = async ({ cookies, locals }) => {
 		cookies.delete(authService.cookieName);
 	}
 
-	throw redirect(302, '/');
+	throw redirect(302, '/?login');
 };
