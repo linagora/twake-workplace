@@ -56,7 +56,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		if (await authService.verify(cookie)) {
 			logger.info('user is already authenticated, redirecting');
 
-			throw redirect(302, postLoginUrl ?? '/success');
+			throw redirect(302, postLoginUrl ? getOidcRedirectUrl(postLoginUrl) : '/success');
 		}
 	}
 
