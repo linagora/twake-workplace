@@ -54,7 +54,6 @@
 		"svelte-preprocess-react": "^0.17.0",
 		"svelte-tel-input": "^3.3.9",
 		"tslog": "^4.9.2",
-		"universal-base64url": "^1.1.0",
 		"validator": "^13.11.0"
 	}
 }

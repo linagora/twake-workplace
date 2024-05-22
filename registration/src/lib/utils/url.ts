@@ -3,12 +3,7 @@ import { goto } from '$app/navigation';
 import { env } from '$env/dynamic/public';
 import type { ApplicationType } from '$types';
 import { isMobile } from '$utils/device';
-import {
-	getApplicationDeepLink,
-	getApplicationGotoLink,
-	getApplicationStoreUrl
-} from '$utils/product';
-import { encode as base64url } from 'universal-base64url';
+import { getApplicationGotoLink, getApplicationStoreUrl } from '$utils/product';
 
 /**
  * formats a url by adding a trailing slash if it doesn't have one
@@ -31,31 +26,6 @@ export const extractMainDomain = (subdomain: string): string => {
 };
 
 /**
- * Opens the redirect deep link.
- *
- * @param {string} redirect - The redirect url.
- * @param {ApplicationType} app - The application to open.
- */
-export const openRedirectLink = (redirect: string, app: ApplicationType): void => {
-	if (!browser) return;
-
-	const url = new URL(redirect);
-
-	const appDeepLink = getApplicationDeepLink(app);
-	const appStoreUrl = getApplicationStoreUrl(app);
-
-	if (appDeepLink) {
-		url.searchParams.set('open_app', base64url(appDeepLink));
-	}
-
-	if (appStoreUrl) {
-		url.searchParams.set(appStoreUrl.type, base64url(appStoreUrl.url));
-	}
-
-	redirectToOidc(url.toString());
-};
-
-/**
  * opens the application link.
  *
  * @param {ApplicationType} app - The application to open.
@@ -65,7 +35,7 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 
 	const link = getApplicationGotoLink(app);
 
-	redirectToOidc(link);
+	goto(link);
 
 	if (isMobile()) {
 		const appStoreUrl = getApplicationStoreUrl(app);
@@ -78,15 +48,6 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 			}, 250);
 		}
 	}
-};
-
-/**
- * redirects to the oidc provider
- *
- * @param {string} url - the final url
- */
-export const redirectToOidc = (url: string): void => {
-	goto(getOidcRedirectUrl(url));
 };
 
 /**
@@ -116,22 +77,3 @@ export const getOath2RedirectUri = (challenge: string, redirectUri: string, clie
 
 	return url.toString();
 };
-
-/**
- * redirects to the oath2 redirect url
- *
- * @param {string} url - the destination url
- * @param {string} challenge - the app challenge
- * @param {string} clientId - the app client id
- */
-export const gotoOath2RedirectUrl = (url: string, challenge: string, clientId: string): void => {
-	goto(getOath2RedirectUri(challenge, url, clientId));
-};
-
-/**
- * removes trailing slash from a url
- *
- * @returns {string} the url without a trailing slash
- */
-export const removeTrailingSlash = (url: string): string =>
-	url.endsWith('/') ? url.slice(0, -1) : url;
