@@ -11,6 +11,7 @@
 	export let email: string | undefined;
 
 	$: suffix = `@${env.PUBLIC_SIGNUP_EMAIL_DOMAIN}`;
+	$: matrixId = `@${username}:${env.PUBLIC_SIGNUP_EMAIL_DOMAIN}`;
 </script>
 
 <div
@@ -30,7 +31,7 @@
 		<div class="flex flex-col gap-0.5 px-4">
 			<span
 				class="text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left"
-				>@{username}</span
+				>{matrixId}</span
 			>
 			<span class="text-sm font-normal leading-5 text-left text-gray-500"
 				>{$t('twake-matrix-id')}</span
