@@ -54,12 +54,6 @@
 				>
 			</div>
 		{/if}
-
-		<div class="flex items-center justify-center pt-5">
-			<div class="w-4/5 md:hidden">
-				<OutlineButton disabled={true} handler={() => {}}>{$t('add-recovery-email')}</OutlineButton>
-			</div>
-		</div>
 	</div>
 	<span
 		class="text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px] text-disabled-text"
