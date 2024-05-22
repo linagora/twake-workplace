@@ -32,6 +32,13 @@ export const handleProxy = (async ({ event }) => {
 	requestHeaders.delete('connection');
 
 	try {
+		logger.debug('Proxying request: ', {
+			url: proxiedUrl.toString(),
+			method: request.method,
+			headers: Object.fromEntries(requestHeaders.entries()),
+			body: request.body
+		});
+
 		const response = await fetch(proxiedUrl.toString(), {
 			redirect: 'manual',
 			method: request.method,
