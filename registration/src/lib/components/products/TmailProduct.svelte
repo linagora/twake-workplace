@@ -18,7 +18,7 @@
 		<h1
 			class="lg:hidden text-center text-base not-italic font-semibold leading-6 tracking-[0.15px] text-disabled-text"
 		>
-			Mail ({$t('mobile-app')})
+			Mail
 		</h1>
 		<span
 			class="text-xs not-italic font-medium leading-4 tracking-[0.4px] text-coolgray-400 text-left lg:pr-10"
