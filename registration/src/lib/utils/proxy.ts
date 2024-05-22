@@ -36,12 +36,6 @@ export const handleProxy = (async ({ event }) => {
 	}
 
 	try {
-		logger.debug('Proxying request: ', {
-			url: proxiedUrl.toString(),
-			method: request.method,
-			headers: Object.fromEntries(requestHeaders.entries())
-		});
-
 		const response = await fetch(proxiedUrl.toString(), {
 			redirect: 'manual',
 			method: request.method,
