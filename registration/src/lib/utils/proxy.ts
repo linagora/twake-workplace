@@ -36,7 +36,6 @@ export const handleProxy = (async ({ event }) => {
 			url: proxiedUrl.toString(),
 			method: request.method,
 			headers: Object.fromEntries(requestHeaders.entries()),
-			body: request.body
 		});
 
 		const response = await fetch(proxiedUrl.toString(), {
