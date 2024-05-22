@@ -31,11 +31,15 @@ export const handleProxy = (async ({ event }) => {
 	requestHeaders.delete('host');
 	requestHeaders.delete('connection');
 
+	if (requestHeaders.get('content-length') === '0') {
+		requestHeaders.delete('content-length');
+	}
+
 	try {
 		logger.debug('Proxying request: ', {
 			url: proxiedUrl.toString(),
 			method: request.method,
-			headers: Object.fromEntries(requestHeaders.entries()),
+			headers: Object.fromEntries(requestHeaders.entries())
 		});
 
 		const response = await fetch(proxiedUrl.toString(), {
