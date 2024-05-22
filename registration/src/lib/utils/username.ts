@@ -16,7 +16,7 @@ export const validateName = (name: string): boolean =>
  * Checks if a nickname is valid.
  *
  * a valid username must be:
- *  - 6–30 characters long.
+ *  - 3–30 characters long.
  *  - can contain letters (a-z), numbers (0-9), and periods (.).
  *  - username cannot contain two periods in a row.
  *  - username cannot end or start with a period.
@@ -25,7 +25,7 @@ export const validateName = (name: string): boolean =>
  * @returns {boolean} - true if the username is valid, false otherwise.
  */
 export const validateNickName = (nickName: string): boolean =>
-	/^(?!.*\.{2,})[a-zA-Z0-9](?:[a-zA-Z0-9.]{4,28}[a-zA-Z0-9])?$/g.test(nickName);
+	/^(?!.*\.{2,})[a-zA-Z0-9](?:[a-zA-Z0-9.]{1,28})[a-zA-Z0-9]$/g.test(nickName);
 
 /**
  * validated the nickname using zod schema.
