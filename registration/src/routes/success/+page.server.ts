@@ -48,8 +48,6 @@ export const load: PageServerLoad = async ({ parent, cookies }) => {
 		lastName,
 		phone,
 		email,
-		redirectUrl: session.redirectUrl ?? null,
-		challenge: session.challenge ?? null,
-		clientId: session.clientId ?? null
+		redirectUrl: session.redirectUrl ?? null
 	};
 };

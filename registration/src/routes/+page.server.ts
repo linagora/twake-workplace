@@ -12,7 +12,7 @@ import {
 } from '$services/user';
 import { validateName, checkNickName } from '$utils/username';
 import authService from '$services/auth';
-import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$utils/url';
+import { extractMainDomain, getOidcRedirectUrl } from '$utils/url';
 import { getUserCountry } from '$services/ip';
 import type { ApplicationType, RegistrationStepType } from '$types';
 import { env } from '$env/dynamic/private';
@@ -27,8 +27,6 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
 	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
-	const clientId = url.searchParams.get('client_id') ?? undefined;
-	const challenge = url.searchParams.get('challenge_code') ?? undefined;
 	const app = (url.searchParams.get('app') as ApplicationType) ?? 'default';
 	const willLogin = url.searchParams.get('login') !== null;
 	const simpleRedirect = url.searchParams.get('simple_redirect') !== null;
@@ -39,9 +37,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		...data,
 		redirectUrl,
 		postLoginUrl,
-		clientId,
 		country,
-		challenge,
 		app,
 		simpleRedirect
 	}));
@@ -56,7 +52,13 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		if (await authService.verify(cookie)) {
 			logger.info('user is already authenticated, redirecting');
 
-			throw redirect(302, postLoginUrl ? getOidcRedirectUrl(postLoginUrl) : '/success');
+			const redirectUrl = postLoginUrl
+				? app === 'chat'
+					? getOidcRedirectUrl(postLoginUrl)
+					: postLoginUrl
+				: '/success';
+
+			throw redirect(302, redirectUrl);
 		}
 	}
 
@@ -270,12 +272,11 @@ export const actions: Actions = {
 			const {
 				phone,
 				redirectUrl = null,
-				challenge = null,
-				clientId = null,
 				nickname,
 				firstName,
 				lastName,
-				verified
+				verified,
+				app
 			} = session.data;
 
 			if (!phone || !isPhoneValid(phone) || !verified) {
@@ -357,8 +358,8 @@ export const actions: Actions = {
 			});
 
 			const destinationUrl = redirectUrl
-				? challenge && clientId
-					? getOath2RedirectUri(challenge, redirectUrl, clientId)
+				? app === 'chat'
+					? getOidcRedirectUrl(redirectUrl)
 					: redirectUrl
 				: '/success';
 
@@ -386,9 +387,8 @@ export const actions: Actions = {
 			const { login, password } = data;
 			const {
 				postLoginUrl = null,
-				challenge = null,
-				clientId = null,
-				simpleRedirect
+				simpleRedirect,
+				app
 			} = session.data;
 
 			if (!login || !password) {
@@ -434,8 +434,8 @@ export const actions: Actions = {
 			}
 
 			const destinationUrl = postLoginUrl
-				? challenge && clientId
-					? getOath2RedirectUri(challenge, postLoginUrl, clientId)
+				? app === 'chat'
+					? getOidcRedirectUrl(postLoginUrl)
 					: postLoginUrl
 				: '/success';
 
