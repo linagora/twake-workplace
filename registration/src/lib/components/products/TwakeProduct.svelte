@@ -21,12 +21,8 @@
 			Chat
 		</h1>
 		<span
-			class="hidden lg:block text-xs not-italic font-medium leading-4 tracking-[0.4px] text-coolgray-400 text-left lg:pr-10"
+			class="text-xs not-italic font-medium leading-4 tracking-[0.4px] text-coolgray-400 text-left lg:pr-10"
 			>{$t('twake_chat_description')}</span
-		>
-		<span
-			class="lg:hidden text-xs not-italic font-medium leading-4 tracking-[0.4px] text-coolgray-400"
-			>{$t('Start your journey')}</span
 		>
 	</div>
 	<button
