@@ -9,7 +9,7 @@
 		role="alert"
 	>
 		<div
-			class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-green-800 text-green-200"
+			class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg text-green-200"
 		>
 			<svg
 				class="w-5 h-5"
