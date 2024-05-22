@@ -359,7 +359,7 @@ export const actions: Actions = {
 			const destinationUrl = redirectUrl
 				? challenge && clientId
 					? getOath2RedirectUri(challenge, redirectUrl, clientId)
-					: getOidcRedirectUrl(redirectUrl)
+					: redirectUrl
 				: '/success';
 
 			logger.info('Redirecting to destination url', destinationUrl);
@@ -436,7 +436,7 @@ export const actions: Actions = {
 			const destinationUrl = postLoginUrl
 				? challenge && clientId
 					? getOath2RedirectUri(challenge, postLoginUrl, clientId)
-					: getOidcRedirectUrl(postLoginUrl)
+					: postLoginUrl
 				: '/success';
 
 			logger.info('Redirecting to destination url', destinationUrl);
