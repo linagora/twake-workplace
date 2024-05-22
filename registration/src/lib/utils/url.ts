@@ -58,22 +58,3 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 export const getOidcRedirectUrl = (url: string): string =>
 	`${env.PUBLIC_OIDC_PROVIDER}?redirectUrl=${url}`;
 
-/**
- * builds an Oath2 redirect url.
- *
- * @param {string} challenge - the app challenge
- * @param {string} redirectUri - the app redirect uri
- * @param {string} clientId - the app client id
- */
-export const getOath2RedirectUri = (challenge: string, redirectUri: string, clientId: string) => {
-	const url = new URL(env.PUBLIC_AUTHORISATION_URL);
-
-	url.searchParams.set('client_id', clientId);
-	url.searchParams.set('redirect_uri', redirectUri);
-	url.searchParams.set('response_type', 'code');
-	url.searchParams.set('scope', 'openid profile email offline_access');
-	url.searchParams.set('code_challenge_method', 'S256');
-	url.searchParams.set('code_challenge', challenge);
-
-	return url.toString();
-};
