@@ -79,5 +79,6 @@
   "forgot-password": "Forgot your pasword?",
   "not-found": "Not found",
   "404-error-message": "Oops! We couldn't find what you're looking for.",
-  "matrix-id-copied": "Matrix Id copied to clipboard"
+  "matrix-id-copied": "Matrix Id copied to clipboard",
+  "delete-account": "Delete account"
 }

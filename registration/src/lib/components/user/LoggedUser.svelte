@@ -3,6 +3,7 @@
 	import Avatar from '$components/icons/AvatarIcon.svelte';
 	import { t } from 'svelte-i18n';
 	import { clickOutside } from '$utils/html';
+	import DeleteAccountButton from '../buttons/DeleteAccountButton.svelte';
 
 	export let username: string;
 	export let firstName: string;
@@ -37,16 +38,22 @@
 			>
 		</div>
 	</button>
-	<div class="z-20 mt-1 overflow-hidden bg-white rounded-md shadow-xl {open ? 'block' : 'hidden'}">
+	<div
+		data-sveltekit-preload-data="off"
+		class="flex flex-col gap-1 z-20 mt-1 overflow-hidden bg-white rounded-md shadow-xl {open
+			? 'block'
+			: 'hidden'}"
+	>
 		<a
 			href="/logout"
-			class="flex items-center justify-center p-2.5 text-sm transition-colors duration-200 transform hover:bg-gray-100"
+			class="flex items-center gap-5 justify-start p-2.5 text-sm transition-colors duration-200 transform hover:bg-gray-100"
 		>
 			<Logout />
 
-			<div class="mx-1">
+			<div class="mx-1 grow text-left">
 				<h1 class="text-sm font-semibold">{$t('Logout')}</h1>
 			</div>
 		</a>
+		<DeleteAccountButton {username} />
 	</div>
 </div>
