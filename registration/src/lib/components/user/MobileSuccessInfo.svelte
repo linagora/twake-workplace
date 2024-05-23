@@ -5,6 +5,7 @@
 	import CopyIcon from '../icons/CopyIcon.svelte';
 	import { copyToClipboard } from '$utils/clipboard';
 	import Toast from '../display/Toast.svelte';
+	import DeleteAccountButton from '../buttons/DeleteAccountButton.svelte';
 
 	export let firstName: string;
 	export let lastName: string;
@@ -76,6 +77,11 @@
 				>
 			</div>
 		{/if}
+		<div
+			class="px-2 text-[17px] not-italic font-normal leading-6 tracking-[-0.15px] text-disabled-text text-left 0"
+		>
+			<DeleteAccountButton {username} />
+		</div>
 	</div>
 	<span
 		class="text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px] text-disabled-text"
@@ -83,4 +89,4 @@
 		{$t('logged_twakeid_choose_mobile')}
 	</span>
 </div>
-<Toast show={showToast}>{ $t('matrix-id-copied') }</Toast>
+<Toast show={showToast}>{$t('matrix-id-copied')}</Toast>
