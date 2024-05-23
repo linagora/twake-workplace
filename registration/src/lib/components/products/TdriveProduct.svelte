@@ -9,7 +9,7 @@
 
 <div class="flex flex-row space-x-5 bg-gray-100 p-5 rounded-3xl w-full">
 	<div class="shrink items-center justify-center">
-		<img src="/images/tdrive.svg" alt="tdrive" class="h-full" />
+		<img src="/images/tdrive.svg" alt="tdrive" class="h-14 w-14" />
 	</div>
 	<div class="flex flex-col gap-1 w-full items-start justify-start">
 		<h1 class="hidden lg:block text-[22px] not-italic font-semibold leading-7 text-left text-black">
