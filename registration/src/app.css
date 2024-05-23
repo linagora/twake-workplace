@@ -10,3 +10,13 @@ input::-webkit-credentials-auto-fill-button {
   position: absolute;
   right: 0;
 }
+
+@layer utilities {
+  .gradiant {
+    background: linear-gradient(106deg,
+        rgba(248, 169, 52, 0.2) 0%,
+        rgba(203, 40, 206, 0.2) 43.6%,
+        rgba(10, 132, 255, 0.2) 100%),
+      #fff;
+  }
+}
