@@ -79,5 +79,6 @@
   "forgot-password": "Vous avez oublié votre mot de passe ?",
   "not-found": "Pas trouvé",
   "404-error-message": "Oops! Nous n'avons pas trouvé ce que vous cherchez.",
-  "matrix-id-copied": "Identifiant Matrix copié dans le presse-papiers"
+  "matrix-id-copied": "Identifiant Matrix copié dans le presse-papiers",
+  "delete-account": "Supprimer votre compte"
 }
