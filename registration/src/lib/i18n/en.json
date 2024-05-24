@@ -8,7 +8,7 @@
   "Password": "Password",
   "Confirm password": "Confirm password",
   "Phone number": "Phone number",
-  "uela": "I agree with <a href='#/ue' class='text-primary'>User Agreement</a> and <a href='#/ue' class='text-primary'>Personal Data Usage</a> terms under conditions stipulated in <a href='#/pp' class='text-primary'>Privacy Policy</a> agreement.",
+  "uela": "I agree with <a href=\"https://twake.app/terms\" target=\"_blank\" title=\"Terms of use\" class=\"text-primary\">Terms of use</a> and personal data usage terms under conditions stipulated in <a href=\"https://twake.app/policy\" target=\"_blank\" title=\"Privacy policy\" class=\"text-primary\" >Privacy Policy</a> agreement.",
   "Cellphone / Username / Email": "Phone number / Username / Email",
   "logged_hero": "Twake ID is your one entry access to all our services Chat, Mail and Drive",
   "Congratulations": "Congratulations",

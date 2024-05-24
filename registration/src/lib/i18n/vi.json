@@ -8,7 +8,7 @@
   "Password": "Mật khẩu",
   "Confirm password": "Xác nhận mật khẩu",
   "Phone number": "Số điện thoại",
-  "uela": "Tôi đồng ý với <a href='#/ue' class='text-primary'> Thỏa thuận người dùng </a> và <a href='#/ue' class='text-primary'> Việc sử dụng dữ liệu cá nhân </a> các điều khoản theo các điều kiện được quy định trong thỏa thuận <a href='#/pp' class='text-primary'> Chính sách quyền riêng tư </a> .",
+  "uela": "Tôi đồng ý với <a href=\"https://twake.app/terms\" target=\"_blank\" title=\"Terms of use\" class=\"text-primary\">Điều khoản sử dụng</a> và điều khoản sử dụng dữ liệu cá nhân \ntheo các điều kiện được quy định trong thỏa thuận <a href=\"https://twake.app/policy\" target=\"_blank\" title=\"Chính sách quyền riêng tư\" class=\"text-primary\" >Chính sách quyền riêng tư</a>.",
   "Cellphone / Username / Email": "Số điện thoại/Tên người dùng/Email",
   "logged_hero": " Twake ID là một mục nhập của bạn truy cập vào tất cả các dịch vụ của chúng tôi Trò chuyện, Thư và Drive",
   "Congratulations": "Chúc mừng",
