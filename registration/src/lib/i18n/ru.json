@@ -8,7 +8,7 @@
 	"Password": "Пароль",
 	"Confirm password": "Подтвердите пароль",
 	"Phone number": "Номер телефона",
-	"uela": "Я согласен с <a href='#/ue' class='text-primary'> Условиями использования </a> и <a href='#/ue' class='text-primary'> Использованием персональных данных </a> на условиях, предусмотренных в соглашении <a href='#/pp' class='text-primary'> Политикой конфиденциальности </a> .",
+	"uela": "Я согласен с <a href=\"https://twake.app/terms\" target=\"_blank\" title=\"Условиями использования\" class=\"text-primary\"> Условиями использования </a>и Использованием персональных данных на условиях, предусмотренных в соглашении <a href=\"https://twake.app/policy\" target=\"_blank\" title=\"Политика конфиденциальности\" class=\"text-primary\"> Политикой конфиденциальности </a> .",
 	"Cellphone / Username / Email": "Номер телефона / Логин / Email",
 	"logged_hero": "Twake ID — единый доступ к сервисам: чату, почте и диску",
 	"Congratulations": "Поздравляем",

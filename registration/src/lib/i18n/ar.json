@@ -8,7 +8,7 @@
   "Password": "كلمة المرور",
   "Confirm password": "تأكيد كلمة المرور",
   "Phone number": "رقم الهاتف",
-  "uela": "أوافق على <a href='#/ue' class='text-primary'> اتفاقية المستخدم </a> و <a href='#/ue' class='text-primary'> استخدام البيانات الشخصية </a> الشروط بموجب الشروط المنصوص عليها في اتفاقية <a href='#/pp' class='text-primary'> سياسة الخصوصية </a> .",
+  "uela": "أوافق على <a href=\"https://twake.app/terms\" target=\"_blank\" title=\"Terms of use\" class=\"text-primary\">شروط الاستخدام</a> وشروط استخدام البيانات الشخصية \nبموجب الشروط المنصوص عليها في اتفاقية <a href=\"https://twake.app/policy\" target=\"_blank\" title=\"Privacy Policy\" class=\"text-primary\" >سياسة الخصوصية</a>.",
   "Cellphone / Username / Email": "رقم الهاتف / اسم المستخدم / البريد الإلكتروني",
   "logged_hero": "معرف تويك هو إدخالك الوحيد الوصول إلى جميع خدماتنا الدردشة والبريد  الملفات",
   "Congratulations": "تهانينا",
