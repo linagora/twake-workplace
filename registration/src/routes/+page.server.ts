@@ -30,6 +30,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 	const app = (url.searchParams.get('app') as ApplicationType) ?? 'default';
 	const willLogin = url.searchParams.get('login') !== null;
 	const simpleRedirect = url.searchParams.get('simple_redirect') !== null;
+	const banner = url.searchParams.get('banner') !== null;
 
 	const cookie = cookies.get(authService.cookieName);
 
@@ -39,7 +40,8 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		postLoginUrl,
 		country,
 		app,
-		simpleRedirect
+		simpleRedirect,
+		banner
 	}));
 
 	logger.info('detected context: ', {
@@ -71,7 +73,8 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 		isLogin: isLogin || willLogin,
 		step: session.data.step || initialStep,
 		verified: session.data.verified,
-		phone: session.data.phone
+		phone: session.data.phone,
+		banner
 	};
 };
 
@@ -385,11 +388,7 @@ export const actions: Actions = {
 			};
 
 			const { login, password } = data;
-			const {
-				postLoginUrl = null,
-				simpleRedirect,
-				app
-			} = session.data;
+			const { postLoginUrl = null, simpleRedirect, app } = session.data;
 
 			if (!login || !password) {
 				logger.error('Missing login or password');
