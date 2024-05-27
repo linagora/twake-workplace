@@ -11,7 +11,7 @@
 	$: redirectUrlStore.set(data.redirectUrl);
 </script>
 
-<div class="w-full h-full lg:h-fit">
+<div class="w-full h-full lg:h-fit bg-white md:bg-transparent">
 	<div class="flex flex-col h-full lg:space-y-5">
 		<div class="h-20 flex-row w-full lg:p-10 hidden lg:flex">
 			<div class="w-full" />
