@@ -6,7 +6,8 @@
 		userCountry,
 		registrationStep,
 		verified,
-		phone
+		phone,
+		showBanner
 	} from '$store';
 	import AccessSelect from '$components/landing/AccessSelect.svelte';
 	import Hero from '$components/landing/Hero.svelte';
@@ -24,6 +25,7 @@
 	$: registrationStep.set(data.step);
 	$: verified.set(data.verified);
 	$: phone.set(data.phone ?? '');
+	$: showBanner.set(data.banner);
 </script>
 
 <div class="flex w-full h-full lg:px-10 xl:px-[148px] 2xl:px-52 3xl:px-72 4xl:px-96">

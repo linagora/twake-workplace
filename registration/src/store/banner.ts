@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store';
 
-export const showBanner = writable<boolean>(true);
+export const showBanner = writable<boolean>(false);

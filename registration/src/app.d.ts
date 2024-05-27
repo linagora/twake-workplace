@@ -40,5 +40,6 @@ interface SessionData {
 	recovery_otp_request_token?: string;
 	verified_recovery_phone?: boolean;
 	recovery_step?: PasswordRecoveryStepType = 'phone';
-  simpleRedirect?: boolean = false;
+	simpleRedirect?: boolean = false;
+	banner?: boolean = false;
 }
