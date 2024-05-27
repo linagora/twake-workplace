@@ -3,7 +3,7 @@ import { env } from '$env/dynamic/private';
 import logger from '$services/logger';
 import authService from '$services/auth';
 
-export const PROXY_PATHS = ['/oauth2', '/.well-known'];
+export const PROXY_PATHS = ['/oauth2', '/.well-known', '/logout'];
 export const PROXY_AUTH_PATH = '/oauth2/authorize';
 export const PROXY_LOGOUT_PATH = '/oauth2/logout';
 
