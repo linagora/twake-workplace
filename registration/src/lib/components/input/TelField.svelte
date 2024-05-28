@@ -4,6 +4,7 @@
 	import { t } from 'svelte-i18n';
 	import Spin from '$components/icons/SpinnerIcon.svelte';
 	import { isPhoneValid } from '$utils/phone';
+  import { defaultCountries } from '$utils/country'
 
 	export let value: string | null = '';
 	export let selectedCountry: string | null;
@@ -31,6 +32,7 @@
 		on:input={onInput}
 		on:change={onChange}
 		defaultCountry={selectedCountry}
+    countries={defaultCountries}
 		inputClassName="!rounded-[4px] !focus:outline-none !text-[17px] !font-medium !leading-6 !tracking-tight !text-left !peer !w-full !placeholder:text-inputOutline !border-none"
 	/>
 	{#if loading}
