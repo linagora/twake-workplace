@@ -5,7 +5,8 @@ import authService from '$services/auth';
 
 export const PROXY_PATHS = ['/oauth2', '/.well-known', '/logout'];
 export const PROXY_AUTH_PATH = '/oauth2/authorize';
-export const PROXY_LOGOUT_PATH = '/oauth2/logout';
+export const PROXY_OATH2_LOGOUT_PATH = '/oauth2/logout';
+export const PROXY_LOGOUT_SEARCH_PATH = '?logout=1';
 
 export const handleProxy = (async ({ event }) => {
 	const { request, url, cookies } = event;
@@ -18,7 +19,7 @@ export const handleProxy = (async ({ event }) => {
 		}
 	}
 
-	if (url.pathname.startsWith(PROXY_LOGOUT_PATH)) {
+	if (url.pathname.startsWith(PROXY_OATH2_LOGOUT_PATH)) {
 		return redirectToLogout(url.origin);
 	}
 
