@@ -14,7 +14,7 @@
 	let nickNamechecked = false;
 	let nickNameTaken = false;
 	let loading = false;
-	let accepted = false;
+	let accepted = true;
 	let alternativeNicknames: string[] = [];
 	let checkNicknameForm: HTMLFormElement;
 	let formLoading = false;
