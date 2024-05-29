@@ -21,7 +21,7 @@
 	</div>
 	<div class="flex p-[16px] justify-center items-center gap-[10px] self-stretch w-full">
 		<div class="flex-[1_0_0] text-center text-[17px] font-medium tracking-[0px] w-full">
-			{$t('end-to-end-encryption-collaborative-features-for-secure-and-efficient-teamwork')}
+			{$t('welcome_mobile')}
 		</div>
 	</div>
 	<div class="flex flex-col mt-auto gap-[16pt] py-4">
