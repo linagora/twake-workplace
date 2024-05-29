@@ -80,5 +80,6 @@
   "not-found": "Pas trouvé",
   "404-error-message": "Oops! Nous n'avons pas trouvé ce que vous cherchez.",
   "matrix-id-copied": "Identifiant Matrix copié dans le presse-papiers",
-  "delete-account": "Supprimer votre compte"
+  "delete-account": "Supprimer votre compte",
+  "welcome_mobile": "Twake ID est votre accès unique à tous nos services : Chat, Mail et Drive"
 }
