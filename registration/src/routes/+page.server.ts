@@ -37,7 +37,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies, request, getC
 	await session.update((data) => ({
 		...data,
 		redirectUrl,
-		postLoginUrl,
+		postLoginUrl: postLoginUrl ?? redirectUrl,
 		country,
 		app,
 		simpleRedirect,
