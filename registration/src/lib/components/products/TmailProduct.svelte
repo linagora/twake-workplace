@@ -25,11 +25,10 @@
 			>{$t('tmail_description')}</span
 		>
 	</div>
-	<button
+	<div
 		aria-label="open tmail"
-		type="button"
 		class="flex shrink items-center justify-center h-full"
 	>
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
-	</button>
+	</div>
 </button>
