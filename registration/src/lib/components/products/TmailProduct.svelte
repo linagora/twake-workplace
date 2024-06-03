@@ -7,7 +7,7 @@
 	};
 </script>
 
-<div class="flex flex-row space-x-5 bg-gray-100 p-5 rounded-3xl w-full">
+<button on:click={open} type="button" class="flex flex-row space-x-5 bg-gray-100 p-5 rounded-3xl w-full cursor-pointer">
 	<div class="shrink items-center justify-center">
 		<img src="/images/tmail.svg" alt="tmail" class="h-14 w-14" />
 	</div>
@@ -33,4 +33,4 @@
 	>
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
 	</button>
-</div>
+</button>
