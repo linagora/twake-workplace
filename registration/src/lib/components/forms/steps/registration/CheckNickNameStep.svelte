@@ -53,7 +53,10 @@
 			lastName,
 			nickName,
 			accepted
-		}).success || nickNameTaken || formLoading || !nickNamechecked;
+		}).success ||
+		nickNameTaken ||
+		formLoading ||
+		!nickNamechecked;
 
 	const handler = async () => {
 		if (disabled) return;
@@ -117,6 +120,7 @@
 			info={true}
 			infoTitle={$t('Matrix ID/Email')}
 			infoDescription={$t('username_info_tooltip')}
+			onStopTyping={checkNickName}
 		/>
 		{#if nickNameTaken === true}
 			<AvailableNicknames

@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { clickOutside } from '$utils/html';
+	import { clickOutside, stopTyping } from '$utils/html';
 	import ErrorIcon from '$components/icons/ErrorIcon.svelte';
 	import InfoIcon from '$components/icons/InfoIcon.svelte';
 	import Spin from '$components/icons/SpinnerIcon.svelte';
 	import Valid from '$components/icons/ValidIcon.svelte';
 	import InfoTooltip from '$components/display/InfoTooltip.svelte';
+	import { onMount } from 'svelte';
 
 	export let label: string;
 	export let placeholder: string;
@@ -19,8 +20,17 @@
 	export let info: boolean = false;
 	export let infoTitle: string = '';
 	export let infoDescription: string = '';
+	export let onStopTyping: (() => void) | undefined = undefined;
 
+	let inputRef: HTMLInputElement;
 	let showInfo = false;
+	const action = onStopTyping ? stopTyping : () => {};
+
+	onMount(() => {
+		if (onStopTyping) {
+			inputRef.addEventListener('stopTyping', onStopTyping);
+		}
+	});
 
 	$: notValid = value.length > 0 && isInValid;
 </script>
@@ -30,6 +40,8 @@
 		<InfoTooltip title={infoTitle} description={infoDescription} bind:show={showInfo} />
 	{/if}
 	<input
+		bind:this={inputRef}
+		use:action
 		autocomplete="off"
 		required
 		id={name}
