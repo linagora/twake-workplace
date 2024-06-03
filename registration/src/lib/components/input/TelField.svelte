@@ -4,7 +4,8 @@
 	import { t } from 'svelte-i18n';
 	import Spin from '$components/icons/SpinnerIcon.svelte';
 	import { isPhoneValid } from '$utils/phone';
-  import { defaultCountries } from '$utils/country'
+	import { defaultCountries } from '$utils/country';
+	import { tick } from 'svelte';
 
 	export let value: string | null = '';
 	export let selectedCountry: string | null;
@@ -25,16 +26,23 @@
 <div
 	class="flex relative px-4 py-1 ring-1 rounded-[4px] {valid
 		? `ring-inputOutline focus-within:ring-primary`
-		: ` ring-error focus-within:ring-offset-1 focus-within:ring-offset-error/50 focus-within:ring-1`}"
+		: ` ring-error focus-within:ring-offset-1 focus-within:ring-offset-error/50 focus-within:ring-1`} min-h-11"
 >
-	<react:PhoneInput
-		className="border-none"
-		on:input={onInput}
-		on:change={onChange}
-		defaultCountry={selectedCountry}
-    countries={defaultCountries}
-		inputClassName="!rounded-[4px] !focus:outline-none !text-[17px] !font-medium !leading-6 !tracking-tight !text-left !peer !w-full !placeholder:text-inputOutline !border-none"
-	/>
+	{#await tick()}
+		<span class="absolute inset-y-0 left-0 flex items-center px-4">
+			<Spin />
+		</span>
+	{:then}
+		<react:PhoneInput
+			className="border-none"
+			on:input={onInput}
+			on:change={onChange}
+			defaultCountry={selectedCountry}
+			countries={defaultCountries}
+			inputClassName="!rounded-[4px] !focus:outline-none !text-[17px] !font-medium !leading-6 !tracking-tight !text-left !peer !w-full !placeholder:text-inputOutline !border-none"
+		/>
+	{/await}
+
 	{#if loading}
 		<span class="absolute inset-y-0 right-0 flex items-center px-1">
 			<Spin />
