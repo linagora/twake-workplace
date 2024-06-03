@@ -29,11 +29,10 @@
 			>{$t('twake_chat_description')}</span
 		>
 	</div>
-	<button
-		type="button"
+	<div
 		aria-label={$t('open-twake')}
-		class="flex shrink items-center justify-center"
+		class="flex shrink items-center justify-center h-full"
 	>
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
-	</button>
+	</div>
 </button>
