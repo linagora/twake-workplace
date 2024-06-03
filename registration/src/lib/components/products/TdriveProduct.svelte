@@ -32,7 +32,6 @@
 	<button
 		aria-label="open tdrive"
 		type="button"
-		on:click={open}
 		class="flex shrink items-center justify-center"
 	>
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
