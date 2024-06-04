@@ -1,5 +1,4 @@
 import { browser } from '$app/environment';
-import { goto } from '$app/navigation';
 import { env } from '$env/dynamic/public';
 import type { ApplicationType } from '$types';
 import { isMobile } from '$utils/device';
@@ -35,7 +34,7 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 
 	const link = getApplicationGotoLink(app);
 
-	goto(link);
+	window.location.assign(link);
 
 	if (isMobile()) {
 		const appStoreUrl = getApplicationStoreUrl(app);
@@ -43,9 +42,8 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 		if (appStoreUrl && appStoreUrl.url) {
 			setTimeout(() => {
 				navigator.clipboard.writeText(link).catch(console.error);
-
-				window.location.href = appStoreUrl.url;
-			}, 250);
+				window.location.assign(appStoreUrl.url);
+			}, 300);
 		}
 	}
 };
@@ -57,4 +55,3 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
  */
 export const getOidcRedirectUrl = (url: string): string =>
 	`${env.PUBLIC_OIDC_PROVIDER}?redirectUrl=${url}`;
-
