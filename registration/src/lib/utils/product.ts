@@ -49,18 +49,16 @@ export const getApplicationStoreUrl = (
  * @param {ApplicationType} app - The application to open.
  * @return {string | undefined}
  */
-export const getApplicationDeepLink = (app: ApplicationType): string | undefined => {
+export const getApplicationDeepLink = (app: ApplicationType): string => {
 	if (app === 'tdrive') {
-		return env.PUBLIC_TDRIVE_MAGIC_LINK;
+		return env.PUBLIC_TDRIVE_WEB;
 	}
 
 	if (app === 'tmail') {
-		return env.PUBLIC_TMAIL_MAGIC_LINK;
+		return `${env.PUBLIC_TMAIL_MAGIC_LINK}redirect`;
 	}
 
-	if (app === 'chat') {
-		return env.PUBLIC_TWAKE_MAGIC_LINK;
-	}
+	return `${env.PUBLIC_TWAKE_MAGIC_LINK}redirect`;
 };
 
 /**
@@ -70,16 +68,12 @@ export const getApplicationDeepLink = (app: ApplicationType): string | undefined
  * @returns {string} the application url.
  */
 export const getApplicationGotoLink = (app: ApplicationType): string => {
-	if (app === 'tdrive') {
-		return env.PUBLIC_TDRIVE_WEB;
+	if (isMobile()) {
+		return getApplicationDeepLink(app);
 	}
 
-	if (isMobile()) {
-		if (app === 'tmail') {
-			return `${env.PUBLIC_TMAIL_MAGIC_LINK}registered`;
-		}
-
-		return `${env.PUBLIC_TWAKE_MAGIC_LINK}registered`;
+	if (app === 'tdrive') {
+		return env.PUBLIC_TDRIVE_WEB;
 	}
 
 	if (app === 'tmail') {
