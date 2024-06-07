@@ -10,7 +10,7 @@
   <h3 align="center">twake.app</h3>
 
   <p align="center">
-    <b align="center">The open-source alternative to Microsoft Office.</b>
+    <b align="center">The open-source alternative to Microsoft Teams</b>
     <br />
     <a href="https://twake.app"><strong>Learn more »</strong></a>
     <br />
