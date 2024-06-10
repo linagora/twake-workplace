@@ -5,7 +5,7 @@
 	import AvailableNicknames from '$components/user/AvailableNicknames.svelte';
 	import { env } from '$env/dynamic/public';
 	import { createUserFormSchema } from '$lib/schemas/zodSchema';
-	import { nickNameStepInfo } from '$src/store';
+	import { nickNameStepInfo } from '$store';
 	import { isNickNameTaken, suggestNickNames } from '$utils/api';
 	import { onDestroy, onMount } from 'svelte';
 	import { t } from 'svelte-i18n';
@@ -80,7 +80,7 @@
 		checkNickName();
 	});
 
-	onDestroy(() => {
+	onDestroy(() => { 
 		nickNameStepInfo.set({
 			firstName,
 			lastName,
