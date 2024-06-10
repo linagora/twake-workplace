@@ -5,7 +5,9 @@
 	import AvailableNicknames from '$components/user/AvailableNicknames.svelte';
 	import { env } from '$env/dynamic/public';
 	import { createUserFormSchema } from '$lib/schemas/zodSchema';
+	import { nickNameStepInfo } from '$src/store';
 	import { isNickNameTaken, suggestNickNames } from '$utils/api';
+	import { onDestroy, onMount } from 'svelte';
 	import { t } from 'svelte-i18n';
 
 	let firstName: string = '';
@@ -63,6 +65,28 @@
 
 		checkNicknameForm.requestSubmit();
 	};
+
+	onMount(() => {
+		const {
+			firstName: savedFirstName,
+			lastName: savedLastName,
+			nickName: savedNickname
+		} = $nickNameStepInfo;
+
+		firstName = savedFirstName;
+		lastName = savedLastName;
+		nickName = savedNickname;
+  
+		checkNickName();
+	});
+
+	onDestroy(() => {
+		nickNameStepInfo.set({
+			firstName,
+			lastName,
+			nickName
+		});
+	});
 </script>
 
 <form
