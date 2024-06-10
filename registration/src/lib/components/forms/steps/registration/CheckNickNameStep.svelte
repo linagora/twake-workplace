@@ -112,7 +112,6 @@
 			label={$t('Matrix ID/Email')}
 			bind:value={nickName}
 			isInValid={!createUserFormSchema.safeParse({ nickName }).success || nickNameTaken}
-			onBlur={checkNickName}
 			feedback={validNickName}
 			onInput={invalidateNickNameCheck}
 			{loading}
