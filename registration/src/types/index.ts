@@ -114,3 +114,9 @@ export interface lemonLDAPSessionInformation {
 	error?: number;
 	token?: string;
 }
+
+export interface UserInfo {
+	firstName: string;
+	lastName: string;
+	nickName: string;
+}

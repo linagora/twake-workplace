@@ -1,4 +1,4 @@
-import type { RegistrationStepType } from '$types';
+import type { UserInfo, RegistrationStepType } from '$types';
 import { writable, get } from 'svelte/store';
 import type { ActionData } from '../routes/$types';
 
@@ -34,3 +34,9 @@ export const nextRegistrationStep = () => {
 
 	if (currentStep === 'password') return registrationStep.set('success');
 };
+
+export const nickNameStepInfo = writable<UserInfo>({
+	firstName: '',
+	lastName: '',
+	nickName: ''
+});
