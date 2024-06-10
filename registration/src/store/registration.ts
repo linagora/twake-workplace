@@ -2,6 +2,12 @@ import type { UserInfo, RegistrationStepType } from '$types';
 import { writable, get } from 'svelte/store';
 import type { ActionData } from '../routes/$types';
 
+const defaultUserInfo = {
+	firstName: '',
+	lastName: '',
+	nickName: ''
+};
+
 export const form = writable<ActionData>();
 export const registrationStep = writable<RegistrationStepType>('home');
 
@@ -35,8 +41,11 @@ export const nextRegistrationStep = () => {
 	if (currentStep === 'password') return registrationStep.set('success');
 };
 
-export const nickNameStepInfo = writable<UserInfo>({
-	firstName: '',
-	lastName: '',
-	nickName: ''
-});
+export const nickNameStepInfo = writable<UserInfo>(defaultUserInfo);
+
+/**
+ * Resets the default user info Store
+ */
+export const resetUserInfo = (): void => {
+	nickNameStepInfo.set(defaultUserInfo);
+};

@@ -3,6 +3,7 @@
 	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import PasswordField from '$components/input/PasswordField.svelte';
 	import { createUserFormSchema, fullCreateUserFormSchema } from '$lib/schemas/zodSchema';
+	import { resetUserInfo } from '$src/store';
 	import { t } from 'svelte-i18n';
 
 	let sendPasswordForm: HTMLFormElement;
@@ -11,10 +12,11 @@
 	let confirmPassword = '';
 	let loading = false;
 
-	$: disabled = !fullCreateUserFormSchema.safeParse({
-		password,
-		confirmPassword
-	}).success || loading;
+	$: disabled =
+		!fullCreateUserFormSchema.safeParse({
+			password,
+			confirmPassword
+		}).success || loading;
 
 	const handler = () => {
 		if (disabled) return;
@@ -35,6 +37,7 @@
 			loading = false;
 
 			update();
+			resetUserInfo();
 		};
 	}}
 >
