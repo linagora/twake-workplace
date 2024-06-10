@@ -3,7 +3,7 @@
 	import PrimaryButton from '$components/buttons/PrimaryButton.svelte';
 	import PasswordField from '$components/input/PasswordField.svelte';
 	import { createUserFormSchema, fullCreateUserFormSchema } from '$lib/schemas/zodSchema';
-	import { resetUserInfo } from '$src/store';
+	import { resetUserInfo } from '$store';
 	import { t } from 'svelte-i18n';
 
 	let sendPasswordForm: HTMLFormElement;
